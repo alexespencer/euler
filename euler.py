@@ -58,3 +58,24 @@ def is_composite_number(n):
             return True
 
     return False
+
+def prime_factors(n):
+    """Returns a dictionary of prime: order. For example 100 (prime factors 2x2x5x5) would return {2: 2, 5:2}"""
+    if n == 1:
+        return {}
+
+    p = 2
+    factors = {}
+    while n >= p * p:
+        if n % p == 0:
+            factors.setdefault(p, 0)
+            factors[p] += 1
+            n = n / p
+        else:
+            p += 1
+
+    n = int(n)
+    factors.setdefault(n, 0)
+    factors[n] += 1
+
+    return factors

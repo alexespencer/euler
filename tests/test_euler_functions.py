@@ -3,6 +3,7 @@ import pytest
 
 from euler import pentagon_n, quadratic_equation, is_pentagon_number
 from euler import is_prime, find_factors, is_composite_number
+from euler import prime_factors
 
 class TestEuler:
     def test_pentagon(self):
@@ -57,3 +58,16 @@ class TestEuler:
                 assert n in under_100
             else:
                 assert n not in under_100
+
+    @pytest.mark.parametrize("n, expected_prime_factors",
+                                [(1, {}),
+                                 (2, {2: 1}),
+                                 (81, {3: 4}),
+                                 (92, {2: 2, 23: 1}),
+                                 (182, {2: 1, 7: 1, 13: 1}),
+                                 (199, {199: 1}),
+                                 (256, {2: 8}),
+                                 (300, {2: 2, 3: 1, 5: 2})
+                                 ])
+    def test_prime_factors(self, n, expected_prime_factors):
+        assert prime_factors(n) == expected_prime_factors
