@@ -20,3 +20,41 @@ def quadratic_equation(a, b, c):
         raise ValueError("No solution")
 
     return ((-b + sqrt(b2_4ac))/(2 * a), (-b - sqrt(b2_4ac))/(2 * a))
+
+def is_prime(n):
+    """Returns if a number is prime"""
+    if n == 1:
+        return False
+
+    if n == 2:
+        return True
+
+    for i in range(2, int(sqrt(n+1)+1)):
+        if n % i == 0:
+            return False
+
+    return True
+
+def find_factors(n):
+    """Returns the factors of n (must be an int)"""
+    factors = []
+
+    for i in range(1, n+1):
+        if n % i == 0:
+            factors.append(i)
+
+    return factors
+
+def is_composite_number(n):
+    """Returns if a number is a composite number. A composite number is a whole number with 2 factors (other than 1 and itself) and is not prime"""
+    if is_prime(n):
+        return False
+
+    if n in [1, 2]:
+        return False
+
+    for i in range(2, n):
+        if n % i == 0:
+            return True
+
+    return False
