@@ -80,3 +80,11 @@ def prime_factors(n):
     factors[n] += 1
 
     return factors
+
+def is_palindrome(n):
+    """Returns if a number is a palindrome"""
+    return str(n) == str(n)[::-1]
+
+def reverse_and_add(n):
+    """Returns the sum of the reverse of a number and the number"""
+    return n + int(str(n)[::-1])

@@ -1,8 +1,8 @@
 import pytest
 
-from euler import pentagon_n, quadratic_equation, is_pentagon_number
+from euler import pentagon_n, quadratic_equation, is_pentagon_number, reverse_and_add
 from euler import is_prime, find_factors, is_composite_number
-from euler import prime_factors
+from euler import prime_factors, is_palindrome
 
 class TestEuler:
     def test_pentagon(self):
@@ -72,3 +72,30 @@ class TestEuler:
                                  ])
     def test_prime_factors(self, n, expected_prime_factors):
         assert prime_factors(n) == expected_prime_factors
+
+    @pytest.mark.parametrize("n, expected_result",
+                                [(1, True),
+                                (121, True),
+                                (122, False),
+                                (222, True),
+                                (223, False),
+                                (333, True),
+                                (1223221, True)
+                                ])
+    def test_palindrome(self, n, expected_result):
+        assert is_palindrome(n) == expected_result
+
+    @pytest.mark.parametrize("n, expected_result",
+                                [(1, 2),
+                                (121, 121+121),
+                                (122, 122+221),
+                                (222, 222+222),
+                                (223, 223+322),
+                                (333, 666),
+                                (1223221, 1223221 + 1223221),
+                                (349, 1292),
+                                (1292 , 4213),
+                                (4213, 7337)
+                                ])
+    def test_palindrome(self, n, expected_result):
+        assert reverse_and_add(n) == expected_result
