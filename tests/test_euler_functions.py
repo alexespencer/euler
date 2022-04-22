@@ -1,4 +1,3 @@
-from http.client import ImproperConnectionState
 import pytest
 
 from euler import pentagon_n, quadratic_equation, is_pentagon_number
@@ -31,7 +30,9 @@ class TestEuler:
                                 (3, True),
                                 (4, False),
                                 (5, True),
-                                (9, False)])
+                                (9, False),
+                                (10, False),
+                                (1001621, True)])
     def test_prime(self, n, prime):
         assert is_prime(n) == prime
 
