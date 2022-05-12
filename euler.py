@@ -4,6 +4,26 @@ def pentagon_n(n):
     """Returns the nth pentagon number"""
     return int(n * (3 * n - 1) / 2)
 
+def triangle_n(n):
+    """Returns the nth triangle number"""
+    return int(n * (n + 1) / 2)
+
+def square_n(n):
+    """Returns the square of a number"""
+    return int(n * n)
+
+def hexagonal_n(n):
+    """Returns the nth hexagonal number"""
+    return int(n * (2 * n - 1))
+
+def heptagonal_n(n):
+    """Returns the nth heptagonal number"""
+    return int(n * (5 * n - 3) / 2)
+
+def octagonal_n(n):
+    """Returns the nth octagonal number"""
+    return int(n * (3 * n - 2))
+
 def is_pentagon_number(number):
     """Returns true if this number is a pentagon number. Must be given an int"""
     try:

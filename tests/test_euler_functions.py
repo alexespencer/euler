@@ -4,6 +4,7 @@ from euler import pentagon_n, quadratic_equation, is_pentagon_number, reverse_an
 from euler import is_prime, find_factors, is_composite_number
 from euler import prime_factors, is_palindrome
 
+from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
 class TestEuler:
     def test_pentagon(self):
         # Test pengtagon numbers
@@ -99,3 +100,53 @@ class TestEuler:
                                 ])
     def test_palindrome(self, n, expected_result):
         assert reverse_and_add(n) == expected_result
+
+    @pytest.mark.parametrize("n, expected_result",
+                                [(1, 1),
+                                (2, 3),
+                                (3, 6),
+                                (4, 10),
+                                (5, 15)
+                                ])
+    def test_triangle(self, n, expected_result):
+        assert triangle_n(n) == expected_result
+
+    @pytest.mark.parametrize("n, expected_result",
+                                [(1, 1),
+                                (2, 4),
+                                (3, 9),
+                                (4, 16),
+                                (5, 25)
+                                ])
+    def test_square(self, n, expected_result):
+        assert square_n(n) == expected_result
+
+    @pytest.mark.parametrize("n, expected_result",
+                                [(1, 1),
+                                (2, 6),
+                                (3, 15),
+                                (4, 28),
+                                (5, 45)
+                                ])
+    def test_hex(self, n, expected_result):
+        assert hexagonal_n(n) == expected_result
+
+    @pytest.mark.parametrize("n, expected_result",
+                                [(1, 1),
+                                (2, 7),
+                                (3, 18),
+                                (4, 34),
+                                (5, 55)
+                                ])
+    def test_hep(self, n, expected_result):
+        assert heptagonal_n(n) == expected_result
+
+    @pytest.mark.parametrize("n, expected_result",
+                                [(1, 1),
+                                (2, 8),
+                                (3, 21),
+                                (4, 40),
+                                (5, 65)
+                                ])
+    def test_oct(self, n, expected_result):
+        assert octagonal_n(n) == expected_result
