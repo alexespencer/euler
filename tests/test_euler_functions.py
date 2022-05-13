@@ -5,6 +5,8 @@ from euler import is_prime, find_factors, is_composite_number
 from euler import prime_factors, is_palindrome
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
+from euler import is_cube
+
 class TestEuler:
     def test_pentagon(self):
         # Test pengtagon numbers
@@ -150,3 +152,8 @@ class TestEuler:
                                 ])
     def test_oct(self, n, expected_result):
         assert octagonal_n(n) == expected_result
+
+    def test_cube(self):
+        assert is_cube(41063625) == True
+        assert is_cube(41063626) == False
+        assert is_cube(8) == True
