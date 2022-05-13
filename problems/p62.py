@@ -44,14 +44,8 @@ while True:
     if len(str(cube_number)) != number_digits:
         # Run our check now (if the dictionary has results, that is)
         if number_digits in number_digits_to_cube_numbers:
-            # Check if any of the ordered digits have the number of entries required
-            min_found = None
-            for ordered_digits, cube_numbers in number_digits_to_cube_numbers[number_digits].items():
-                number_valid_perms = len(cube_numbers)
-                if number_valid_perms == find_x_perms:
-                    cur_min = min(cube_numbers)
-                    if min_found is None or cur_min < min_found:
-                        min_found = cur_min
+            # Check if any of the ordered digits have the number of entries required, get the minimum (there may be multiple solutions, non-minimal)
+            min_found = min([min(cube_numbers) for cube_numbers in number_digits_to_cube_numbers[number_digits].values() if len(cube_numbers) == find_x_perms], default=None)
 
             if min_found:
                 cube_root = round(min_found ** (1/3))
