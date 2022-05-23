@@ -97,7 +97,10 @@ def prime_factors(n):
             factors[p] += 1
             n = n / p
         else:
-            p += 1
+            if p <= 2:
+                p += 1
+            else:
+                p += 2
 
     n = int(n)
     factors.setdefault(n, 0)
