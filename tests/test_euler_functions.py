@@ -5,7 +5,7 @@ from euler import is_prime, find_factors, is_composite_number
 from euler import prime_factors, is_palindrome
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
-from euler import is_cube
+from euler import is_cube, is_square
 
 class TestEuler:
     def test_pentagon(self):
@@ -157,3 +157,8 @@ class TestEuler:
         assert is_cube(41063625) == True
         assert is_cube(41063626) == False
         assert is_cube(8) == True
+
+    def test_is_square(self):
+        assert is_square(4) == True
+        assert is_square(5) == False
+        assert is_square(9) == True

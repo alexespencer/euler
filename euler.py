@@ -28,6 +28,10 @@ def is_cube(n):
     """Returns if a number is a cube"""
     return round(n ** (1/3)) ** 3 == n
 
+def is_square(n):
+    """Returns if a number is a cube"""
+    return round(n ** (1/2)) ** 2 == n
+
 def is_pentagon_number(number):
     """Returns true if this number is a pentagon number. Must be given an int"""
     try:
