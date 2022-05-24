@@ -5,7 +5,7 @@ from euler import is_prime, find_factors, is_composite_number
 from euler import prime_factors, is_palindrome
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
-from euler import is_cube, is_square
+from euler import is_cube, is_square, continued_expansion
 
 class TestEuler:
     def test_pentagon(self):
@@ -162,3 +162,20 @@ class TestEuler:
         assert is_square(4) == True
         assert is_square(5) == False
         assert is_square(9) == True
+
+    @pytest.mark.parametrize("period, vals",
+    [
+        (1, [2, 5, 10, 17, 26, 37, 50, 65, 82, 101]),
+        (2, [3, 6, 8, 11, 12, 15, 18, 20, 24, 27]),
+        (3, [41, 130, 269, 370, 458]),
+        (4, [7, 14, 23, 28, 32, 33, 34, 47, 55, 60]),
+        (5, [13, 29, 53, 74, 85, 89, 125, 173, 185, 218]),
+        (6, [19, 21, 22, 45, 52, 54, 57, 59, 70, 77]),
+        (7, [58, 73, 202, 250, 274, 314, 349, 425]),
+        (8, [31, 44, 69, 71, 91, 92, 108, 135, 153, 158]),
+        (9, [106, 113, 137, 149, 265, 389, 493]),
+        (10, [43, 67, 86, 93, 115, 116, 118, 129, 154])]
+                )
+    def test_continued_expansion(self, period, vals):
+        for n in vals:
+            assert len(continued_expansion(n)) - 1 == period

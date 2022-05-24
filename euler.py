@@ -119,3 +119,22 @@ def is_palindrome(n):
 def reverse_and_add(n):
     """Returns the sum of the reverse of a number and the number"""
     return n + int(str(n)[::-1])
+
+def continued_expansion(S):
+    m = 0
+    d = 1
+    a0 = int(S ** 0.5)
+    a = a0
+    expansion = [a]
+
+    # The algorithm terminates when this triplet is the same as one encountered before. The algorithm can also terminate on ai when ai = 2 a0
+    while True:
+        m = d * a - m
+        d = (S - m * m) / d
+
+        a = int((a0 + m) / d)
+        expansion.append(a)
+        if a == 2 * a0:
+            break
+
+    return expansion
