@@ -1,4 +1,5 @@
 from math import sqrt
+from functools import reduce
 
 def pentagon_n(n):
     """Returns the nth pentagon number"""
@@ -66,13 +67,9 @@ def is_prime(n):
 
 def find_factors(n):
     """Returns the factors of n (must be an int)"""
-    factors = []
-
-    for i in range(1, n+1):
-        if n % i == 0:
-            factors.append(i)
-
-    return factors
+    step = 2 if n % 2 else 1
+    return set(reduce(list.__add__,
+                    ([i, n//i] for i in range(1, int(sqrt(n))+1, step) if n % i == 0)))
 
 def is_composite_number(n):
     """Returns if a number is a composite number. A composite number is a whole number with 2 factors (other than 1 and itself) and is not prime"""
