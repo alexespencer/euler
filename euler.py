@@ -135,3 +135,17 @@ def continued_expansion(S):
             break
 
     return expansion
+
+def HCF(a, b):
+    """Finds the HCF of two numbers"""
+    while b:
+        a, b = b, a % b
+    return a
+
+def LCM(a, b):
+    """Finds the LCM of two numbers"""
+    return a * b // HCF(a, b)
+
+def LCM_list(l):
+    """Finds the LCM of a list of numbers"""
+    return reduce(LCM, l)

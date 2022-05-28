@@ -5,7 +5,7 @@ from euler import is_prime, find_factors, is_composite_number
 from euler import prime_factors, is_palindrome
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
-from euler import is_cube, is_square, continued_expansion
+from euler import is_cube, is_square, continued_expansion, HCF, LCM
 
 class TestEuler:
     def test_pentagon(self):
@@ -179,3 +179,21 @@ class TestEuler:
     def test_continued_expansion(self, period, vals):
         for n in vals:
             assert len(continued_expansion(n)) - 1 == period
+
+    @pytest.mark.parametrize("a, b, hcf", [
+                                (8, 4, 4),
+                                (4, 8, 4),
+                                (12, 16, 4),
+                                (9, 12, 3),
+                                (7, 8, 1)
+                                ])
+    def test_HCF(self, a, b, hcf):
+        assert HCF(a, b) == hcf
+
+    @pytest.mark.parametrize("a, b, lcm", [
+                                (4, 6, 12),
+                                (4, 10, 20),
+                                (2, 6, 6)
+                                ])
+    def test_LCM(self, a, b, lcm):
+        assert LCM(a, b) == lcm
