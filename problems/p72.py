@@ -80,17 +80,43 @@ def count_possible_fractions(max_d):
 
     return count_fractions
 
+def phi_1_to_n(n):
+    phi_set = {}
+    for i in range(1, n+1):
+        phi_set[i] = i
+
+    for i in range(2, n+1):
+        if phi_set[i] == i:
+            for j in range(i, n+1, i):
+                phi_set[j] -= int(phi_set[j] / i)
+
+    return phi_set
+
+def count_possible_fractions_fast(max_d):
+    # We can just sum phi(d) for 2 to max_d
+    phi_set = phi_1_to_n(max_d)
+    return sum(phi_set.values()) - 1
+
 if True:
     print("Running tests")
     for i in range(10, 105):
         assert count_possible_fractions(i) == count_possible_fractions_slow(i)
+        assert count_possible_fractions_fast(i) == count_possible_fractions_slow(i)
 
     assert non_contributing(12, [3, 4, 6]) == 5
     assert non_contributing(10, [2, 5]) == 5
     print("Tests complete")
 
+if False:
+    starttime = time.time()
+    print(count_possible_fractions(10**6))
+    # count_possible_fractions(10**4)
+    endtime = time.time()
+    print(f"Time taken: {endtime - starttime}")
+
+# Old way took 17000 seconds, this way takes 1.3 seconds!
 starttime = time.time()
-print(count_possible_fractions(10**6))
+print(count_possible_fractions_fast(10**6))
 # count_possible_fractions(10**4)
 endtime = time.time()
 print(f"Time taken: {endtime - starttime}")

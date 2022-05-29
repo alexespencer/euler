@@ -149,3 +149,15 @@ def LCM(a, b):
 def LCM_list(l):
     """Finds the LCM of a list of numbers"""
     return reduce(LCM, l)
+
+def phi_1_to_n(n):
+    phi_set = {}
+    for i in range(1, n+1):
+        phi_set[i] = i
+
+    for i in range(2, n+1):
+        if phi_set[i] == i:
+            for j in range(i, n+1, i):
+                phi_set[j] -= int(phi_set[j] / i)
+
+    return phi_set

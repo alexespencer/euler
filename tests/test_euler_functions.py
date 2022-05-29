@@ -6,6 +6,7 @@ from euler import prime_factors, is_palindrome
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
 from euler import is_cube, is_square, continued_expansion, HCF, LCM
+from euler import phi_1_to_n
 
 class TestEuler:
     def test_pentagon(self):
@@ -197,3 +198,10 @@ class TestEuler:
                                 ])
     def test_LCM(self, a, b, lcm):
         assert LCM(a, b) == lcm
+
+    @pytest.mark.parametrize("n, expected_set", [
+                                (4, [1, 1, 2, 2]),
+                                (10, [1, 1, 2, 2, 4, 2, 6, 4, 6, 4]),
+                                ])
+    def test_phi(self, n, expected_set):
+        assert phi_1_to_n(n) == {i+1: v for i, v in enumerate(expected_set)}
