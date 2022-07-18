@@ -119,7 +119,7 @@ assert b.get_destination_index("Rx") == 15
 print("Tests passed")
 
 print("---------")
-print("Simualting 1,000,000 rolls (with 6 sided dice)")
+print("Simulating 1,000,000 rolls (with 6 sided dice)")
 b = Board([6, 6])
 for i in range(1000000):
     b.roll_dice()
@@ -127,7 +127,7 @@ for i in range(1000000):
 print(b.top_3_squares())
 
 print("---------")
-print("Simualting 1,000,000 rolls (with 4 sided dice)")
+print("Simulating 1,000,000 rolls (with 4 sided dice)")
 b = Board([4, 4])
 for i in range(1000000):
     b.roll_dice()
