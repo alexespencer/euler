@@ -6,7 +6,9 @@ from euler import prime_factors, is_palindrome
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
 from euler import is_cube, is_square, continued_expansion, HCF, LCM
-from euler import phi_1_to_n
+from euler import phi_1_to_n, unique_product_from_factors, is_product_sum
+
+from math import prod
 
 class TestEuler:
     def test_pentagon(self):
@@ -205,3 +207,27 @@ class TestEuler:
                                 ])
     def test_phi(self, n, expected_set):
         assert phi_1_to_n(n) == {i+1: v for i, v in enumerate(expected_set)}
+
+    @pytest.mark.parametrize("n, expected_set", [
+                                (12, [[2, 2, 3], [2, 6], [3, 4], [12]]),
+                                (8, [[2, 2, 2], [2, 4], [8]]),
+                                ])
+    def test_unique_product_from_factors(self, n, expected_set):
+        # Create a factors list that gets reused for optimised lookups
+        factors_lookup = {}
+
+        # Call the function
+        unique_factors = unique_product_from_factors(factors_lookup, n)
+
+        assert unique_factors == expected_set
+        # For each set, check that the product is n
+        for s in unique_factors:
+            assert prod(s) == n
+
+    @pytest.mark.parametrize("n, product_factors, k, expected_result", [
+                                (8, [2, 2, 2], 8, False),
+                                (8, [2, 2, 2], 5, True),
+                                (12, [2, 6], 6, True),
+                                ])
+    def test_is_product_sum(self, n, product_factors, k, expected_result):
+        assert is_product_sum(n, product_factors, k) == expected_result

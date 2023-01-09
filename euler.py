@@ -1,5 +1,6 @@
-from math import sqrt
+from math import sqrt, prod
 from functools import reduce
+import itertools
 
 def pentagon_n(n):
     """Returns the nth pentagon number"""
@@ -161,3 +162,48 @@ def phi_1_to_n(n):
                 phi_set[j] -= int(phi_set[j] / i)
 
     return phi_set
+
+def unique_product_from_factors(factors_lookup, number, depth=0, current_products=None, master_list=None):
+    # This functio will be called recursively until number is prime
+    # Given a list of a numbers factors, return all the unique ways of multiplying them together (with repetition if needed) to get the original number
+    # For example, given the factors [1, 2, 3, 4, 6, 12] and the number 12, return [[1, 12], [2, 6], [3, 4], [1, 2, 6], [1, 3, 4], [1, 2, 3, 4]]
+    if master_list is None:
+        master_list = []
+
+    if current_products is None:
+        my_products = []
+    else:
+        my_products = current_products.copy()
+
+    # Check if the number is in factors_lookup (a dict, so if we edit it, it will be changed for all future calls)
+    if number not in factors_lookup:
+        factors_lookup[number] = find_factors(number)
+
+    my_products.append(number)
+    # print(f"{'-'*depth} Number: {number}, Current products: {my_products} ({prod(my_products)})")
+    master_list.append(my_products.copy())
+
+    # Call this function for each factor of this number (except 1 and itself)
+    for factor in factors_lookup[number]:
+        if factor == 1 or factor == number:
+            continue
+
+        my_products[-1] = number // factor
+        # Divide the last element by this factor before calling
+        unique_product_from_factors(factors_lookup, factor, depth+1, current_products=my_products, master_list=master_list)
+
+    if depth == 0:
+        # Sort each of the lists in master_list
+        for i, l in enumerate(master_list):
+            master_list[i] = sorted(l)
+
+        master_list.sort()
+        master_list = list(k for k,_ in itertools.groupby(master_list))
+
+        return master_list
+
+def is_product_sum(current_prod, product_factors, k):
+    # Get the pad count
+    pad_count = k - len(product_factors)
+
+    return current_prod == sum(product_factors) + pad_count
