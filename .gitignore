@@ -153,3 +153,5 @@ cython_debug/
 
 data
 misc
+
+problems/p10*.py
