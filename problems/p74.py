@@ -1,8 +1,4 @@
-from ipaddress import summarize_address_range
 from math import factorial
-
-from pyparsing import countedArray
-
 
 factorial_cache = {}
 for i in range(0, 10):
@@ -12,10 +8,10 @@ print(factorial_cache)
 
 def digit_factorial_sum(n):
     sum = 0
-    
+
     for c in str(n):
         sum += factorial_cache[c]
-    
+
     return sum
 
 assert digit_factorial_sum(145) == 145
