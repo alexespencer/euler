@@ -214,14 +214,17 @@ class Calculation:
         self.operator = operator
         self.number2 = number2
         self.result = self.calc()
+        self.number_set = self.numbers_used()
 
     def __eq__(self, other):
         # Everything has to be the same
         if not isinstance(other, Calculation):
             return False
-        if self.number1 != other.number1:
+        if self.result != other.result:
             return False
         if self.operator != other.operator:
+            return False
+        if self.number1 != other.number1:
             return False
         if self.number2 != other.number2:
             return False
