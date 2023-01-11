@@ -207,3 +207,93 @@ def is_product_sum(current_prod, product_factors, k):
     pad_count = k - len(product_factors)
 
     return current_prod == sum(product_factors) + pad_count
+
+class Calculation:
+    def __init__(self, number1, operator=None, number2=None):
+        self.number1 = number1
+        self.operator = operator
+        self.number2 = number2
+        self.result = self.calc()
+
+    def __eq__(self, other):
+        # Everything has to be the same
+        if not isinstance(other, Calculation):
+            return False
+        if self.number1 != other.number1:
+            return False
+        if self.operator != other.operator:
+            return False
+        if self.number2 != other.number2:
+            return False
+
+        return True
+
+    def __hash__(self):
+        return hash((self.number1, self.operator, self.number2))
+
+    def numbers_used(self):
+        numbers_used = []
+        if isinstance(self.number1, int):
+            numbers_used.append(self.number1)
+        else:
+            numbers_used.extend(self.number1.numbers_used())
+        if isinstance(self.number2, int):
+            numbers_used.append(self.number2)
+        elif self.number2 is not None:
+            numbers_used.extend(self.number2.numbers_used())
+
+        return set(numbers_used)
+
+    def __repr__(self):
+        if self.operator == None:
+            return f"{self.number1}"
+
+        return f"({repr(self.number1)} {self.operator} {repr(self.number2)})"
+
+    def __str__(self):
+        return str(self.result)
+
+    def __add__(self, other):
+        if isinstance(other, int):
+            return Calculation(self.result, '+', other)
+
+        return Calculation(self.result, '+', other.result)
+
+    def __sub__(self, other):
+        if isinstance(other, int):
+            return Calculation(self.result, '-', other)
+        return Calculation(self.result, '-', other.result)
+
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return Calculation(self.result, '*', other)
+        return Calculation(self.result, '*', other.result)
+
+    def __truediv__(self, other):
+        if isinstance(other, int):
+            return Calculation(self.result, '/', other)
+        return Calculation(self.result, '/', other.result)
+
+    def calc(self):
+        if isinstance(self.number1, Calculation):
+            left = self.number1.calc()
+        else:
+            left = self.number1
+
+        if isinstance(self.number2, Calculation):
+            right = self.number2.calc()
+        else:
+            right = self.number2
+
+        if self.operator == '+':
+            return left + right
+        elif self.operator == '-':
+            return left - right
+        elif self.operator == '*':
+            return left * right
+        elif self.operator == '/':
+            return left / right
+        elif self.operator == None:
+            return left
+        else:
+            raise ValueError("Unknown operator")

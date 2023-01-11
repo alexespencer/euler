@@ -8,6 +8,8 @@ from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
 from euler import is_cube, is_square, continued_expansion, HCF, LCM
 from euler import phi_1_to_n, unique_product_from_factors, is_product_sum
 
+from euler import Calculation
+
 from math import prod
 
 class TestEuler:
@@ -231,3 +233,26 @@ class TestEuler:
                                 ])
     def test_is_product_sum(self, n, product_factors, k, expected_result):
         assert is_product_sum(n, product_factors, k) == expected_result
+
+    def test_calculation(self):
+        a = Calculation(1)
+        assert str(a) == "1"
+        assert repr(a) == "1"
+        b = Calculation(5, '*', 3)
+        assert str(b) == "15"
+        assert repr(b) == "(5 * 3)"
+        c = Calculation(a, '+', b)
+        assert str(c) == "16"
+        assert repr(c) == "(1 + (5 * 3))"
+        assert c.numbers_used() == {1, 5, 3}
+
+        d = Calculation(c, "/", 8)
+        assert str(d) == "2.0"
+        assert repr(d) == "((1 + (5 * 3)) / 8)"
+        assert d.numbers_used() == {1, 5, 3, 8}
+
+        e = Calculation(8, "/", c)
+        assert str(e) == "0.5"
+        assert repr(e) == "(8 / (1 + (5 * 3)))"
+        assert e.numbers_used() == {1, 5, 3, 8}
+
