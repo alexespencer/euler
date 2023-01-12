@@ -208,6 +208,64 @@ def is_product_sum(current_prod, product_factors, k):
 
     return current_prod == sum(product_factors) + pad_count
 
+def _pythag_triples(m, n, max_length):
+    triples = []
+
+    a = m ** 2 - n ** 2
+    b = 2 * m * n
+    c = m ** 2 + n ** 2
+    k = 1
+    while True:
+        if (k * a) + (k * b) + (k * c) > max_length:
+            break
+
+        triples.append(tuple(sorted([k * a, k * b, k * c])))
+        k += 1
+
+    return triples
+
+def generate_pythag_triples(max_length):
+    """Generates all pythah triples up to max_length"""
+    # What is the max value of m we need to use?
+    m = 2
+    while True:
+        if _pythag_triples(m, 1, max_length):
+            m += 1
+        else:
+            break
+
+    # Generate all triangles up to our max length
+    max_m = m * 2
+    triangles = {}
+    for m in range(2, max_m):
+        # If m is odd then n cannot also be odd we we get to skip every other n
+        step = 1 if m % 2 == 0 else 2
+        for n in range(step, m, step):
+            if HCF(m, n) == 1:
+                for triple in _pythag_triples(m, n, max_length):
+                    length = sum(triple)
+                    triangles.setdefault(length, []).append(triple)
+
+    # Sometimes we can generate things like (12, 16, 20), (12, 16, 20) - from different m/n pairs - so make them unique now
+    for length, triples in triangles.items():
+        triangles[length] = set(triples)
+
+    return triangles
+
+def fast_pythag_triples(k): # k is the max length of the hypotenuse
+    """Returns a list of all pythagorean triples with a hypotenuse less than k, (a, b, c) or (b, a, c) - be careful"""
+    n, m = 1, 2
+    while m * m + 1 < k:
+        if n >= m:
+            n, m = m % 2, m + 1
+        c = m * m + n * n
+        if c >= k:
+            n=m
+            continue
+        if HCF(n, m) == 1:
+            yield m * m - n * n, 2 * m * n, c
+        n += 2
+
 class Calculation:
     def __init__(self, number1, operator=None, number2=None):
         self.number1 = number1

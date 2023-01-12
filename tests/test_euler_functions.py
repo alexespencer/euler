@@ -8,7 +8,7 @@ from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
 from euler import is_cube, is_square, continued_expansion, HCF, LCM
 from euler import phi_1_to_n, unique_product_from_factors, is_product_sum
 
-from euler import Calculation
+from euler import Calculation, generate_pythag_triples
 
 from math import prod
 
@@ -255,4 +255,16 @@ class TestEuler:
         assert str(e) == "0.5"
         assert repr(e) == "(8 / (1 + (5 * 3)))"
         assert e.numbers_used() == {1, 5, 3, 8}
+
+    def test_pythag_triples(self):
+        triangles = generate_pythag_triples(234)
+
+        # Run tests (from wiki, all of these are expected to be found)
+        pt_100 = [(3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25),
+                (20, 21, 29), (12, 35, 37), (9, 40, 41), (28, 45, 53),
+                (11, 60, 61), (16, 63, 65), (33, 56, 65), (48, 55, 73),
+                (13, 84, 85), (36, 77, 85), (39, 80, 89), (65, 72, 97)]
+
+        for triple in pt_100:
+            assert triple in triangles[sum(triple)]
 
