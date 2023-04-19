@@ -75,6 +75,11 @@ def find_factors(n):
     return set(reduce(list.__add__,
                     ([i, n//i] for i in range(1, int(sqrt(n))+1, step) if n % i == 0)))
 
+def count_factors(n):
+    pf = prime_factors(n)
+
+    return prod([v + 1 for v in pf.values()])
+
 def is_composite_number(n):
     """Returns if a number is a composite number. A composite number is a whole number with 2 factors (other than 1 and itself) and is not prime"""
     if is_prime(n):

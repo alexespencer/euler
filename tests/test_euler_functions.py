@@ -2,7 +2,7 @@ import pytest
 
 from euler import pentagon_n, quadratic_equation, is_pentagon_number, reverse_and_add
 from euler import is_prime, find_factors, is_composite_number
-from euler import prime_factors, is_palindrome
+from euler import prime_factors, is_palindrome, count_factors
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
 from euler import is_cube, is_square, continued_expansion, HCF, LCM
@@ -43,6 +43,10 @@ class TestEuler:
                                 (1001621, True)])
     def test_prime(self, n, prime):
         assert is_prime(n) == prime
+
+    def test_count_factors(self):
+        for i in range(1, 10 ** 5):
+            assert len(find_factors(i)) == count_factors(i)
 
     def test_sum_prime(self):
         # Sum of primes under 10
