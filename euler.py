@@ -69,6 +69,15 @@ def is_prime(n):
 
     return True
 
+def fibonacci_seq(max_n=None):
+    """Returns a list of fibonacci numbers up to max_n"""
+    a, b = 1, 1
+    while True:
+        yield a
+        a, b = b, a + b
+        if max_n and a > max_n:
+            break
+
 def find_factors(n):
     """Returns the factors of n (must be an int)"""
     step = 2 if n % 2 else 1
@@ -135,7 +144,7 @@ def prime_factors(n):
         if n % p == 0:
             factors.setdefault(p, 0)
             factors[p] += 1
-            n = n / p
+            n = n // p
         else:
             if p <= 2:
                 p += 1
