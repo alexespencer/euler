@@ -19,7 +19,7 @@ from euler import is_composite_number, is_prime
 
 # Prepopulate primes up to 1000
 prime_limit = 6000
-primes = [2] + [n for n in range(3, prime_limit, 2) if is_prime(n)]
+primes = set([2] + [n for n in range(3, prime_limit, 2) if is_prime(n)])
 
 # Prepopulate twice of squares up to 1000
 twice_squares = [2 * n * n for n in range(1, 1000) if 2 * n * n < prime_limit]

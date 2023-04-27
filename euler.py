@@ -69,6 +69,15 @@ def is_prime(n):
 
     return True
 
+def fibonacci_seq(max_n=None):
+    """Returns a list of fibonacci numbers up to max_n"""
+    a, b = 1, 1
+    while True:
+        yield a
+        a, b = b, a + b
+        if max_n and a > max_n:
+            break
+
 def find_factors(n):
     """Returns the factors of n (must be an int)"""
     step = 2 if n % 2 else 1
@@ -94,6 +103,36 @@ def is_composite_number(n):
 
     return False
 
+def list_count_distinct_prime_factor_sieve(N):
+    A = [0] * (1+N)
+    for p in range(2, 1+N):
+        if A[p]:
+            continue
+        for n in range(p, 1+N, p):
+            A[n] += 1
+    return A
+
+def list_distinct_prime_factor_sieve(N):
+    A = [[] for _ in range(1+N)]
+    for p in range(2, 1+N):
+        if A[p]:
+            continue
+        for n in range(p, 1+N, p):
+            A[n].append(p)
+    return A
+
+def prime_sieve(n):
+    n = n + 1
+    size = n//2
+    sieve = [1]*size
+    limit = int(n**0.5)
+    for i in range(1,limit):
+        if sieve[i]:
+            val = 2*i+1
+            tmp = ((size-1) - i)//val 
+            sieve[i+val::val] = [0]*tmp
+    return [2] + [i*2+1 for i, v in enumerate(sieve) if v and i>0]
+
 def prime_factors(n):
     """Returns a dictionary of prime: order. For example 100 (prime factors 2x2x5x5) would return {2: 2, 5:2}"""
     if n == 1:
@@ -105,7 +144,7 @@ def prime_factors(n):
         if n % p == 0:
             factors.setdefault(p, 0)
             factors[p] += 1
-            n = n / p
+            n = n // p
         else:
             if p <= 2:
                 p += 1

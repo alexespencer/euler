@@ -10,9 +10,24 @@ from euler import phi_1_to_n, unique_product_from_factors, is_product_sum
 
 from euler import Calculation, generate_pythag_triples
 
+from euler import list_distinct_prime_factor_sieve, list_count_distinct_prime_factor_sieve
+from euler import prime_sieve, fibonacci_seq
+
 from math import prod
 
 class TestEuler:
+    def test_fibonacci(self):
+        assert list(fibonacci_seq(55)) == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+    
+    def test_prime_sieve(self):
+        primes = prime_sieve(11)
+        assert primes == [2, 3, 5, 7, 11]
+
+    def test_factor_sieve(self):
+        A = list_distinct_prime_factor_sieve(20)
+        assert A == [[], [], [2], [3], [2], [5], [2, 3], [7], [2], [3], [2, 5], [11], [2, 3], [13], [2, 7], [3, 5], [2], [17], [2, 3], [19], [2, 5]]
+        assert list_count_distinct_prime_factor_sieve(20) == [0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 1, 2, 1, 2]
+
     def test_pentagon(self):
         # Test pengtagon numbers
         assert list(map(pentagon_n, range(1, 11))) == [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]
@@ -80,7 +95,8 @@ class TestEuler:
                                  (182, {2: 1, 7: 1, 13: 1}),
                                  (199, {199: 1}),
                                  (256, {2: 8}),
-                                 (300, {2: 2, 3: 1, 5: 2})
+                                 (300, {2: 2, 3: 1, 5: 2}),
+                                 (25**12, {5: 24})
                                  ])
     def test_prime_factors(self, n, expected_prime_factors):
         assert prime_factors(n) == expected_prime_factors
