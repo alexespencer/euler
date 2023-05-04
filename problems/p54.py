@@ -1,7 +1,7 @@
 import sys, os
 sys.path.insert(0, os.getcwd())
 
-from problems.cards import Card, Hand, RankedHand
+from problems.cards import canonical
 
 # Read the poker.txt file into a list of strings
 with open('data/poker.txt') as f:
@@ -13,8 +13,8 @@ hands = [(" ".join(line.split()[:5]), " ".join(line.split()[-5:])) for line in l
 # Go through, create hands and see which hand wins, count how many left hand wins
 count = 0
 for left_hand, right_hand in hands:
-    left_hand = Hand.from_string(left_hand)
-    right_hand = Hand.from_string(right_hand)
+    left_hand = canonical(left_hand)
+    right_hand = canonical(right_hand)
     if left_hand > right_hand:
         count += 1
 

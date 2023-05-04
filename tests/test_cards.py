@@ -1,142 +1,16 @@
 
 import pytest
 
-from problems.cards import Card, Hand, RankedHand
+from problems.cards import canonical
 
 class TestCards:
-    def test_str_repr(self):
+    def test_canonical(self):
         # Create a card
-        card = Card('C', 'A')
-        assert str(card) == 'Ace of Clubs'
-        assert repr(card) == 'Card(suit=\'C\', rank=\'A\')'
+        a = canonical('TD 7H KH TS 7S'.split()) # two pairs (tens and sevens)
 
-    def test_hand_royal_flush(self):
-        # Create a hand
-        cards = [Card('C', 'A'), Card('C', 'K'), Card('C', 'Q'), Card('C', 'J'), Card('C', 'T')]
-        hand = Hand(cards)
-        assert hand.royal_flush() == RankedHand('Royal Flush', 14, [0, 1, 2, 3, 4])
-        assert hand.straight_flush() == RankedHand('Straight Flush', 14, [0, 1, 2, 3, 4])
+        b = canonical('3C AH 4D 2S 5C'.split()) # ace-low straight
 
-        # Reverse the cards and try again
-        cards.reverse()
-        hand = Hand(cards)
-        assert hand.royal_flush() == RankedHand('Royal Flush', 14, [0, 1, 2, 3, 4])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', 'K'), Card('C', 'Q'), Card('C', 'J'), Card('C', 'T')]
-        hand = Hand(cards)
-        assert hand.royal_flush() == None
-
-    def test_hand_straight_flush(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '4'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.straight_flush() == RankedHand('Straight Flush', 6, [0, 1, 2, 3, 4])
-        assert hand.straight() == RankedHand('Straight', 6, [0, 1, 2, 3, 4])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '8'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.straight_flush() == None
-
-    def test_four_of_a_kind(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '2'), Card('C', '2'), Card('C', '2'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.four_of_a_kind() == RankedHand('Four of a Kind', 2, [0, 1, 2, 3])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '2'), Card('C', '2'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.four_of_a_kind() == None
-
-    def test_full_house(self):
-        # Create a hand
-        cards = [Card('H', '2'), Card('D', '2'), Card('C', '4'), Card('D', '4'), Card('S', '4')]
-        hand = Hand(cards)
-        assert hand.full_house() == RankedHand('Full House', 4, [2, 3, 4])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '2'), Card('C', '6'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.full_house() == None
-
-    def test_flush(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '4'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.flush() == RankedHand('Flush', 6, [0, 1, 2, 3, 4])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('D', '8'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.flush() == None
-
-    def test_straight(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '4'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.straight() == RankedHand('Straight', 6, [0, 1, 2, 3, 4])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '8'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.straight() == None
-
-    def test_three_of_a_kind(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '2'), Card('C', '2'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.three_of_a_kind() == RankedHand('Three of a Kind', 2, [0, 1, 2])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '2'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.three_of_a_kind() == None
-
-    def test_two_pair(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '2'), Card('C', '5'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.two_pair() == RankedHand('Two Pair', 5, [0, 1, 2, 3])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '2'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.two_pair() == None
-
-    def test_one_pair(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '5'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.one_pair() == RankedHand('One Pair', 5, [2, 3])
-
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '8'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.one_pair() == None
-
-    def test_high_card(self):
-        # Create a hand
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '8'), Card('C', '5'), Card('C', '6')]
-        hand = Hand(cards)
-        assert hand.high_card() == RankedHand('High Card', 8, [2])
-
-        cards = [Card('C', '2'), Card('C', '3'), Card('C', '8'), Card('C', '5'), Card('C', 'A')]
-        hand = Hand(cards)
-        assert hand.high_card() == RankedHand('High Card', 14, [4])
-
-    def test_hand_from_string(self):
-        hand_string = "5H 5C 6S 7S KD"
-        hand = Hand.from_string(hand_string)
-        assert hand.cards == [Card('H', '5'), Card('C', '5'), Card('S', '6'), Card('S', '7'), Card('D', 'K')]
-
-    def test_is_flush(self):
-        # Create the hand
-        hand = Hand.from_string("3D 6D 7D TD QD")
-
-        # Assert it is a flush
-        assert hand.flush() is not None
+        assert a < b
 
     @pytest.mark.parametrize("id, hand_1, hand_2, left_wins",
                                 [
@@ -146,16 +20,20 @@ class TestCards:
                                     ("4","4D 6S 9H QH QC", "3D 6D 7H QD QS", True), # Hand 4
                                     ("5","2H 2D 4C 4D 4S", "3C 3D 3S 9S 9D", True), # Hand 5
                                     ("5mod","2H 2D 4C 4D 4S", "4C 4D 4S 9S 9D", False), # Hand 5 - same three of a kind
+                                    ("hackerrank1", "2H 3C AS 4S 5D", "2C 3S 4S 5D 6D", False),
+                                    ("hackerrank2", "2H 3C AS 4S 5D", "6C 6S 4S 5S 6D", True),
+                                    ("stackoverflow1", "AH 4H 4C 5H 5C", "6H 6C 7H 7C 2H", False),
+                                    ("hackerrank1", "2H 3C AS 4S 5D", "TC JS QS KD AD", False),
                                 ])
     def test_winning_hand(self, id, hand_1, hand_2, left_wins):
         # Create the left hand
-        left_hand = Hand.from_string(hand_1)
+        left_hand = canonical(hand_1.split())
 
         # Create the right hand
-        right_hand = Hand.from_string(hand_2)
+        right_hand = canonical(hand_2.split())
 
         # Check if the left hand wins
-        assert (left_hand > right_hand) == left_wins
+        assert (left_hand > right_hand) == left_wins, f"Test {id} failed"
 
         # When reversed, the opposite should be true
-        assert (right_hand > left_hand) == (not left_wins)
+        assert (right_hand > left_hand) == (not left_wins), f"Test {id} failed for reverse check"
