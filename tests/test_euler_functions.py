@@ -5,6 +5,7 @@ from euler import is_prime, find_factors, is_composite_number
 from euler import prime_factors, is_palindrome, count_factors
 
 from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
+from euler import is_triangular, is_pentagonal
 from euler import is_cube, is_square, continued_expansion, HCF, LCM
 from euler import phi_1_to_n, unique_product_from_factors, is_product_sum
 
@@ -33,6 +34,9 @@ class TestEuler:
         assert list(map(pentagon_n, range(1, 11))) == [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]
         assert all([is_pentagon_number(n) for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
         assert all([is_pentagon_number(n + 1) == False for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
+
+        assert all([is_pentagonal(n) for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
+        assert all([is_pentagonal(n + 1) == False for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
 
     @pytest.mark.parametrize("a, b, c, p1, p2",
                                 [(1, -3, 2, 2, 1),
@@ -137,6 +141,7 @@ class TestEuler:
                                 ])
     def test_triangle(self, n, expected_result):
         assert triangle_n(n) == expected_result
+        assert is_triangular(expected_result) == True
 
     @pytest.mark.parametrize("n, expected_result",
                                 [(1, 1),

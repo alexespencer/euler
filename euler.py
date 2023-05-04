@@ -4,27 +4,48 @@ import itertools
 
 def pentagon_n(n):
     """Returns the nth pentagon number"""
-    return int(n * (3 * n - 1) / 2)
+    return n * (3 * n - 1) // 2
+
+def is_pentagonal(n):
+    """
+    returns boolean whether n is a solution to (3*m**2 - m)
+    (Using quadratic equation)
+    """
+    if (1 + (1 + 24*n)**.5) % 6 == 0:
+        return True
+
+    return False
 
 def triangle_n(n):
     """Returns the nth triangle number"""
-    return int(n * (n + 1) / 2)
+    return n * (n + 1) // 2
+
+def is_triangular(n):
+    """
+    returns boolean whether n is a triangular number,
+    i.e. whether there exits m such that n = m(m+1)/2 >> 0 = -m^2 - m + 2n
+    (Using quadratic equation)
+    """
+    if (- 1 + (1 + 8*n)**.5) % 2 == 0:
+        return True
+
+    return False
 
 def square_n(n):
     """Returns the square of a number"""
-    return int(n * n)
+    return n * n
 
 def hexagonal_n(n):
     """Returns the nth hexagonal number"""
-    return int(n * (2 * n - 1))
+    return n * (2 * n - 1)
 
 def heptagonal_n(n):
     """Returns the nth heptagonal number"""
-    return int(n * (5 * n - 3) / 2)
+    return n * (5 * n - 3) // 2
 
 def octagonal_n(n):
     """Returns the nth octagonal number"""
-    return int(n * (3 * n - 2))
+    return n * (3 * n - 2)
 
 def is_cube(n):
     """Returns if a number is a cube"""
@@ -61,7 +82,7 @@ def is_prime(n):
 
     if n % 2 == 0:
         return False
-    
+
     for i in range(3, int(sqrt(n+1)+1), 2):
     # for i in range(2, n):
         if n % i == 0:
@@ -129,7 +150,7 @@ def prime_sieve(n):
     for i in range(1,limit):
         if sieve[i]:
             val = 2*i+1
-            tmp = ((size-1) - i)//val 
+            tmp = ((size-1) - i)//val
             sieve[i+val::val] = [0]*tmp
     return [2] + [i*2+1 for i, v in enumerate(sieve) if v and i>0]
 
@@ -272,7 +293,7 @@ def _pythag_triples(m, n, max_length):
     return triples
 
 def generate_pythag_triples(max_length):
-    """Generates all pythah triples up to max_length"""
+    """Generates all pythaga triples up to max_length"""
     # What is the max value of m we need to use?
     m = 2
     while True:
@@ -285,7 +306,7 @@ def generate_pythag_triples(max_length):
     max_m = m * 2
     triangles = {}
     for m in range(2, max_m):
-        # If m is odd then n cannot also be odd we we get to skip every other n
+        # If m is odd then n cannot also be odd so we get to skip every other n
         step = 1 if m % 2 == 0 else 2
         for n in range(step, m, step):
             if HCF(m, n) == 1:

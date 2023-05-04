@@ -156,3 +156,5 @@ misc
 
 problems/p10*.py
 !problems/p100.py
+
+*hacker*
