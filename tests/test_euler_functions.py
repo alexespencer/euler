@@ -12,14 +12,14 @@ from euler import phi_1_to_n, unique_product_from_factors, is_product_sum
 from euler import Calculation, generate_pythag_triples
 
 from euler import list_distinct_prime_factor_sieve, list_count_distinct_prime_factor_sieve
-from euler import prime_sieve, fibonacci_seq
+from euler import prime_sieve, fibonacci_seq, is_prime_miller_rabin
 
 from math import prod
 
 class TestEuler:
     def test_fibonacci(self):
         assert list(fibonacci_seq(55)) == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
-    
+
     def test_prime_sieve(self):
         primes = prime_sieve(11)
         assert primes == [2, 3, 5, 7, 11]
@@ -66,6 +66,10 @@ class TestEuler:
     def test_count_factors(self):
         for i in range(1, 10 ** 5):
             assert len(find_factors(i)) == count_factors(i)
+
+    def test_miller_rabin(self):
+        for i in range(3, 10 ** 6, 2):
+            assert is_prime(i) == is_prime_miller_rabin(i)
 
     def test_sum_prime(self):
         # Sum of primes under 10
