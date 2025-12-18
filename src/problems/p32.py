@@ -41,13 +41,14 @@ class Solution:
         return False
 
 
-s = Solution(9)
-assert s.pandigital_product(39, 186, 39 * 186)
-assert not s.pandigital_product(39, 183, 39 * 183)
+def solution() -> int:
+    s = Solution(9)
+    assert s.pandigital_product(39, 186, 39 * 186)
+    assert not s.pandigital_product(39, 183, 39 * 183)
 
-# Sum of all pandigital products for N 9
-assert s.solve(9) == 45228
+    # Sum of all pandigital products for N 9
+    return s.solve(9)
 
-s = Solution()
-for N in range(4, 10):
-    print(f"Sum of all pandigital products for N {N}: {s.solve(N)}")
+
+if __name__ == "__main__":
+    solution()
