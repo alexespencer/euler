@@ -1,0 +1,14 @@
+[project]
+name = "euler"
+version = "0.1.0"
+description = "Project Euler in Python"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.3.5",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.10",
+]
