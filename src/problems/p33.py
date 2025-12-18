@@ -101,10 +101,10 @@ def curious_fraction(n, d, k, orig_fraction=None):
     # Tried all digits, no match
     return False
 
-assert curious_fraction(49, 98, 1) == True
-assert curious_fraction(449, 494, 2) == False
+assert curious_fraction(49, 98, 1)
+assert not curious_fraction(449, 494, 2)
 
-assert curious_fraction(3016, 6032, 3) == True
+assert curious_fraction(3016, 6032, 3)
 
 total_n, total_d = 0, 0
 for i, (n, d) in enumerate(fractions):

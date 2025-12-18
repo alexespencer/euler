@@ -42,8 +42,8 @@ class Solution():
         return False
 
 s = Solution(9)
-assert s.pandigital_product(39, 186, 39*186) == True
-assert s.pandigital_product(39, 183, 39*183) == False
+assert s.pandigital_product(39, 186, 39*186)
+assert not s.pandigital_product(39, 183, 39*183)
 
 # Sum of all pandigital products for N 9
 assert s.solve(9) == 45228

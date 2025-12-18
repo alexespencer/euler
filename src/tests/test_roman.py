@@ -84,7 +84,7 @@ class TestRoman:
         invalid = []
         for number in range(1, 10000):
             try:
-                x = roman_to_int(number_to_minimal_roman(number))
+                roman_to_int(number_to_minimal_roman(number))
             except ValueError:
                 invalid += [number]
                 break

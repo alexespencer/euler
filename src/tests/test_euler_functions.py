@@ -33,10 +33,10 @@ class TestEuler:
         # Test pengtagon numbers
         assert list(map(pentagon_n, range(1, 11))) == [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]
         assert all([is_pentagon_number(n) for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
-        assert all([is_pentagon_number(n + 1) == False for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
+        assert all([not is_pentagon_number(n + 1) for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
 
         assert all([is_pentagonal(n) for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
-        assert all([is_pentagonal(n + 1) == False for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
+        assert all([not is_pentagonal(n + 1) for n in [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]])
 
     @pytest.mark.parametrize("a, b, c, p1, p2",
                                 [(1, -3, 2, 2, 1),
@@ -48,7 +48,7 @@ class TestEuler:
         assert quadratic_equation(a, b, c) == (p1, p2)
 
     def test_quad_error(self):
-        with pytest.raises(ValueError) as e_info:
+        with pytest.raises(ValueError):
             quadratic_equation(2, -4, 7)
 
     @pytest.mark.parametrize("n, prime",
@@ -145,7 +145,7 @@ class TestEuler:
                                 ])
     def test_triangle(self, n, expected_result):
         assert triangle_n(n) == expected_result
-        assert is_triangular(expected_result) == True
+        assert is_triangular(expected_result)
 
     @pytest.mark.parametrize("n, expected_result",
                                 [(1, 1),
@@ -188,14 +188,14 @@ class TestEuler:
         assert octagonal_n(n) == expected_result
 
     def test_cube(self):
-        assert is_cube(41063625) == True
-        assert is_cube(41063626) == False
-        assert is_cube(8) == True
+        assert is_cube(41063625)
+        assert not is_cube(41063626)
+        assert is_cube(8)
 
     def test_is_square(self):
-        assert is_square(4) == True
-        assert is_square(5) == False
-        assert is_square(9) == True
+        assert is_square(4)
+        assert not is_square(5)
+        assert is_square(9)
 
     @pytest.mark.parametrize("period, vals",
     [

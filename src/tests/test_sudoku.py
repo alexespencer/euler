@@ -4,14 +4,14 @@ from sudoku import Sudoku
 class TestSudoku:
     def test_solved(self):
         s = Sudoku(['483921657', '967345821', '251876493', '548132976', '729564138', '136798245', '372689514', '814253769', '695417382'])
-        assert s.solved() == True
+        assert s.solved()
         assert s.grid[0][0] == 4
         assert s.grid[0][1] == 8
         assert s.grid[0][2] == 3
 
     def test_lock_in(self):
         s = Sudoku(['003020600', '900305001', '001806400', '008102900', '700000008', '006708200', '002609500', '800203009', '005010300'])
-        assert s.solved() == False
+        assert not s.solved()
         assert s.possible_values[0][0] == [4, 5]
         assert s.possible_values[0][1] == [4, 5, 7, 8]
         assert s.grid[0][2] == 3
@@ -23,7 +23,7 @@ class TestSudoku:
 
     def test_find(self):
         s = Sudoku(['003020600', '900305001', '001806400', '008102900', '700000008', '006708200', '002609500', '800203009', '005010300'])
-        assert s.solved() == False
+        assert not s.solved()
         assert s.possible_values[0][0] == [4, 5]
         assert s.possible_values[0][1] == [4, 5, 7, 8]
         assert s.grid[0][2] == 3
@@ -39,12 +39,12 @@ class TestSudoku:
     def test_solve(self):
         s = Sudoku(['003020600', '900305001', '001806400', '008102900', '700000008', '006708200', '002609500', '800203009', '005010300'])
         s.solve()
-        assert s.solved() == True
+        assert s.solved()
 
     def test_find_locked_candidates1(self):
         s = Sudoku(['003020600', '900305001', '001806400', '008102900', '700000008', '006708200', '002609500', '800203009', '005010300'])
         s.solve()
-        assert s.solved() == True
+        assert s.solved()
 
         s = Sudoku(['801007090', '590080061', '030000080', '010275843', '358060127', '274138956', '080000030', '100820079', '020700418'])
         # Run find_locked_candidates() until it returns False
@@ -133,7 +133,7 @@ class TestSudoku:
 
     def test_column_possible_values(self):
         s = Sudoku(['003020600', '900305001', '001806400', '008102900', '700000008', '006708200', '002609500', '800203009', '005010300'])
-        assert s.solved() == False
+        assert not s.solved()
         assert s.possible_values[0][0] == [4, 5]
         assert s.possible_values[0][1] == [4, 5, 7, 8]
         assert s.grid[0][2] == 3

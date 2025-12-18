@@ -374,7 +374,7 @@ class Calculation:
         return set(numbers_used)
 
     def __repr__(self):
-        if self.operator == None:
+        if self.operator is None:
             return f"{self.number1}"
 
         return f"({repr(self.number1)} {self.operator} {repr(self.number2)})"
@@ -422,7 +422,7 @@ class Calculation:
             return left * right
         elif self.operator == '/':
             return left / right
-        elif self.operator == None:
+        elif self.operator is None:
             return left
         else:
             raise ValueError("Unknown operator")

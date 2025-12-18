@@ -26,10 +26,10 @@ def check_permutations(number_list):
 
     return False
 
-assert check_permutations([1487, 4817, 8147]) == True
-assert check_permutations([123, 321]) == True
-assert check_permutations([123, 31]) == False
-assert check_permutations([123, 31, 321]) == False
+assert check_permutations([1487, 4817, 8147])
+assert check_permutations([123, 321])
+assert not check_permutations([123, 31])
+assert not check_permutations([123, 31, 321])
 
 for n1 in range(1000, 9974):
     if not is_prime(n1):

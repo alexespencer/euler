@@ -10,7 +10,7 @@ def p52(number, multiplies=[2, 3, 4, 5, 6]):
 
     return True
 
-assert p52(125874, [2]) == True
+assert p52(125874, [2])
 
 found = False
 i = 0

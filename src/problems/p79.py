@@ -27,16 +27,16 @@ def attempt_valid(attempt, pin):
 
     return True
 
-assert attempt_valid([4, 1, 9], [3, 1, 9]) == False
-assert attempt_valid([3, 1, 9], [3, 1, 9]) == True
-assert attempt_valid([3, 1, 9, 3], [3, 1, 9]) == False
-assert attempt_valid([1, 9], [3, 1, 9]) == True
-assert attempt_valid([1, 9, 3], [3, 1, 9]) == False
-assert attempt_valid([1, 9, 3], [3, 1, 9, 3]) == True
-assert attempt_valid([1, 9, 3], [3, 1, 9, 0, 0, 0, 3]) == True
-assert attempt_valid([1, 9, 3], [3, 1, 0, 9, 0, 0, 0, 3]) == True
+assert not attempt_valid([4, 1, 9], [3, 1, 9])
+assert attempt_valid([3, 1, 9], [3, 1, 9])
+assert not attempt_valid([3, 1, 9, 3], [3, 1, 9])
+assert attempt_valid([1, 9], [3, 1, 9])
+assert not attempt_valid([1, 9, 3], [3, 1, 9])
+assert attempt_valid([1, 9, 3], [3, 1, 9, 3])
+assert attempt_valid([1, 9, 3], [3, 1, 9, 0, 0, 0, 3])
+assert attempt_valid([1, 9, 3], [3, 1, 0, 9, 0, 0, 0, 3])
 
-assert attempt_valid([9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 0, 0, 0, 0, 1, 6]) == False
+assert not attempt_valid([9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 0, 0, 0, 0, 1, 6])
 
 # Brute force method, starting from a 4 digit PIN, check if each attempt would be valid
 for i in range(1000000, 100000000):

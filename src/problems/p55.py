@@ -22,10 +22,10 @@ def is_lychrel(n, iter_max=50):
 # assert is_lychrel(47, 10) == True
 # assert is_lychrel(349, 1) == False
 # assert is_lychrel(349, 2) == False
-assert is_lychrel(349, 3) == False
-assert is_lychrel(10677, 52) == True
-assert is_lychrel(10677, 53) == False
-assert is_lychrel(196) == True
+assert not is_lychrel(349, 3)
+assert is_lychrel(10677, 52)
+assert not is_lychrel(10677, 53)
+assert is_lychrel(196)
 
 # # How many Lychrel numbers are there below ten-thousand? (Using 50 as a cutoff)
 count = 0
