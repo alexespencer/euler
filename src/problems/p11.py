@@ -21,67 +21,31 @@ grid_input = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"""
 
-# a = np.array([row.split() for row in grid_input.split('\n')], int)
-
-# rows, cols = a.shape
-
-# # Move 4x4 window over
-# max_found = 0
-# for x in range(rows-4+1):
-#     for y in range(cols-4+1):
-#         b = a[x:x+4, y:y+4]
-#         # Row max
-#         row_max = max([max(row) for row in b])
-#         print(row_max)
-#         col_max = max([max([row[col] for row in b]) for col in range(4)])
-#         print(col_max)
-
-#         # cur_max = max([max(np.prod(b, 1)), max(np.prod(b, 0)), np.prod(np.diag(b)), np.prod(np.diag(np.fliplr(b)))])
-#         cur_max = max([row_max, col_max])
-#         if cur_max > max_found:
-#             max_found = cur_max
-
-# print(max_found)
-
-#!/bin/python3
 
 def get_max_no_numpy(grid):
-    
     rows, cols = len(grid), len(grid[0])
 
     # Move 4x4 window over
     max_found = 0
-    for x in range(rows-4+1):
-        for y in range(cols-4+1):
-            b = [col[y:y+4] for col in grid[x:x+4]]
+    for x in range(rows - 4 + 1):
+        for y in range(cols - 4 + 1):
+            b = [col[y : y + 4] for col in grid[x : x + 4]]
 
             row_max = max([prod(row) for row in b])
             col_max = max([prod([row[col] for row in b]) for col in range(4)])
             diag_max_1 = prod([b[i][i] for i in range(4)])
-            diag_max_2 = prod([b[4-i-1][i] for i in range(4)])
+            diag_max_2 = prod([b[4 - i - 1][i] for i in range(4)])
 
-            # cur_max = max([max(np.prod(b, 1)), max(np.prod(b, 0)), np.prod(np.diag(b)), np.prod(np.diag(np.fliplr(b)))])
             cur_max = max([row_max, col_max, diag_max_1, diag_max_2])
 
-            # if b[0][0] == 26 and b[1][1] == 63:
-            #     for row in b:
-            #         print(row)
-                
-            #     print(row_max, [prod(row) for row in b])
-            #     print(col_max, [prod([row[col] for row in b]) for col in range(4)])
-            #     print(diag_max_1, [b[i][i] for i in range(4)])
-            #     print(diag_max_2, [b[4-i-1][i] for i in range(4)])
-            #     print(cur_max)           
-            
-            # cur_max = max([max(np.prod(b, 1)), max(np.prod(b, 0)), np.prod(np.diag(b)), np.prod(np.diag(np.fliplr(b)))])
             if cur_max > max_found:
                 max_found = cur_max
 
     return max_found
 
-grid = []
-grid_rows = [row.split() for row in grid_input.split('\n')]
-print(grid_rows)
-grid = [list(map(int, row)) for row in grid_rows]
-print(grid)
-print(get_max_no_numpy(grid))
+
+def solution() -> int:
+    grid = []
+    grid_rows = [row.split() for row in grid_input.split("\n")]
+    grid = [list(map(int, row)) for row in grid_rows]
+    return get_max_no_numpy(grid)
