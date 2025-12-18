@@ -2,6 +2,7 @@
 
 # Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
 
+
 def p52(number, multiplies=[2, 3, 4, 5, 6]):
     num_digit_set = sorted(list(str(number)))
     for m in multiplies:
@@ -9,6 +10,7 @@ def p52(number, multiplies=[2, 3, 4, 5, 6]):
             return False
 
     return True
+
 
 assert p52(125874, [2])
 

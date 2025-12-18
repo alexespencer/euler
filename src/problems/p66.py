@@ -3,12 +3,13 @@
 # Generate the D possibilities from 2 to 1000 if it is NOT square
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from euler import is_square, continued_expansion
 
 D_max = 1000
-D_poss = [n for n in range(2, D_max+1) if not is_square(n)]
+D_poss = [n for n in range(2, D_max + 1) if not is_square(n)]
 # print(D_poss)
 
 # THis solution is too slow and doesn't find high limits, leaving in for prosperity
@@ -37,8 +38,9 @@ D_poss = [n for n in range(2, D_max+1) if not is_square(n)]
 # The equation in question is a special form of Diophantine equation, called a Pell equation.
 # The equation is of the form:
 #     x^2 - Dy^2 = 1
-#...and this special form can be solved by finding the continued fraction of the square root of D
+# ...and this special form can be solved by finding the continued fraction of the square root of D
 # See https://mathworld.wolfram.com/PellEquation.html
+
 
 def solve_pell_equation(D):
     alphas = continued_expansion(D)
@@ -55,16 +57,17 @@ def solve_pell_equation(D):
         q.append(alphas[i] * q[-1] + q[-2])
 
     r = len(alphas) - len(alphas_extended) - 2
-    assert alphas[r+1] == 2 * alphas[0]
+    assert alphas[r + 1] == 2 * alphas[0]
 
     if r % 2 == 1:
         x = p[r]
         y = q[r]
     else:
-        x = p[2*r+1]
-        y = q[2*r+1]
+        x = p[2 * r + 1]
+        y = q[2 * r + 1]
 
     return x, y
+
 
 for i in [2, 3, 5, 6, 7]:
     print(i, solve_pell_equation(i))

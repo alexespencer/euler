@@ -1,11 +1,62 @@
-
-attempts = [319,680,180,690,129,620,762,689,762,318,368,710,720,710,629,168,160,689,716,731,736,729,316,729,729,710,769,290,719,680,318,389,162,289,162,718,729,319,790,680,890,362,319,760,316,729,380,319,728,716]
+attempts = [
+    319,
+    680,
+    180,
+    690,
+    129,
+    620,
+    762,
+    689,
+    762,
+    318,
+    368,
+    710,
+    720,
+    710,
+    629,
+    168,
+    160,
+    689,
+    716,
+    731,
+    736,
+    729,
+    316,
+    729,
+    729,
+    710,
+    769,
+    290,
+    719,
+    680,
+    318,
+    389,
+    162,
+    289,
+    162,
+    718,
+    729,
+    319,
+    790,
+    680,
+    890,
+    362,
+    319,
+    760,
+    316,
+    729,
+    380,
+    319,
+    728,
+    716,
+]
 # De-dupe
 attempts = list(set(attempts))
 # Convert to arrays
 attempts = [list(map(int, str(attempt))) for attempt in attempts]
 
-attempts.insert(0, [9, 9 ,9, 9, 9, 9, 9, 9, 9, 9])
+attempts.insert(0, [9, 9, 9, 9, 9, 9, 9, 9, 9, 9])
+
 
 def attempt_valid(attempt, pin):
     # Attempt/pin are assumed to be ARRAYs like [3,1,9] and [3,3,3,1,1,1,9]
@@ -19,13 +70,14 @@ def attempt_valid(attempt, pin):
     for digit in attempt:
         # Try and find this digit AFTER the current n
         try:
-            n = pin.index(digit, n+1)
+            n = pin.index(digit, n + 1)
 
         except ValueError:
             # Cannot be found
             return False
 
     return True
+
 
 assert not attempt_valid([4, 1, 9], [3, 1, 9])
 assert attempt_valid([3, 1, 9], [3, 1, 9])

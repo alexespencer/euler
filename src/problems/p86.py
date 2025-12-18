@@ -8,6 +8,7 @@
 import sys
 import os
 import time
+
 sys.path.insert(0, os.getcwd())
 
 from euler import is_square
@@ -22,7 +23,7 @@ for h in range(1, max_M + 1):
     for w in range(h, max_M + 1):
         wh_square = (w + h) ** 2
         for l in range(w, max_M + 1):
-            shortest_distance_sq = (l ** 2) + wh_square
+            shortest_distance_sq = (l**2) + wh_square
             if is_square(shortest_distance_sq):
                 count += 1
                 cuboids.append((h, w, l))
@@ -38,8 +39,9 @@ if count >= find_n_solutions:
         count_found = sum([1 for cuboid in cuboids if max(cuboid) <= m])
 
         if count_found >= find_n_solutions:
-            print(f"Lowest M such that the number of solutions first exceed {find_n_solutions} is {m}")
+            print(
+                f"Lowest M such that the number of solutions first exceed {find_n_solutions} is {m}"
+            )
             break
 else:
     print("Increase max_M limit")
-

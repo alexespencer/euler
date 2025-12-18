@@ -1,6 +1,7 @@
 # Roman numerals
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from roman import number_to_minimal_roman, roman_to_int
@@ -8,7 +9,7 @@ from roman import number_to_minimal_roman, roman_to_int
 # Open the file and read in all lines
 with open("data/p89.txt", "r") as f:
     roman_lines = f.readlines()
-    roman_lines = [line.strip().replace('\n', '') for line in roman_lines]
+    roman_lines = [line.strip().replace("\n", "") for line in roman_lines]
 
 # Get total original length
 original_length = sum([len(line) for line in roman_lines])

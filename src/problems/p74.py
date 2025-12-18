@@ -6,6 +6,7 @@ for i in range(0, 10):
 
 print(factorial_cache)
 
+
 def digit_factorial_sum(n):
     sum = 0
 
@@ -14,11 +15,13 @@ def digit_factorial_sum(n):
 
     return sum
 
+
 assert digit_factorial_sum(145) == 145
 assert digit_factorial_sum(69) == 363600
 
 # Chain lookup
 chain_lookup = {}
+
 
 def add_to_chain_lookup(n):
     dfs = digit_factorial_sum(n)
@@ -27,10 +30,12 @@ def add_to_chain_lookup(n):
         if dfs not in chain_lookup:
             add_to_chain_lookup(dfs)
 
+
 for i in range(1, 10**6):
     add_to_chain_lookup(i)
 
 # We
+
 
 # Function for length of chain
 def chain_length(n):
@@ -39,6 +44,7 @@ def chain_length(n):
         numbers_seen.append(n)
         n = chain_lookup[n]
     return len(numbers_seen)
+
 
 assert chain_length(69) == 5
 assert chain_length(78) == 4

@@ -1,6 +1,6 @@
 # Read in the pyramid
 pyramid = []
-with open('data/p67.txt', 'r') as f:
+with open("data/p67.txt", "r") as f:
     for line in f:
         pyramid.append(list(map(int, line.split())))
 
@@ -17,7 +17,7 @@ for layer in pyramid:
 
     for i in range(len(layer)):
         left = previous_layer[i]
-        right = previous_layer[i+1]
+        right = previous_layer[i + 1]
         layer[i] = max(layer[i] + left, layer[i] + right)
 
     previous_layer = layer

@@ -1,11 +1,12 @@
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from problems.cards import canonical
 
 # Read the poker.txt file into a list of strings
-with open('data/poker.txt') as f:
+with open("data/poker.txt") as f:
     lines = f.readlines()
 
 # Split the lines up by taking the first 5 elements and the last 5 elements

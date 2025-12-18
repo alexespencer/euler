@@ -1,21 +1,31 @@
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
-from euler import triangle_n, square_n, pentagon_n, hexagonal_n, heptagonal_n, octagonal_n
+from euler import (
+    triangle_n,
+    square_n,
+    pentagon_n,
+    hexagonal_n,
+    heptagonal_n,
+    octagonal_n,
+)
 
 import networkx as nx
 
 # Store for the 4 digit numbers (triangle, square, pentagon, hexagon, hepagon, octagon)
 numbers = {}
 
-for function_i, f in enumerate([triangle_n, square_n, pentagon_n, hexagonal_n, heptagonal_n, octagonal_n]):
+for function_i, f in enumerate(
+    [triangle_n, square_n, pentagon_n, hexagonal_n, heptagonal_n, octagonal_n]
+):
     # Find all 4 digit numbers
     i = 1
     while True:
         n = f(i)
         if len(str(n)) == 4:
-            numbers.setdefault(function_i+3, []).append(n)
+            numbers.setdefault(function_i + 3, []).append(n)
 
         if len(str(n)) > 4:
             break
@@ -34,6 +44,7 @@ for node_type in numbers.keys():
         # Create a node
         G.add_node((node_type, number))
 
+
 def is_cyclic(number1, number2):
     # Convert to strings
     number1 = str(number1)
@@ -41,6 +52,7 @@ def is_cyclic(number1, number2):
 
     # Check if the last 2 digits of number1 = the first 2 digits of number2
     return number1[-2:] == number2[:2]
+
 
 assert is_cyclic(8128, 2882)
 
@@ -64,19 +76,28 @@ for node_type1 in numbers.keys():
 print(f"Nodes: {G.number_of_nodes()}")
 print(f"Edges: {G.number_of_edges()}")
 
+
 # Go through all nodes and find simple paths (ones without repeated nodes) - if a path has length 6, then we may have a solution
 def find_cycle():
     for node in G.nodes():
         # Find a simple path from this node to (0, y) (y can be different but must be cyclic so (y, x) is cyclic)))
         # print("node:", node)
-        potential_end_nodes = [end_node for end_node in G.nodes() if end_node != node and is_cyclic(end_node[1], node[1])]
+        potential_end_nodes = [
+            end_node
+            for end_node in G.nodes()
+            if end_node != node and is_cyclic(end_node[1], node[1])
+        ]
         if potential_end_nodes:
             # print("Finding route to end nodes:", potential_end_nodes)
-            for path in nx.all_simple_paths(G, source=node, target=potential_end_nodes, cutoff=6):
+            for path in nx.all_simple_paths(
+                G, source=node, target=potential_end_nodes, cutoff=6
+            ):
                 # Number of node types in the path (the first element of the node ID)
                 number_node_types = len(set([node[0] for node in path]))
                 if len(path) == 6 and number_node_types == 6:
-                    print("Path found:", path, " number of node types:", number_node_types)
+                    print(
+                        "Path found:", path, " number of node types:", number_node_types
+                    )
                     print(len(path))
 
                     # Print the sum of the node[1] values
@@ -84,4 +105,6 @@ def find_cycle():
 
                     # Break out of all loops
                     return
+
+
 find_cycle()

@@ -3,11 +3,50 @@ import random
 
 random.seed(42)
 
+
 class Board:
-    squares = ["GO", "A1", "CC1", "A2", "T1", "R1", "B1", "CH1", "B2", "B3", "JAIL",
-                "C1", "U1", "C2", "C3", "R2", "D1", "CC2", "D2", "D3", "FP",
-                "E1", "CH2", "E2", "E3", "R3", "F1", "F2", "U2", "F3", "G2J",
-                "G1", "G2", "CC3", "G3", "R4", "CH3", "H1", "T2", "H2"]
+    squares = [
+        "GO",
+        "A1",
+        "CC1",
+        "A2",
+        "T1",
+        "R1",
+        "B1",
+        "CH1",
+        "B2",
+        "B3",
+        "JAIL",
+        "C1",
+        "U1",
+        "C2",
+        "C3",
+        "R2",
+        "D1",
+        "CC2",
+        "D2",
+        "D3",
+        "FP",
+        "E1",
+        "CH2",
+        "E2",
+        "E3",
+        "R3",
+        "F1",
+        "F2",
+        "U2",
+        "F3",
+        "G2J",
+        "G1",
+        "G2",
+        "CC3",
+        "G3",
+        "R4",
+        "CH3",
+        "H1",
+        "T2",
+        "H2",
+    ]
 
     def __init__(self, dice_sides):
         self.dice_sides = dice_sides
@@ -19,7 +58,18 @@ class Board:
         # Shuffle CC and CH - store in self
         self.CC_choices = ["GO", "JAIL"] + [None] * 14
         self.CC_index = 0
-        self.CH_choices = ["GO", "JAIL", "C1", "E3", "H2", "R1", "Rx", "Rx", "Ux", "-3"] + [None] * 6
+        self.CH_choices = [
+            "GO",
+            "JAIL",
+            "C1",
+            "E3",
+            "H2",
+            "R1",
+            "Rx",
+            "Rx",
+            "Ux",
+            "-3",
+        ] + [None] * 6
         self.CH_index = 0
         random.shuffle(self.CC_choices)
         random.shuffle(self.CH_choices)
@@ -30,11 +80,20 @@ class Board:
         # print("Square counts:", self.square_counts)
 
         # For speed, calculate the indexes of R[x] and U[x]
-        self.R_indexes = [i for i, square in enumerate(Board.squares) if square.startswith("R")]
-        self.U_indexes = [i for i, square in enumerate(Board.squares) if square.startswith("U")]
+        self.R_indexes = [
+            i for i, square in enumerate(Board.squares) if square.startswith("R")
+        ]
+        self.U_indexes = [
+            i for i, square in enumerate(Board.squares) if square.startswith("U")
+        ]
 
     def top_3_squares(self):
-        return [(x, self.square_counts[x] / self.dice_rolls, Board.squares.index(x)) for x in sorted(self.square_counts, key=self.square_counts.get, reverse=True)[:3]]
+        return [
+            (x, self.square_counts[x] / self.dice_rolls, Board.squares.index(x))
+            for x in sorted(
+                self.square_counts, key=self.square_counts.get, reverse=True
+            )[:3]
+        ]
 
     def dice_score(self):
         # Dice_sides = [6, 6] <--- means you can have any number of dice, with any number of sides
@@ -54,9 +113,15 @@ class Board:
 
     def get_destination_index(self, action):
         if action == "Rx":
-            return min([x for x in self.R_indexes if x > self.current_square], default=min(self.R_indexes))
+            return min(
+                [x for x in self.R_indexes if x > self.current_square],
+                default=min(self.R_indexes),
+            )
         elif action == "Ux":
-            return min([x for x in self.U_indexes if x > self.current_square], default=min(self.U_indexes))
+            return min(
+                [x for x in self.U_indexes if x > self.current_square],
+                default=min(self.U_indexes),
+            )
         else:
             # Simply return the index of the square
             return Board.squares.index(action)
@@ -110,6 +175,7 @@ class Board:
 
         # Move the the destination square
         return self.advance_to_square(destination_index)
+
 
 print("Starting tests")
 b = Board([6, 6])

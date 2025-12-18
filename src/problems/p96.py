@@ -1,6 +1,7 @@
 # P96 - Su doku
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from sudoku import Sudoku
@@ -13,7 +14,7 @@ with open("data/p96.txt", "r") as f:
             # New sudoku
             sudokus.append([])
         else:
-            sudokus[-1].append(line.replace('\n', ''))
+            sudokus[-1].append(line.replace("\n", ""))
 
 sudokus = [Sudoku(sudoku) for sudoku in sudokus]
 
@@ -27,7 +28,9 @@ for sudoku in sudokus:
     else:
         unsolved_sudokus.append(sudoku)
 
-print(f"There are {len(solved_sudokus)} solved sudokus and {len(unsolved_sudokus)} unsolved sudokus")
+print(
+    f"There are {len(solved_sudokus)} solved sudokus and {len(unsolved_sudokus)} unsolved sudokus"
+)
 
 # Validate each soduku
 sum_top_left = 0

@@ -1,5 +1,6 @@
 import sys
 import os
+
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
@@ -25,6 +26,7 @@ import time
 
 # First see if we can find the one in the question (7)
 
+
 def apply_mask(number, mask, digit):
     # Convert the number to string
     str_num = list(str(number))
@@ -33,9 +35,11 @@ def apply_mask(number, mask, digit):
     for char in mask:
         str_num[char] = str(digit)
 
-    return int(''.join(str_num))
+    return int("".join(str_num))
+
 
 assert apply_mask("56123", (2, 3), 6) == 56663
+
 
 def p51(number, mask, family_count):
     """Short circuiting function to test if a number and mask has the required number of primes with the logic applied"""
@@ -60,9 +64,11 @@ def p51(number, mask, family_count):
 
     return True, primes
 
+
 print(p51(56003, (2, 3), 7))
 print(p51(13, (0,), 6))
 print(p51(13, (0,), 7))
+
 
 # We can generate masks in advance
 def generate_masks(num_digits):
@@ -76,6 +82,7 @@ def generate_masks(num_digits):
         masks.extend(itertools.combinations(range(0, num_digits - 1), i))
 
     return masks
+
 
 start_time = time.time()
 

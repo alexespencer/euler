@@ -1,11 +1,13 @@
 import sys
 import os
 import time
+
 sys.path.insert(0, os.getcwd())
 
 from euler import HCF, find_factors
 
 # This one looks familiar...and seems to need us to discover (or determine) the number of possible fractions. Let's see if there is a pattern
+
 
 def reduce_fraction(numerator, denominator):
     # Reduce the fraction to lowest terms
@@ -18,10 +20,12 @@ def reduce_fraction(numerator, denominator):
         denominator = denominator // cd
     return numerator, denominator
 
+
 assert reduce_fraction(10, 20) == (1, 2)
 assert reduce_fraction(4, 8) == (1, 2)
 assert reduce_fraction(3, 7) == (3, 7)
-assert reduce_fraction(3*15*10*3*19, 7*15*10*3*19) == (3, 7)
+assert reduce_fraction(3 * 15 * 10 * 3 * 19, 7 * 15 * 10 * 3 * 19) == (3, 7)
+
 
 def count_possible_fractions_slow(max_d):
     # Generate fractions up to the max_fraction...this is VERY SLOW
@@ -36,7 +40,9 @@ def count_possible_fractions_slow(max_d):
 
     return len(possible_fractions)
 
+
 assert count_possible_fractions_slow(8) == 21
+
 
 def non_contributing(d, common_factors):
     ncfs = []
@@ -44,6 +50,7 @@ def non_contributing(d, common_factors):
         ncfs.extend([i for i in range(f, d, f)])
 
     return len(set(ncfs))
+
 
 # Proud of this, but it's still too slow
 def count_possible_fractions(max_d):
@@ -73,7 +80,9 @@ def count_possible_fractions(max_d):
 
             # contributing_fractions = [1 for i in range(1, d) if not any(i % (d // f) == 0 for f in common_factors)]
             # count_fractions += sum(contributing_fractions)
-            count_fractions += d - 1 - non_contributing(d, [d // f for f in common_factors])
+            count_fractions += (
+                d - 1 - non_contributing(d, [d // f for f in common_factors])
+            )
 
         # Now update the covered factors
         new_covered_factors = {f for f in factors if f != 1 and f != d}
@@ -81,22 +90,25 @@ def count_possible_fractions(max_d):
 
     return count_fractions
 
+
 def phi_1_to_n(n):
     phi_set = {}
-    for i in range(1, n+1):
+    for i in range(1, n + 1):
         phi_set[i] = i
 
-    for i in range(2, n+1):
+    for i in range(2, n + 1):
         if phi_set[i] == i:
-            for j in range(i, n+1, i):
+            for j in range(i, n + 1, i):
                 phi_set[j] -= int(phi_set[j] / i)
 
     return phi_set
+
 
 def count_possible_fractions_fast(max_d):
     # We can just sum phi(d) for 2 to max_d
     phi_set = phi_1_to_n(max_d)
     return sum(phi_set.values()) - 1
+
 
 if True:
     print("Running tests")

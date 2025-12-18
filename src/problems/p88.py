@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from euler import unique_product_from_factors, is_product_sum
@@ -17,7 +18,7 @@ max_k = 12000
 
 # Get a dict of n: all product combinations of n
 product_perm_lookup = {}
-for n in tqdm(range(2, (max_k+1)*2), desc="Generating product combinations"):
+for n in tqdm(range(2, (max_k + 1) * 2), desc="Generating product combinations"):
     product_perm_lookup[n] = unique_product_from_factors(factor_dict, n)
 
     # if current_prod < k:
@@ -28,7 +29,7 @@ for n in tqdm(range(2, (max_k+1)*2), desc="Generating product combinations"):
     #     return False
 
 minimal_product_sum = {}
-for k in tqdm(range(2, max_k+1), "Finding minimal product-sum for k"):
+for k in tqdm(range(2, max_k + 1), "Finding minimal product-sum for k"):
     # Finding minimal product-sum for k
     for current_prod, all_product_factors in product_perm_lookup.items():
         if k > current_prod > 2 * k:
@@ -42,10 +43,14 @@ for k in tqdm(range(2, max_k+1), "Finding minimal product-sum for k"):
             # print(f"K: {k}, Current product: {current_prod}, Product factors: {product_factors}")
             # Check and if less than the current minimal, update
             if is_product_sum(current_prod, product_factors, k):
-                if k not in minimal_product_sum or current_prod < minimal_product_sum[k]:
+                if (
+                    k not in minimal_product_sum
+                    or current_prod < minimal_product_sum[k]
+                ):
                     minimal_product_sum[k] = current_prod
 
 sum_of_minimal_product_sum = sum(set(minimal_product_sum.values()))
 
-print(f"The sum of all the minimal product-sum numbers for 2≤k≤{max_k} is {sum_of_minimal_product_sum}")
-
+print(
+    f"The sum of all the minimal product-sum numbers for 2≤k≤{max_k} is {sum_of_minimal_product_sum}"
+)

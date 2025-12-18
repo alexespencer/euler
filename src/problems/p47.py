@@ -1,5 +1,6 @@
 import sys
 import os
+
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
@@ -23,7 +24,7 @@ from euler import prime_factors
 # Find the first number with 4 prime factors
 n = 2
 while len(prime_factors(n)) < 4:
-    n+=1
+    n += 1
 
 print("First number with 4 prime factors is:")
 print(n, ", with prime factors of", prime_factors(n))
@@ -39,7 +40,7 @@ while count_contigous < 4:
     else:
         count_contigous = 0
         first_number = 0
-    n+=1
+    n += 1
 
 print("First number where the next 4 numbers have 4 prime factors is:", first_number)
 n = first_number
@@ -67,7 +68,9 @@ while consecutive_count < 4:
         current_prime_factors = []
 
         history = []
-    elif any([f"{k}^{v}" in current_prime_factors for k, v in next_prime_factors.items()]):
+    elif any(
+        [f"{k}^{v}" in current_prime_factors for k, v in next_prime_factors.items()]
+    ):
         # Reset
         current_number = current_number + 1
         lowest_number = current_number + 1
@@ -78,9 +81,11 @@ while consecutive_count < 4:
         history = [(current_number, next_prime_factors)]
     else:
         # Add
-        current_number = current_number + 1 # (leave lowest number alone)
+        current_number = current_number + 1  # (leave lowest number alone)
         consecutive_count += 1
-        current_prime_factors.extend([f"{k}^{v}" for k, v in next_prime_factors.items()])
+        current_prime_factors.extend(
+            [f"{k}^{v}" for k, v in next_prime_factors.items()]
+        )
 
         history.append((current_number, next_prime_factors))
 

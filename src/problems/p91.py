@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 import time
@@ -15,6 +16,7 @@ limit = 50
 num_triangles = limit * limit * 3
 print(f"Number of type 1, 2 and 3 triangles: {num_triangles}")
 
+
 # Then, we need to find all triangles where none of the coordinates are on the x or y axis
 def get_all_points(limit):
     points = []
@@ -22,6 +24,7 @@ def get_all_points(limit):
         for y in range(0, limit + 1):
             points.append((x, y))
     return points
+
 
 print("Finding all points...")
 coords = get_all_points(limit)
@@ -79,6 +82,7 @@ for coord1 in coords:
                 # If the coords are the same, skip
                 continue
 
+
 def is_right_angle_triangle(coord1, coord2):
     # Use 0,0 as the third point
     # Do (0,0), coord1 and coord2 form a right angle triangle?
@@ -92,10 +96,11 @@ def is_right_angle_triangle(coord1, coord2):
     side1, side2, side3 = sides
 
     # Check if the sides form a right angle triangle
-    if abs((side1 ** 2 + side2 ** 2) - side3 ** 2) < 0.000001:
+    if abs((side1**2 + side2**2) - side3**2) < 0.000001:
         return True
 
     return False
+
 
 all_coords = set(all_coords)
 print(f"Number of coordinates: {len(all_coords)}")

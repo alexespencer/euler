@@ -6,6 +6,7 @@ choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 # Only 0, 1, 2, 3, 4, 5, 6, 8, 9 are used (7 is not)
 
+
 def solution_valid(cube1, cube2):
     # If a 6 or 9 is in either cube, add both 6 and 9 to the set (as they can be spun around)
     cubes = [set(cube1), set(cube2)]
@@ -16,10 +17,14 @@ def solution_valid(cube1, cube2):
 
     # Can each square be represented by the cubes?
     for square in squares:
-        if not ((square[0] in cubes[0] and square[1] in cubes[1]) or (square[0] in cubes[1] and square[1] in cubes[0])):
+        if not (
+            (square[0] in cubes[0] and square[1] in cubes[1])
+            or (square[0] in cubes[1] and square[1] in cubes[0])
+        ):
             return False, None
 
     return True, cubes
+
 
 cube1 = {"0", "5", "6", "7", "8", "9"}
 cube2 = {"1", "2", "3", "4", "8", "9"}

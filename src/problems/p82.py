@@ -2,6 +2,7 @@ import math
 
 # Same as 81 but can start in any row on the left and end in any row on the right, plus can move up/down/right (just not left)
 
+
 def minimal_path(matrix):
     # First column minimums is a copy of the first column
     mins = [row[0] for row in matrix]
@@ -19,10 +20,16 @@ def minimal_path(matrix):
             left = x[j] + mins[j]
 
             # Above
-            above = min([sum(x[k:j]) + mins[k] + x[j] for k in range(j-1, -1, -1)], default=math.inf)
+            above = min(
+                [sum(x[k:j]) + mins[k] + x[j] for k in range(j - 1, -1, -1)],
+                default=math.inf,
+            )
 
             # Below
-            below = min([sum(x[j+1:k+1]) + mins[k] + x[j] for k in range(j+1, len(x))], default=math.inf)
+            below = min(
+                [sum(x[j + 1 : k + 1]) + mins[k] + x[j] for k in range(j + 1, len(x))],
+                default=math.inf,
+            )
 
             new_mins.append(min(left, above, below))
 
@@ -32,20 +39,21 @@ def minimal_path(matrix):
     # Return overall minimum
     return min(mins)
 
-matrix = [[131, 673, 234, 103, 18],
-          [201, 96, 342, 965, 150],
-          [630, 803, 746, 422, 111],
-          [537, 699, 497, 121, 956],
-          [805, 732, 524, 37, 331]]
+
+matrix = [
+    [131, 673, 234, 103, 18],
+    [201, 96, 342, 965, 150],
+    [630, 803, 746, 422, 111],
+    [537, 699, 497, 121, 956],
+    [805, 732, 524, 37, 331],
+]
 
 assert minimal_path(matrix) == 994
 
 # Read in the pyramid
 matrix = []
-with open('data/p81.txt', 'r') as f:
+with open("data/p81.txt", "r") as f:
     for line in f:
-        matrix.append(list(map(int, line.split(','))))
+        matrix.append(list(map(int, line.split(","))))
 
 print("Minimum path sum (up, down or right):", minimal_path(matrix))
-
-

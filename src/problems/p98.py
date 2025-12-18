@@ -2,19 +2,22 @@
 import sys
 import os
 import time
+
 sys.path.insert(0, os.getcwd())
 
 from euler import is_square
+
 
 # Declare functions
 def apply_lookup(word, lookup):
     """Apply the digit lookup to the word and return the new word as an int. Return None if the word starts with 0"""
     new_word = "".join(map(lookup.get, word))
     # Leading 0s are not permitted
-    if new_word[0] == '0':
+    if new_word[0] == "0":
         return None
 
     return int(new_word)
+
 
 def largest_square(set_words):
     """Finds the largest square that can be formed from the set of words, applying the rules of the problem"""
@@ -24,11 +27,15 @@ def largest_square(set_words):
     num_unique_letters = len(set(seed_word))
 
     # Find largest square that is a pair match
-    sq_root_max = int((10 ** (len(seed_word)) - 1) ** 0.5) # ie 9999 is 4 chars long, so 99
-    sq_root_min = int((10 ** (len(seed_word) - 1)) ** 0.5) # ie 1000 is 4 chars long, so 31
+    sq_root_max = int(
+        (10 ** (len(seed_word)) - 1) ** 0.5
+    )  # ie 9999 is 4 chars long, so 99
+    sq_root_min = int(
+        (10 ** (len(seed_word) - 1)) ** 0.5
+    )  # ie 1000 is 4 chars long, so 31
 
     for sq_root in range(sq_root_max, sq_root_min, -1):
-        sq_num = sq_root ** 2
+        sq_num = sq_root**2
         if not len(set(str(sq_num))) == num_unique_letters:
             continue
 
@@ -46,13 +53,14 @@ def largest_square(set_words):
 
     return None, None
 
+
 start_time = time.time()
 last_time = start_time
 
 print("Reading in words...")
 # Read in the data
 with open("data/p98.txt", "r") as f:
-    words = f.read().replace('"', '').split(",")
+    words = f.read().replace('"', "").split(",")
 print(f"Read in {len(words)} words in {time.time() - last_time:.2f} seconds")
 last_time = time.time()
 

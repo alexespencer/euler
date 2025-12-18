@@ -1,6 +1,7 @@
 import sys
 import os
 import time
+
 sys.path.insert(0, os.getcwd())
 
 from itertools import permutations, product
@@ -11,6 +12,7 @@ start_time = time.time()
 
 digit_set = {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
+
 def possible_calculations(digits):
     # All combinations of the digits
     all_numbers = []
@@ -19,12 +21,12 @@ def possible_calculations(digits):
         for op1, op2, op3 in product("+-*/", repeat=3):
             # All combinations of the brackets
             fs = [
-                    " ".join(["(", str(a), op1, str(b), ")", op2, str(c), op3, str(d)]),
-                    " ".join([str(a), op1, "(", str(b), op2, str(c), ")", op3, str(d)]),
-                    " ".join([str(a), op1, str(b), op2, "(", str(c), op3, str(d), ")"]),
-                    " ".join(["(", str(a), op1, str(b), op2, str(c), ")", op3, str(d)]),
-                    " ".join([str(a), op1, "(", str(b), op2,  str(c), op3, str(d), ")"]),
-                ]
+                " ".join(["(", str(a), op1, str(b), ")", op2, str(c), op3, str(d)]),
+                " ".join([str(a), op1, "(", str(b), op2, str(c), ")", op3, str(d)]),
+                " ".join([str(a), op1, str(b), op2, "(", str(c), op3, str(d), ")"]),
+                " ".join(["(", str(a), op1, str(b), op2, str(c), ")", op3, str(d)]),
+                " ".join([str(a), op1, "(", str(b), op2, str(c), op3, str(d), ")"]),
+            ]
 
             for f in fs:
                 # if f.startswith("4 * 2"):
@@ -39,6 +41,7 @@ def possible_calculations(digits):
                     pass
 
     return all_numbers
+
 
 # Generate all the permutations of the digits
 longest_run = 0

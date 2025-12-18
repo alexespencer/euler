@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from euler import generate_pythag_triples

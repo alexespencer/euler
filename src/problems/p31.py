@@ -1,7 +1,9 @@
 coins = [1, 2, 5, 10, 20, 50, 100, 200]
 
+
 def total(coin_counts):
     return sum([k * v for k, v in coin_counts.items()])
+
 
 def count_combos_slow(goal):
     unique_combos = set()
@@ -12,7 +14,7 @@ def count_combos_slow(goal):
 
     for p1 in range(max_counts[0] + 1):
         coin_counts[1] = p1
-        for p2 in range(max_counts[1] + 1):#
+        for p2 in range(max_counts[1] + 1):  #
             coin_counts[2] = p2
             for p5 in range(max_counts[2] + 1):
                 coin_counts[5] = p5
@@ -27,15 +29,19 @@ def count_combos_slow(goal):
                                 for p200 in range(max_counts[7] + 1):
                                     coin_counts[200] = p200
                                     if total(coin_counts) == goal:
-                                        unique_combos.add(tuple(sorted(coin_counts.items())))
+                                        unique_combos.add(
+                                            tuple(sorted(coin_counts.items()))
+                                        )
 
-    return(len(unique_combos)), unique_combos
+    return (len(unique_combos)), unique_combos
+
 
 for goal in coins[0:5]:
     count, unique_combos = count_combos_slow(goal)
     print(goal, count)
 
-class CoinCounter():
+
+class CoinCounter:
     coins = [1, 2, 5, 10, 20, 50, 100, 200]
 
     def __init__(self, goal):
@@ -50,6 +56,7 @@ class CoinCounter():
         if mod:
             return self.ways[n] % mod
         return self.ways[n]
+
 
 cc = CoinCounter(10**5)
 

@@ -1,5 +1,6 @@
 import sys
 import os
+
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
@@ -17,9 +18,10 @@ from datetime import datetime
 
 # Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
-print("Finding primes under 1,000,000...", end='')
+print("Finding primes under 1,000,000...", end="")
 primes_1m = [2] + [x for x in range(3, 1000001, 2) if is_prime(x)]
 print("done")
+
 
 # Function to give a sliding window
 def window(seq, n=2):
@@ -33,21 +35,27 @@ def window(seq, n=2):
         result = result[1:] + (elem,)
         yield result
 
+
 def method1(window_size):
     for w in window(primes_1m, window_size):
         if w[-1] >= 500000:
-            print(f"Aborting checking window size {window_size} as largest prime is now >= 500,000")
+            print(
+                f"Aborting checking window size {window_size} as largest prime is now >= 500,000"
+            )
             return None
 
         sum_window = sum(w)
 
         if sum_window >= 1000000:
-            print(f"Aborting checking window size {window_size} as sum of the window is now >= 1,000,000")
+            print(
+                f"Aborting checking window size {window_size} as sum of the window is now >= 1,000,000"
+            )
             return None
 
         if sum_window in primes_1m:
             print(window_size, sum_window, w)
             return True
+
 
 overall_start = datetime.now()
 # Take a sliding window of 6 and see if it adds to a prime

@@ -1,15 +1,17 @@
 # Roman numeral functions
 
-roman_numerals = {  "I" : 1,
-                    "V" : 5,
-                    "IX" : 9,
-                    "X" : 10,
-                    "L" : 50,
-                    "XC" : 90,
-                    "C" : 100,
-                    "D" : 500,
-                    "CM" : 900,
-                    "M" : 1000}
+roman_numerals = {
+    "I": 1,
+    "V": 5,
+    "IX": 9,
+    "X": 10,
+    "L": 50,
+    "XC": 90,
+    "C": 100,
+    "D": 500,
+    "CM": 900,
+    "M": 1000,
+}
 
 # 3 main rules:
 # 1) Numerals must be arranged in descending order of size.
@@ -21,6 +23,7 @@ roman_numerals = {  "I" : 1,
 # I can only be placed before V and X.
 # X can only be placed before L and C.
 # C can only be placed before D and M
+
 
 def split_into_groups(numeral):
     """Splits a numeral into groups bounded by subtractive rules"""
@@ -49,6 +52,7 @@ def split_into_groups(numeral):
 
     return groups
 
+
 def roman_to_int(numeral):
     """Converts a roman numeral to an int"""
     if not rule_1(numeral):
@@ -63,7 +67,7 @@ def roman_to_int(numeral):
     total = 0
     for i in range(len(numeral)):
         current_num = roman_numerals[numeral[i]]
-        next_num = roman_numerals[numeral[i+1]] if i != len(numeral) - 1 else None
+        next_num = roman_numerals[numeral[i + 1]] if i != len(numeral) - 1 else None
 
         if next_num is None:
             total += current_num
@@ -73,6 +77,7 @@ def roman_to_int(numeral):
             total += current_num
 
     return total
+
 
 def rule_1(numeral):
     "Checks if rule 1 is broken"
@@ -102,6 +107,7 @@ def rule_1(numeral):
     # If we get here, then the rules are followed
     return True
 
+
 def rule_2(numeral):
     """Checks if rule 2 is broken"""
     # M, C, and X cannot be equalled or exceeded by smaller denominations.
@@ -113,7 +119,6 @@ def rule_2(numeral):
     current_group = None
     current_count = 0
     for group in groups:
-
         if group[0] == current_group:
             current_count += 1
         else:
@@ -126,6 +131,7 @@ def rule_2(numeral):
     # Must be OK
     return True
 
+
 def rule_3(numeral):
     """Checks if rule 3 is broken"""
     for char in ["D", "L", "V"]:
@@ -133,6 +139,7 @@ def rule_3(numeral):
             return False
 
     return True
+
 
 def find_subtractive_pair(number):
     """Finds a potential subtractive pair for a number, if there is one"""
@@ -166,6 +173,7 @@ def find_subtractive_pair(number):
 
     return None
 
+
 def number_to_minimal_roman(num):
     """Converts a number to a minimal roman numeral"""
     remaining = num
@@ -179,7 +187,11 @@ def number_to_minimal_roman(num):
         # or it is a subtractive pair of EITHER the remaining number, or a SP of the biggest possible chunk
         # Whichever is shorter
 
-        biggest_possible = [(roman, integer) for roman, integer in roman_numerals.items() if integer <= remaining][-1]
+        biggest_possible = [
+            (roman, integer)
+            for roman, integer in roman_numerals.items()
+            if integer <= remaining
+        ][-1]
         count = remaining // biggest_possible[1]
         deduct = count * biggest_possible[1]
         # print(f"Either straight to {remaining}, or deducting {deduct}, using {count} of {biggest_possible[0]}")
@@ -193,7 +205,10 @@ def number_to_minimal_roman(num):
             continue
 
         subtractive_pair_chunk = find_subtractive_pair(deduct)
-        if subtractive_pair_chunk is not None and len(subtractive_pair_chunk) < len(biggest_possible[0]) * count:
+        if (
+            subtractive_pair_chunk is not None
+            and len(subtractive_pair_chunk) < len(biggest_possible[0]) * count
+        ):
             # print(f"Subtractive pair of {deduct} is {subtractive_pair_chunk}")
             numeral += subtractive_pair_chunk
             remaining -= roman_to_int(subtractive_pair_chunk)

@@ -4,6 +4,7 @@
 
 # How many n-digit positive integers exist which are also an nth power?
 
+
 def find_nth_powers(x):
     print("Finding nth powers of", x)
     numbers_found = []
@@ -15,15 +16,19 @@ def find_nth_powers(x):
         current_num_digits = len(str(num))
         if current_num_digits == y:
             numbers_found.append(num)
-            print(f"Found {x**y} which is a {len(str(x**y))} digit number and a {y}th power ({x} to the power of {y})")
-
+            print(
+                f"Found {x**y} which is a {len(str(x**y))} digit number and a {y}th power ({x} to the power of {y})"
+            )
 
         if y > current_num_digits + 10:
             print("Stopping because we can't find any more")
-            print(f"Stopping where power was {y} and we were seeing {current_num_digits} digits and the num was {num}")
+            print(
+                f"Stopping where power was {y} and we were seeing {current_num_digits} digits and the num was {num}"
+            )
 
             break
     return numbers_found
+
 
 all_numbers_found = []
 for x in range(1, 10):

@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from euler import HCF
@@ -15,6 +16,7 @@ from euler import HCF
 min_fraction = 2 / 7
 max_fraction = 1
 
+
 def reduce_fraction(numerator, denominator):
     # Reduce the fraction to lowest terms
     while True:
@@ -26,15 +28,16 @@ def reduce_fraction(numerator, denominator):
         denominator = denominator // cd
     return numerator, denominator
 
+
 assert reduce_fraction(10, 20) == (1, 2)
 assert reduce_fraction(4, 8) == (1, 2)
 assert reduce_fraction(3, 7) == (3, 7)
-assert reduce_fraction(3*15*10*3*19, 7*15*10*3*19) == (3, 7)
+assert reduce_fraction(3 * 15 * 10 * 3 * 19, 7 * 15 * 10 * 3 * 19) == (3, 7)
 
 # Generate fractions up to the max_fraction...this is VERY SLOW
 possible_fractions = []
 for n in range(1, 8 + 1):
-    for d in range(1, 8+1):
+    for d in range(1, 8 + 1):
         if n / d < max_fraction:
             rf = reduce_fraction(n, d)
             if rf not in possible_fractions:

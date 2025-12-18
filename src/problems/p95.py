@@ -1,17 +1,19 @@
-
 import networkx as nx
 
 import sys
 import os
 import time
+
 sys.path.insert(0, os.getcwd())
 
 from euler import find_factors
+
 
 def sum_proper_divisors(n):
     # Sum the proper divisors of n
     factors = find_factors(n)
     return sum(factors) - n
+
 
 assert sum_proper_divisors(220) == 284
 assert sum_proper_divisors(284) == 220
@@ -21,6 +23,7 @@ assert sum_proper_divisors(3) == 1
 assert sum_proper_divisors(4) == 3
 
 # Se can make use of subgraphs/cycles - if we start at a number and get all connected nodes, we are guaranteed to find a repeating cycle
+
 
 def setup_graph(limit):
     # Setup networkx graph
@@ -38,12 +41,14 @@ def setup_graph(limit):
 
     return G
 
+
 start_time = time.time()
 
 limit = 10**6
 print(f"Setup graph for limit {limit}...")
 G = setup_graph(limit)
 print(G)
+
 
 def find_longest_cycle(G):
     cycles = nx.cycle_basis(G)
@@ -52,6 +57,7 @@ def find_longest_cycle(G):
     cycles.sort(key=len, reverse=True)
 
     return cycles[0]
+
 
 print("Find longest cycle...")
 longest_cycle = find_longest_cycle(G)

@@ -1,9 +1,15 @@
 # 5-gon ring
 from itertools import permutations
 
+
 # Storange for the lists (See if we can create the 3 gon ring solution first)
 class GonRing:
-    map = [None, [-1, 2], [1, 1]] # When you set node 0, it doesn't affect anything else.
+    map = [
+        None,
+        [-1, 2],
+        [1, 1],
+    ]  # When you set node 0, it doesn't affect anything else.
+
     # When you set node 1, it affects the line before it and the 2nd (by ID) node on that line
     # When you set node 2, it affects the line after it and the middle node (ID 1) on that line
     def __init__(self, default=None):
@@ -36,11 +42,19 @@ class GonRing:
 
         return str_repr
 
-settable = [[0, 0], [0, 1], [0, 2],
-            [1, 0], [1, 2],
-            [2, 0], [2, 2],
-            [3, 0], [3, 2],
-            [4, 0]]
+
+settable = [
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [1, 0],
+    [1, 2],
+    [2, 0],
+    [2, 2],
+    [3, 0],
+    [3, 2],
+    [4, 0],
+]
 
 # Quick test
 gr = GonRing()

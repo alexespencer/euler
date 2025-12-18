@@ -1,10 +1,12 @@
 import sys
 import os
 import time
+
 sys.path.insert(0, os.getcwd())
 
 from euler import prime_factors
 import math
+
 
 def phi(n):
     # Using the prime factorization of n, find the number of relative primes
@@ -18,14 +20,15 @@ def phi(n):
     # Apply function
     return round(n * math.prod(pfl))
 
+
 def phi_1_to_n(n):
     phi_set = {}
-    for i in range(1, n+1):
+    for i in range(1, n + 1):
         phi_set[i] = i
 
-    for i in range(2, n+1):
+    for i in range(2, n + 1):
         if phi_set[i] == i:
-            for j in range(i, n+1, i):
+            for j in range(i, n + 1, i):
                 phi_set[j] -= int(phi_set[j] / i)
 
     return phi_set
@@ -34,6 +37,7 @@ def phi_1_to_n(n):
 def is_perm(a, b):
     # Check if two numbers are permutations of each other
     return sorted(str(a)) == sorted(str(b))
+
 
 assert phi(2) == 1
 assert phi(3) == 2
@@ -53,7 +57,7 @@ assert phi_1_to_n(10) == {1: 1, 2: 1, 3: 2, 4: 2, 5: 4, 6: 2, 7: 6, 8: 4, 9: 6, 
 # Try the better function
 starttime = time.time()
 min_ratio_found = math.inf
-n_max = 10 ** 7
+n_max = 10**7
 phi_set = phi_1_to_n(n_max)
 del phi_set[1]
 for n, phi_value in phi_set.items():

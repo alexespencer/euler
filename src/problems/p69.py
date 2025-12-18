@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from euler import find_factors
@@ -7,10 +8,12 @@ import math
 
 factor_sets = {}
 
+
 def get_factor_set(n):
     if n not in factor_sets:
         factor_sets[n] = set(find_factors(n))
     return factor_sets[n]
+
 
 def phi(n, limit=math.inf):
     # How many relative primes does n have
@@ -26,6 +29,7 @@ def phi(n, limit=math.inf):
             return math.inf
 
     return found
+
 
 assert phi(2) == 1
 assert phi(3) == 2
@@ -63,6 +67,7 @@ assert phi(10) == 4
 # variable primes stores list of primes
 primes = [2, 3, 5, 7, 11, 13, 17, 19, 21, 23, 29, 31]
 
+
 def totient_maximum(L):
     n = 1
 
@@ -76,5 +81,6 @@ def totient_maximum(L):
         n = n * i
 
     raise ValueError("Not enough primes")
+
 
 print("The totient maximum of N <= 1,000,000 is", totient_maximum(1000000))

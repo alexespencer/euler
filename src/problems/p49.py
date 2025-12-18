@@ -1,5 +1,6 @@
 import sys
 import os
+
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
@@ -18,13 +19,15 @@ from euler import is_prime
 
 # Where the digits of n are permuted to form n + x and n + x + x AND n, n + x and n + x + x are all prime
 
+
 def check_permutations(number_list):
     # For each number in the list, convert to a sorted array. If there is only one unique sorted list, then they are permutations
-    list_set = {''.join(sorted(list(str(number)))) for number in number_list}
+    list_set = {"".join(sorted(list(str(number)))) for number in number_list}
     if len(list_set) == 1:
         return True
 
     return False
+
 
 assert check_permutations([1487, 4817, 8147])
 assert check_permutations([123, 321])
@@ -45,4 +48,3 @@ for n1 in range(1000, 9974):
             if check_permutations([n1, n2, n3]):
                 print(n1, n2, n3)
                 break
-

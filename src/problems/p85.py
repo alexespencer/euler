@@ -1,18 +1,18 @@
 # Couting rectangles
 
-#f(a, b) == f(b, a) = so can limit our search space
+# f(a, b) == f(b, a) = so can limit our search space
 
 import math
 
 
 def count_rectanges(x, y):
     count = 0
-    for x2 in range(1, x+1):
-        for y2 in range(1, y+1):
-
-            count += ((x - x2 + 1) * (y - y2 + 1))
+    for x2 in range(1, x + 1):
+        for y2 in range(1, y + 1):
+            count += (x - x2 + 1) * (y - y2 + 1)
 
     return count
+
 
 assert count_rectanges(3, 2) == 18
 

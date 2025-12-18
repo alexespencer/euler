@@ -1,4 +1,3 @@
-
 class Sudoku:
     def __init__(self, nine_lines):
         # nine_lines is a list of nine strings, each string is a row of the sudoku
@@ -13,7 +12,17 @@ class Sudoku:
             for cell_index, cell in enumerate(row):
                 if cell == 0:
                     self.grid[row_index][cell_index] = None
-                    self.possible_values[row_index][cell_index] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    self.possible_values[row_index][cell_index] = [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                    ]
 
         # First init, we need to lock in all single values
         for row_index, row in enumerate(self.grid):
@@ -161,7 +170,10 @@ class Sudoku:
                         # Remove value from the other boxes in the col
                         col = box[0][1]
                         for i in range(0, 9):
-                            if i // 3 != box_row and value in self.possible_values[i][col]:
+                            if (
+                                i // 3 != box_row
+                                and value in self.possible_values[i][col]
+                            ):
                                 self.possible_values[i][col].remove(value)
                                 updated = True
 
@@ -170,7 +182,10 @@ class Sudoku:
                         # Remove value from the other boxes in the row
                         row = box[0][0]
                         for j in range(0, 9):
-                            if j // 3 != box_col and value in self.possible_values[row][j]:
+                            if (
+                                j // 3 != box_col
+                                and value in self.possible_values[row][j]
+                            ):
                                 self.possible_values[row][j].remove(value)
                                 updated = True
 
@@ -178,7 +193,7 @@ class Sudoku:
         # Find locked candidates in a row
         for row_index, row in enumerate(self.possible_values):
             # if row_index == 1:
-                # print(row_index, row)
+            # print(row_index, row)
             for value in range(1, 10):
                 # For the current row, cells contains the column indexes of the cells that CAN contain the value
                 cells = [i for i, cell in enumerate(row) if value in cell]
@@ -195,10 +210,12 @@ class Sudoku:
                     # Remove value from all other cells in this box
                     for i in range(box_row * 3, box_row * 3 + 3):
                         for j in range(box_col * 3, box_col * 3 + 3):
-                            if not (i == row_index and j in cells) and value in self.possible_values[i][j]:
+                            if (
+                                not (i == row_index and j in cells)
+                                and value in self.possible_values[i][j]
+                            ):
                                 self.possible_values[i][j].remove(value)
                                 updated = True
-
 
         # Find locked candidates in a column
         for col_index, col in enumerate(self.column_possible_values()):
@@ -214,7 +231,10 @@ class Sudoku:
                     # Remove value from all other cells in this box
                     for i in range(box_row * 3, box_row * 3 + 3):
                         for j in range(box_col * 3, box_col * 3 + 3):
-                            if not (j == col_index and i in cells) and value in self.possible_values[i][j]:
+                            if (
+                                not (j == col_index and i in cells)
+                                and value in self.possible_values[i][j]
+                            ):
                                 self.possible_values[i][j].remove(value)
                                 updated = True
 
@@ -226,7 +246,7 @@ class Sudoku:
 
         # Very similar to our hidden pairs
         # Find x-wing in a row
-        lookup = {} # Will be value: [row_index, [candidates]]
+        lookup = {}  # Will be value: [row_index, [candidates]]
 
         for row_index, row in enumerate(self.possible_values):
             for value in range(1, 10):
@@ -247,13 +267,16 @@ class Sudoku:
                     # Remove value from other cells in the column
                     for col_index in col_indexes:
                         for row_index in range(0, 9):
-                            if row_index not in row_indexes and value in self.possible_values[row_index][col_index]:
+                            if (
+                                row_index not in row_indexes
+                                and value in self.possible_values[row_index][col_index]
+                            ):
                                 # print(f"Removing {value} from {row_index}, {col_index}")
                                 self.possible_values[row_index][col_index].remove(value)
                                 updated = True
 
         # Find x-wing in a column
-        lookup = {} # Will be value: [col_index, [candidates]]
+        lookup = {}  # Will be value: [col_index, [candidates]]
 
         for col_index, col in enumerate(self.column_possible_values()):
             for value in range(1, 10):
@@ -274,7 +297,10 @@ class Sudoku:
                     # Remove value from other cells in the column
                     for row_index in row_indexes:
                         for col_index in range(0, 9):
-                            if col_index not in col_indexes and value in self.possible_values[row_index][col_index]:
+                            if (
+                                col_index not in col_indexes
+                                and value in self.possible_values[row_index][col_index]
+                            ):
                                 # print(f"Removing {value} from {row_index}, {col_index}")
                                 self.possible_values[row_index][col_index].remove(value)
                                 updated = True
@@ -288,7 +314,11 @@ class Sudoku:
         # Find naked pairs in a row
         for row_index, row in enumerate(self.possible_values):
             # Get cells with 2 possible values
-            cells = [[cell_index, frozenset(possible_values)] for cell_index, possible_values in enumerate(row) if len(possible_values) == 2]
+            cells = [
+                [cell_index, frozenset(possible_values)]
+                for cell_index, possible_values in enumerate(row)
+                if len(possible_values) == 2
+            ]
             if len(cells) > 1:
                 # Group by 2nd element (the frozenset)
                 groups = {}
@@ -302,15 +332,19 @@ class Sudoku:
                             if cell_index not in columns:
                                 for value in candidates:
                                     if value in cell:
-                                        self.possible_values[row_index][cell_index].remove(value)
+                                        self.possible_values[row_index][
+                                            cell_index
+                                        ].remove(value)
                                         updated = True
 
         # Find naked pairs in a column
         for col_index, col in enumerate(self.column_possible_values()):
             # Get cells with 2 values
-            cells = [[row_index, frozenset(possible_values)]
-                        for row_index, possible_values in enumerate(col)
-                        if len(possible_values) == 2]
+            cells = [
+                [row_index, frozenset(possible_values)]
+                for row_index, possible_values in enumerate(col)
+                if len(possible_values) == 2
+            ]
             if len(cells) > 1:
                 # Group by 2nd element (the frozenset)
                 groups = {}
@@ -324,7 +358,9 @@ class Sudoku:
                             if row_index not in rows:
                                 for value in candidates:
                                     if value in row[col_index]:
-                                        self.possible_values[row_index][col_index].remove(value)
+                                        self.possible_values[row_index][
+                                            col_index
+                                        ].remove(value)
                                         updated = True
 
         # Find naked pairs in a box
@@ -336,7 +372,11 @@ class Sudoku:
                     for j in range(box_col * 3, box_col * 3 + 3):
                         box.append((i, j, self.possible_values[i][j]))
 
-                cells = [[row_index, col_index, frozenset(possible_values)] for row_index, col_index, possible_values in box if len(possible_values) == 2]
+                cells = [
+                    [row_index, col_index, frozenset(possible_values)]
+                    for row_index, col_index, possible_values in box
+                    if len(possible_values) == 2
+                ]
 
                 if len(cells) > 1:
                     # Group by 2nd element (the frozenset)
@@ -347,18 +387,27 @@ class Sudoku:
                     # For each group, if there are 2 cells, remove the candidates from the other cells in the box
                     for candidates, cells in groups.items():
                         if len(cells) == 2:
-
                             for row_index, col_index, _ in box:
                                 if (row_index, col_index) not in cells:
                                     for value in candidates:
-                                        if value in self.possible_values[row_index][col_index]:
-                                            self.possible_values[row_index][col_index].remove(value)
+                                        if (
+                                            value
+                                            in self.possible_values[row_index][
+                                                col_index
+                                            ]
+                                        ):
+                                            self.possible_values[row_index][
+                                                col_index
+                                            ].remove(value)
                                             updated = True
 
         return updated
 
     def column_possible_values(self):
-        return [[row[col_index] for row in self.possible_values] for col_index in range(0, 9) ]
+        return [
+            [row[col_index] for row in self.possible_values]
+            for col_index in range(0, 9)
+        ]
 
     def find_hidden_n(self):
         """Two (or 3 or 4) candidates that appear only in two cells in a row, column or block. Other candidates in those two cells can be eliminated"""
@@ -366,7 +415,7 @@ class Sudoku:
 
         # Find hidden pairs in a row
         for row_index, row in enumerate(self.possible_values):
-            lookup = {} # Value: [col_indexes]
+            lookup = {}  # Value: [col_indexes]
 
             # Then, if there are n values in the same n cells, remove other candidates from these cells
             for col_index, possible_values in enumerate(row):
@@ -443,13 +492,15 @@ class Sudoku:
                             for value in self.possible_values[row_index][col_index]:
                                 if value not in values:
                                     # print(f"Removing {value} from {row_index}, {col_index}")
-                                    self.possible_values[row_index][col_index].remove(value)
+                                    self.possible_values[row_index][col_index].remove(
+                                        value
+                                    )
                                     updated = True
 
         return updated
 
     def output(self):
-        out = ''
+        out = ""
         for row in self.grid:
             for cell in row:
                 out += str(cell if cell else 0)
@@ -458,19 +509,19 @@ class Sudoku:
 
     def __repr__(self):
         # Print the grid
-        out = ''
+        out = ""
 
         for row_index, row in enumerate(self.grid):
             if row_index % 3 == 0:
-                out += '-------------------------\n'
+                out += "-------------------------\n"
 
             for col_index, cell in enumerate(row):
                 if col_index % 3 == 0:
-                    out += '| '
+                    out += "| "
                 if cell:
-                    out += str(cell) + ' '
+                    out += str(cell) + " "
                 else:
-                    out += '  '
-            out += '|\n'
-        out += '-------------------------\n'
+                    out += "  "
+            out += "|\n"
+        out += "-------------------------\n"
         return out

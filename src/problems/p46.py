@@ -1,5 +1,6 @@
 import sys
 import os
+
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
@@ -25,6 +26,7 @@ primes = set([2] + [n for n in range(3, prime_limit, 2) if is_prime(n)])
 # Prepopulate twice of squares up to 1000
 twice_squares = [2 * n * n for n in range(1, 1000) if 2 * n * n < prime_limit]
 
+
 def goldbach(n):
     # Find a match out of the choices we have
     ts_choices = [x for x in twice_squares if x < n - 2]
@@ -35,6 +37,7 @@ def goldbach(n):
             return True
 
     return False
+
 
 for gold in range(33, 10000, 2):
     if is_composite_number(gold) and not goldbach(gold):

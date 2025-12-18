@@ -1,7 +1,9 @@
 from math import factorial
 
+
 def combinations(n, r):
     return factorial(n) / (factorial(r) * factorial(n - r))
+
 
 assert combinations(5, 3) == 10
 assert combinations(23, 10) == 1144066

@@ -2,6 +2,7 @@
 # however it could also be +1, which is 2, 3, 5, 7, 11, 15 which is the OEIS sequence A000041 - this looks like the correct solution as the p(8) for A000123 does not equal 20, but p(8) for A000041 does equal 21
 import time
 
+
 def accel_asc_count(n):
     a = [0 for i in range(n + 1)]
     k = 1
@@ -24,8 +25,10 @@ def accel_asc_count(n):
         y = x + y - 1
         yield 1
 
+
 def number_ways(n):
     return len(list(accel_asc_count(n))) - 1
+
 
 assert number_ways(5) == 6
 assert number_ways(7) == 14

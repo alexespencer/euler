@@ -2,23 +2,27 @@ from math import sqrt, prod
 from functools import reduce
 import itertools
 
+
 def pentagon_n(n):
     """Returns the nth pentagon number"""
     return n * (3 * n - 1) // 2
+
 
 def is_pentagonal(n):
     """
     returns boolean whether n is a solution to (3*m**2 - m)
     (Using quadratic equation)
     """
-    if (1 + (1 + 24*n)**.5) % 6 == 0:
+    if (1 + (1 + 24 * n) ** 0.5) % 6 == 0:
         return True
 
     return False
 
+
 def triangle_n(n):
     """Returns the nth triangle number"""
     return n * (n + 1) // 2
+
 
 def is_triangular(n):
     """
@@ -26,34 +30,41 @@ def is_triangular(n):
     i.e. whether there exits m such that n = m(m+1)/2 >> 0 = -m^2 - m + 2n
     (Using quadratic equation)
     """
-    if (- 1 + (1 + 8*n)**.5) % 2 == 0:
+    if (-1 + (1 + 8 * n) ** 0.5) % 2 == 0:
         return True
 
     return False
+
 
 def square_n(n):
     """Returns the square of a number"""
     return n * n
 
+
 def hexagonal_n(n):
     """Returns the nth hexagonal number"""
     return n * (2 * n - 1)
+
 
 def heptagonal_n(n):
     """Returns the nth heptagonal number"""
     return n * (5 * n - 3) // 2
 
+
 def octagonal_n(n):
     """Returns the nth octagonal number"""
     return n * (3 * n - 2)
 
+
 def is_cube(n):
     """Returns if a number is a cube"""
-    return round(n ** (1/3)) ** 3 == n
+    return round(n ** (1 / 3)) ** 3 == n
+
 
 def is_square(n):
     """Returns if a number is a cube"""
-    return round(n ** (1/2)) ** 2 == n
+    return round(n ** (1 / 2)) ** 2 == n
+
 
 def is_pentagon_number(number):
     """Returns true if this number is a pentagon number. Must be given an int"""
@@ -65,12 +76,14 @@ def is_pentagon_number(number):
     except:
         return False
 
+
 def quadratic_equation(a, b, c):
     b2_4ac = (b * b) - (4 * a * c)
     if 2 * a == 0 or b2_4ac < 0:
         raise ValueError("No solution")
 
-    return ((-b + sqrt(b2_4ac))/(2 * a), (-b - sqrt(b2_4ac))/(2 * a))
+    return ((-b + sqrt(b2_4ac)) / (2 * a), (-b - sqrt(b2_4ac)) / (2 * a))
+
 
 def is_prime(n):
     """Returns if a number is prime"""
@@ -83,12 +96,13 @@ def is_prime(n):
     if n % 2 == 0:
         return False
 
-    for i in range(3, int(sqrt(n+1)+1), 2):
-    # for i in range(2, n):
+    for i in range(3, int(sqrt(n + 1) + 1), 2):
+        # for i in range(2, n):
         if n % i == 0:
             return False
 
     return True
+
 
 def fibonacci_seq(max_n=None):
     """Returns a list of fibonacci numbers up to max_n"""
@@ -99,16 +113,23 @@ def fibonacci_seq(max_n=None):
         if max_n and a > max_n:
             break
 
+
 def find_factors(n):
     """Returns the factors of n (must be an int)"""
     step = 2 if n % 2 else 1
-    return set(reduce(list.__add__,
-                    ([i, n//i] for i in range(1, int(sqrt(n))+1, step) if n % i == 0)))
+    return set(
+        reduce(
+            list.__add__,
+            ([i, n // i] for i in range(1, int(sqrt(n)) + 1, step) if n % i == 0),
+        )
+    )
+
 
 def count_factors(n):
     pf = prime_factors(n)
 
     return prod([v + 1 for v in pf.values()])
+
 
 def is_composite_number(n):
     """Returns if a number is a composite number. A composite number is a whole number with 2 factors (other than 1 and itself) and is not prime"""
@@ -124,35 +145,39 @@ def is_composite_number(n):
 
     return False
 
+
 def list_count_distinct_prime_factor_sieve(N):
-    A = [0] * (1+N)
-    for p in range(2, 1+N):
+    A = [0] * (1 + N)
+    for p in range(2, 1 + N):
         if A[p]:
             continue
-        for n in range(p, 1+N, p):
+        for n in range(p, 1 + N, p):
             A[n] += 1
     return A
 
+
 def list_distinct_prime_factor_sieve(N):
-    A = [[] for _ in range(1+N)]
-    for p in range(2, 1+N):
+    A = [[] for _ in range(1 + N)]
+    for p in range(2, 1 + N):
         if A[p]:
             continue
-        for n in range(p, 1+N, p):
+        for n in range(p, 1 + N, p):
             A[n].append(p)
     return A
 
+
 def prime_sieve(n):
     n = n + 1
-    size = n//2
-    sieve = [1]*size
+    size = n // 2
+    sieve = [1] * size
     limit = int(n**0.5)
-    for i in range(1,limit):
+    for i in range(1, limit):
         if sieve[i]:
-            val = 2*i+1
-            tmp = ((size-1) - i)//val
-            sieve[i+val::val] = [0]*tmp
-    return [2] + [i*2+1 for i, v in enumerate(sieve) if v and i>0]
+            val = 2 * i + 1
+            tmp = ((size - 1) - i) // val
+            sieve[i + val :: val] = [0] * tmp
+    return [2] + [i * 2 + 1 for i, v in enumerate(sieve) if v and i > 0]
+
 
 def prime_factors(n):
     """Returns a dictionary of prime: order. For example 100 (prime factors 2x2x5x5) would return {2: 2, 5:2}"""
@@ -178,18 +203,21 @@ def prime_factors(n):
 
     return factors
 
+
 def is_palindrome(n):
     """Returns if a number is a palindrome"""
     return str(n) == str(n)[::-1]
+
 
 def reverse_and_add(n):
     """Returns the sum of the reverse of a number and the number"""
     return n + int(str(n)[::-1])
 
+
 def continued_expansion(S):
     m = 0
     d = 1
-    a0 = int(S ** 0.5)
+    a0 = int(S**0.5)
     a = a0
     expansion = [a]
 
@@ -205,33 +233,40 @@ def continued_expansion(S):
 
     return expansion
 
+
 def HCF(a, b):
     """Finds the HCF of two numbers"""
     while b:
         a, b = b, a % b
     return a
 
+
 def LCM(a, b):
     """Finds the LCM of two numbers"""
     return a * b // HCF(a, b)
+
 
 def LCM_list(l):
     """Finds the LCM of a list of numbers"""
     return reduce(LCM, l)
 
+
 def phi_1_to_n(n):
     phi_set = {}
-    for i in range(1, n+1):
+    for i in range(1, n + 1):
         phi_set[i] = i
 
-    for i in range(2, n+1):
+    for i in range(2, n + 1):
         if phi_set[i] == i:
-            for j in range(i, n+1, i):
+            for j in range(i, n + 1, i):
                 phi_set[j] -= int(phi_set[j] / i)
 
     return phi_set
 
-def unique_product_from_factors(factors_lookup, number, depth=0, current_products=None, master_list=None):
+
+def unique_product_from_factors(
+    factors_lookup, number, depth=0, current_products=None, master_list=None
+):
     # This functio will be called recursively until number is prime
     # Given a list of a numbers factors, return all the unique ways of multiplying them together (with repetition if needed) to get the original number
     # For example, given the factors [1, 2, 3, 4, 6, 12] and the number 12, return [[1, 12], [2, 6], [3, 4], [1, 2, 6], [1, 3, 4], [1, 2, 3, 4]]
@@ -258,7 +293,13 @@ def unique_product_from_factors(factors_lookup, number, depth=0, current_product
 
         my_products[-1] = number // factor
         # Divide the last element by this factor before calling
-        unique_product_from_factors(factors_lookup, factor, depth+1, current_products=my_products, master_list=master_list)
+        unique_product_from_factors(
+            factors_lookup,
+            factor,
+            depth + 1,
+            current_products=my_products,
+            master_list=master_list,
+        )
 
     if depth == 0:
         # Sort each of the lists in master_list
@@ -266,9 +307,10 @@ def unique_product_from_factors(factors_lookup, number, depth=0, current_product
             master_list[i] = sorted(l)
 
         master_list.sort()
-        master_list = list(k for k,_ in itertools.groupby(master_list))
+        master_list = list(k for k, _ in itertools.groupby(master_list))
 
         return master_list
+
 
 def is_product_sum(current_prod, product_factors, k):
     # Get the pad count
@@ -276,12 +318,13 @@ def is_product_sum(current_prod, product_factors, k):
 
     return current_prod == sum(product_factors) + pad_count
 
+
 def _pythag_triples(m, n, max_length):
     triples = []
 
-    a = m ** 2 - n ** 2
+    a = m**2 - n**2
     b = 2 * m * n
-    c = m ** 2 + n ** 2
+    c = m**2 + n**2
     k = 1
     while True:
         if (k * a) + (k * b) + (k * c) > max_length:
@@ -291,6 +334,7 @@ def _pythag_triples(m, n, max_length):
         k += 1
 
     return triples
+
 
 def generate_pythag_triples(max_length):
     """Generates all pythaga triples up to max_length"""
@@ -320,7 +364,8 @@ def generate_pythag_triples(max_length):
 
     return triangles
 
-def fast_pythag_triples(k): # k is the max length of the hypotenuse
+
+def fast_pythag_triples(k):  # k is the max length of the hypotenuse
     """Returns a list of all pythagorean triples with a hypotenuse less than k, (a, b, c) or (b, a, c) - be careful"""
     n, m = 1, 2
     while m * m + 1 < k:
@@ -328,11 +373,12 @@ def fast_pythag_triples(k): # k is the max length of the hypotenuse
             n, m = m % 2, m + 1
         c = m * m + n * n
         if c >= k:
-            n=m
+            n = m
             continue
         if HCF(n, m) == 1:
             yield m * m - n * n, 2 * m * n, c
         n += 2
+
 
 class Calculation:
     def __init__(self, number1, operator=None, number2=None):
@@ -384,24 +430,24 @@ class Calculation:
 
     def __add__(self, other):
         if isinstance(other, int):
-            return Calculation(self.result, '+', other)
+            return Calculation(self.result, "+", other)
 
-        return Calculation(self.result, '+', other.result)
+        return Calculation(self.result, "+", other.result)
 
     def __sub__(self, other):
         if isinstance(other, int):
-            return Calculation(self.result, '-', other)
-        return Calculation(self.result, '-', other.result)
+            return Calculation(self.result, "-", other)
+        return Calculation(self.result, "-", other.result)
 
     def __mul__(self, other):
         if isinstance(other, int):
-            return Calculation(self.result, '*', other)
-        return Calculation(self.result, '*', other.result)
+            return Calculation(self.result, "*", other)
+        return Calculation(self.result, "*", other.result)
 
     def __truediv__(self, other):
         if isinstance(other, int):
-            return Calculation(self.result, '/', other)
-        return Calculation(self.result, '/', other.result)
+            return Calculation(self.result, "/", other)
+        return Calculation(self.result, "/", other.result)
 
     def calc(self):
         if isinstance(self.number1, Calculation):
@@ -414,26 +460,28 @@ class Calculation:
         else:
             right = self.number2
 
-        if self.operator == '+':
+        if self.operator == "+":
             return left + right
-        elif self.operator == '-':
+        elif self.operator == "-":
             return left - right
-        elif self.operator == '*':
+        elif self.operator == "*":
             return left * right
-        elif self.operator == '/':
+        elif self.operator == "/":
             return left / right
         elif self.operator is None:
             return left
         else:
             raise ValueError("Unknown operator")
 
+
 def _try_composite(a, d, n, s):
     if pow(a, d, n) == 1:
         return False
     for i in range(s):
-        if pow(a, 2**i * d, n) == n-1:
+        if pow(a, 2**i * d, n) == n - 1:
             return False
-    return True # n  is definitely composite
+    return True  # n  is definitely composite
+
 
 def is_prime_miller_rabin(n, _precision_for_huge_n=16):
     if n in _known_primes:
@@ -459,8 +507,10 @@ def is_prime_miller_rabin(n, _precision_for_huge_n=16):
     if n < 341550071728321:
         return not any(_try_composite(a, d, n, s) for a in (2, 3, 5, 7, 11, 13, 17))
     # otherwise
-    return not any(_try_composite(a, d, n, s)
-                   for a in _known_primes[:_precision_for_huge_n])
+    return not any(
+        _try_composite(a, d, n, s) for a in _known_primes[:_precision_for_huge_n]
+    )
+
 
 _known_primes = [2, 3]
 _known_primes += [x for x in range(5, 1000, 2) if is_prime(x)]

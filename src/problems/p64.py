@@ -1,16 +1,17 @@
-
 import sys
 import os
+
 sys.path.insert(0, os.getcwd())
 
 from euler import is_square
 
 # https://en.wikipedia.org/wiki/Periodic_continued_fraction
 
+
 def continued_fraction(S):
     m = 0
     d = 1
-    a0 = int(S ** 0.5)
+    a0 = int(S**0.5)
     a = a0
     exapansion = [a]
 
@@ -26,6 +27,7 @@ def continued_fraction(S):
 
     return exapansion
 
+
 def run_test():
     test_dict = {
         1: [2, 5, 10, 17, 26, 37, 50, 65, 82, 101],
@@ -37,7 +39,7 @@ def run_test():
         7: [58, 73, 202, 250, 274, 314, 349, 425],
         8: [31, 44, 69, 71, 91, 92, 108, 135, 153, 158],
         9: [106, 113, 137, 149, 265, 389, 493],
-        10: [43, 67, 86, 93, 115, 116, 118, 129, 154]
+        10: [43, 67, 86, 93, 115, 116, 118, 129, 154],
     }
     for p, vals in test_dict.items():
         for n in vals:
@@ -45,14 +47,14 @@ def run_test():
             assert len(continued_fraction(n)) - 1 == p
     print("All Tests passed")
 
+
 run_test()
 
 num_odd = 0
-for n in range(2, 10000+1):
+for n in range(2, 10000 + 1):
     if not is_square(n):
         period = len(continued_fraction(n)) - 1
         if period % 2 == 1:
             num_odd += 1
 
 print(num_odd)
-
