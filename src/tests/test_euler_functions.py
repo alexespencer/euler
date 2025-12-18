@@ -1,23 +1,41 @@
+from math import prod
+
 import pytest
 
-from euler import pentagon_n, quadratic_equation, is_pentagon_number, reverse_and_add
-from euler import is_prime, find_factors, is_composite_number
-from euler import prime_factors, is_palindrome, count_factors
-
-from euler import triangle_n, square_n, hexagonal_n, heptagonal_n, octagonal_n
-from euler import is_triangular, is_pentagonal
-from euler import is_cube, is_square, continued_expansion, HCF, LCM
-from euler import phi_1_to_n, unique_product_from_factors, is_product_sum
-
-from euler import Calculation, generate_pythag_triples
-
 from euler import (
-    list_distinct_prime_factor_sieve,
+    HCF,
+    LCM,
+    Calculation,
+    continued_expansion,
+    count_factors,
+    fibonacci_seq,
+    find_factors,
+    generate_pythag_triples,
+    heptagonal_n,
+    hexagonal_n,
+    is_composite_number,
+    is_cube,
+    is_palindrome,
+    is_pentagon_number,
+    is_pentagonal,
+    is_prime,
+    is_prime_miller_rabin,
+    is_product_sum,
+    is_square,
+    is_triangular,
     list_count_distinct_prime_factor_sieve,
+    list_distinct_prime_factor_sieve,
+    octagonal_n,
+    pentagon_n,
+    phi_1_to_n,
+    prime_factors,
+    prime_sieve,
+    quadratic_equation,
+    reverse_and_add,
+    square_n,
+    triangle_n,
+    unique_product_from_factors,
 )
-from euler import prime_sieve, fibonacci_seq, is_prime_miller_rabin
-
-from math import prod
 
 
 class TestEuler:

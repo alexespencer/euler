@@ -5,14 +5,13 @@
 
 # We check each one for an integer solution
 
-import sys
 import os
+import sys
 import time
 
 sys.path.insert(0, os.getcwd())
 
 from euler import is_square
-
 
 max_M = 1900
 find_n_solutions = 1000000

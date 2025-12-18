@@ -1,5 +1,5 @@
-from fractions import Fraction
 from datetime import datetime
+from fractions import Fraction
 
 start_time = datetime.now()
 

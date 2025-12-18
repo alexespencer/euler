@@ -1,10 +1,11 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.getcwd())
 
-from euler import unique_product_from_factors, is_product_sum
 from tqdm import tqdm
+
+from euler import is_product_sum, unique_product_from_factors
 
 # A few things we can work out from this
 # Given factors like {2, 5, 8} 2x5x8 = 80 we can always "pad" by n 'x1's where n = (80 - (2+5+8)) to get the number 1x1x....1x2x5x8 = 1+1+1+...+2+5+8

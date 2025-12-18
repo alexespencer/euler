@@ -1,6 +1,6 @@
 # Analogous to P76, but with + 1? Maybe - but we need a faster p(n) function. We can use the Euler function of alternating pentagon powers to generate the p(n) function.
-import sys
 import os
+import sys
 import time
 
 sys.path.insert(0, os.getcwd())

@@ -1,14 +1,13 @@
-import sys
 import os
+import sys
 
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
 import itertools
+import time
 
 from euler import is_prime
-
-import time
 
 # By replacing the 1st digit of the 2-digit number *3, it turns out that six of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
 

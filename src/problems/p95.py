@@ -1,8 +1,8 @@
-import networkx as nx
-
-import sys
 import os
+import sys
 import time
+
+import networkx as nx
 
 sys.path.insert(0, os.getcwd())
 

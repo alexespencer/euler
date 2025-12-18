@@ -1,10 +1,10 @@
-import sys
 import os
+import sys
 
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
-from euler import pentagon_n, is_pentagon_number
+from euler import is_pentagon_number, pentagon_n
 
 # See if we can find ANY pair
 for j in range(1, 3000):

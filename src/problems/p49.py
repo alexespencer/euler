@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())

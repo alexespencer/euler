@@ -1,7 +1,7 @@
 # Enter your code here. Read input from STDIN. Print output to STDOUT
 
-from math import sqrt, prod
 from functools import reduce
+from math import prod, sqrt
 
 
 def find_factors(n):

@@ -1,12 +1,12 @@
 # Diophantine equations
 
 # Generate the D possibilities from 2 to 1000 if it is NOT square
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.getcwd())
 
-from euler import is_square, continued_expansion
+from euler import continued_expansion, is_square
 
 D_max = 1000
 D_poss = [n for n in range(2, D_max + 1) if not is_square(n)]

@@ -1,18 +1,18 @@
 # I am quite proud of this solution (using cliques within a graph)
 
+import os
 import pickle
 import sys
-import os
 
 sys.path.insert(0, os.getcwd())
 
-from euler import is_prime
-
-from itertools import combinations
 from functools import reduce
+from itertools import combinations
 
 import networkx as nx
 from networkx.algorithms.clique import enumerate_all_cliques
+
+from euler import is_prime
 
 
 def ncr(n, r):

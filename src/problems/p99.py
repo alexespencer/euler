@@ -1,6 +1,7 @@
 # log (3 ** 125) == 125 * log(3)
 
 from math import log
+
 from tqdm import tqdm
 
 # Read in the data (data/p99/txt) which has lines of data in the form of "base,exponent"

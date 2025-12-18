@@ -1,18 +1,18 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.getcwd())
 
-from euler import (
-    triangle_n,
-    square_n,
-    pentagon_n,
-    hexagonal_n,
-    heptagonal_n,
-    octagonal_n,
-)
-
 import networkx as nx
+
+from euler import (
+    heptagonal_n,
+    hexagonal_n,
+    octagonal_n,
+    pentagon_n,
+    square_n,
+    triangle_n,
+)
 
 # Store for the 4 digit numbers (triangle, square, pentagon, hexagon, hepagon, octagon)
 numbers = {}

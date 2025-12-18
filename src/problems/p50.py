@@ -1,13 +1,13 @@
-import sys
 import os
+import sys
 
 print(f"Adding to path: {os.getcwd()}")
 sys.path.insert(0, os.getcwd())
 
-from euler import is_prime
+from datetime import datetime
 from itertools import islice
 
-from datetime import datetime
+from euler import is_prime
 
 # The prime 41, can be written as the sum of six consecutive primes:
 

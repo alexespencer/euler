@@ -1,11 +1,12 @@
-import sys
 import os
+import sys
 import time
 
 sys.path.insert(0, os.getcwd())
 
-from euler import prime_factors
 import math
+
+from euler import prime_factors
 
 
 def phi(n):

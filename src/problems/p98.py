@@ -1,6 +1,6 @@
 # Print out all the 4 digit numbers that are square
-import sys
 import os
+import sys
 import time
 
 sys.path.insert(0, os.getcwd())

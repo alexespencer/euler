@@ -1,6 +1,6 @@
-from math import sqrt, prod
-from functools import reduce
 import itertools
+from functools import reduce
+from math import prod, sqrt
 
 
 def pentagon_n(n):

@@ -1,10 +1,10 @@
 import pytest
 
 from roman import (
-    roman_to_int,
-    split_into_groups,
     find_subtractive_pair,
     number_to_minimal_roman,
+    roman_to_int,
+    split_into_groups,
 )
 
 
