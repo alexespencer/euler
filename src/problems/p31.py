@@ -58,14 +58,10 @@ class CoinCounter:
         return self.ways[n]
 
 
-cc = CoinCounter(10**5)
+def solution() -> int:
+    cc = CoinCounter(10**5)
+    return cc.count(200, 10**9 + 7)
 
-for i in coins[0:5]:
-    assert cc.count(i) == count_combos_slow(i)[0]
 
-print(cc.count(10**5, 10**9 + 7))
-
-print(cc.count(10, 10**9 + 7))
-print(cc.count(15, 10**9 + 7))
-print(cc.count(20, 10**9 + 7))
-print(cc.count(200, 10**9 + 7))
+if __name__ == "__main__":
+    print(solution())
