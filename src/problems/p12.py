@@ -1,9 +1,8 @@
-# Enter your code here. Read input from STDIN. Print output to STDOUT
-
 from functools import reduce
 from math import prod, sqrt
 
 
+# TODO: move to a factors module
 def find_factors(n):
     """Returns the factors of n (must be an int)"""
     step = 2 if n % 2 else 1
@@ -15,6 +14,7 @@ def find_factors(n):
     )
 
 
+# TODO: move to a factors module
 def prime_factors(n):
     """Returns a dictionary of prime: order. For example 100 (prime factors 2x2x5x5) would return {2: 2, 5:2}"""
     if n == 1:
@@ -53,19 +53,6 @@ factor_count_lookup = {
     1: 3,
 }  # key: n value = value of the FIRST triangle number with OVER the n (key) factors
 
-# start_time = datetime.now()
-# for i in range(5000):
-#     f = len(find_factors(842161320))
-# print(f)
-# print(f"Time taken: {datetime.now() - start_time}")
-
-# start_time = datetime.now()
-# for i in range(500):
-#     x = number_factors(842161320)
-# print(x)
-
-# print(f"Time taken: {datetime.now() - start_time}")
-# exit()
 # What's the first number with 10 ** 3 divisors?
 # The first number with OVER 10**3 factors is 842161320. It is the 41040th triangle number and has 1024 factors
 # The "first numbers" with over N factors are always even (after the first 2 triangle numbers). This means we can
@@ -105,5 +92,13 @@ def first_triangle_number_with_over_n_factors(n):
     return factor_count_lookup[key]
 
 
-assert first_triangle_number_with_over_n_factors(5) == 28
-assert first_triangle_number_with_over_n_factors(500) == 76576500
+def solution() -> int:
+    assert first_triangle_number_with_over_n_factors(5) == 28
+    value = first_triangle_number_with_over_n_factors(500)
+    assert value == 76576500
+    return value
+
+
+if __name__ == "__main__":
+    value = solution()
+    print(value)
