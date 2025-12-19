@@ -27,26 +27,17 @@ assert longest_collatz(8) == 4
 assert longest_collatz(13) == 10
 
 n_to_length_lookup = {}
-# length_to_n_lookup = defaultdict(list)
 
 longest_chain = 0
-for i in range(1, 5 * 10**2):
+for i in range(1, 1000000):
     length = longest_collatz(i)
     if length >= longest_chain:
         longest_chain = length
         n_to_length_lookup.setdefault(i, [0, set()])
         n_to_length_lookup[i][0] = length
         n_to_length_lookup[i][1].add(i)
-        # length_to_n_lookup[length].append(i)
 
 print(collatz_length)
-
-import sys
-
-print("Key size: ", sys.getsizeof(collatz_length))
-
-print(n_to_length_lookup)
-# print(length_to_n_lookup)
 
 
 def longest_less_n(n):
@@ -57,8 +48,10 @@ def longest_less_n(n):
     return max(n_to_length_lookup[key][1])
 
 
-assert longest_less_n(10) == 9
-assert longest_less_n(15) == 9
-assert longest_less_n(20) == 19
+def solution() -> int:
+    assert longest_less_n(1000000) == 837799
+    return longest_less_n(1000000)
 
-# print(longest_less_n(10 ** 6))
+
+if __name__ == "__main__":
+    print(solution())
