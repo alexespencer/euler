@@ -36,16 +36,12 @@ def get_max_no_numpy(grid):
             diag_max_1 = prod([b[i][i] for i in range(4)])
             diag_max_2 = prod([b[4 - i - 1][i] for i in range(4)])
 
-            cur_max = max([row_max, col_max, diag_max_1, diag_max_2])
-
-            if cur_max > max_found:
-                max_found = cur_max
+            max_found = max([row_max, col_max, diag_max_1, diag_max_2, max_found])
 
     return max_found
 
 
 def solution() -> int:
-    grid = []
     grid_rows = [row.split() for row in grid_input.split("\n")]
     grid = [list(map(int, row)) for row in grid_rows]
     return get_max_no_numpy(grid)
