@@ -1,14 +1,5 @@
 from itertools import permutations
 
-# Import the cipher.txt file into a list
-with open("data/p59_cipher.txt") as f:
-    line = f.readline()
-
-    # Split the line up by comma and convert to integers
-    cipher_bytes = [int(x) for x in line.split(",")]
-
-assert cipher_bytes[0:5] == [36, 22, 80, 0, 0]
-
 # The encryption key consists of 3 lowercase characters - but we do not know the length? Assume 3 for now
 
 
@@ -41,14 +32,6 @@ def decrypt(encrypted_bytes, password):
     # Convert the decrypted bytes to a string
     decrypted_string = "".join(chr(x) for x in decrypted_bytes)
     return decrypted_string
-
-
-raw_text = "This is a string"
-password = "bob"
-encrypted_bytes = encrypt(raw_text, password)
-decrypted_string = decrypt(encrypted_bytes, password)
-# print(encrypted_bytes)
-assert raw_text == decrypted_string
 
 
 def crack_encryption(encrypted_bytes, password_length=3):
@@ -216,16 +199,32 @@ def crack_encryption(encrypted_bytes, password_length=3):
     # Sort the results by the score
     results.sort(key=lambda x: x[0], reverse=True)
 
-    print(f"Password length: {password_length}")
-    for i in range(2):
-        print(results[i])
-
     return results[0][3]
 
 
-most_likely_password = crack_encryption(cipher_bytes, 3)
+def solution() -> int:
+    raw_text = "This is a string"
+    password = "bob"
+    encrypted_bytes = encrypt(raw_text, password)
+    decrypted_string = decrypt(encrypted_bytes, password)
+    assert raw_text == decrypted_string
 
-# Find the sum of the ASCII values in the original text using the password found
-original_text = decrypt(cipher_bytes, most_likely_password)
-original_bytes = bytes(original_text, "ascii")
-print(sum(original_bytes))
+    # Import the cipher.txt file into a list
+    with open("data/p59_cipher.txt") as f:
+        line = f.readline()
+
+        # Split the line up by comma and convert to integers
+        cipher_bytes = [int(x) for x in line.split(",")]
+
+    assert cipher_bytes[0:5] == [36, 22, 80, 0, 0]
+
+    most_likely_password = crack_encryption(cipher_bytes, 3)
+
+    # Find the sum of the ASCII values in the original text using the password found
+    original_text = decrypt(cipher_bytes, most_likely_password)
+    original_bytes = bytes(original_text, "ascii")
+    return sum(original_bytes)
+
+
+if __name__ == "__main__":
+    print(solution())
