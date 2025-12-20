@@ -1,4 +1,4 @@
-from problems import (
+from euler.problems import (
     p11,
     p12,
     p14,

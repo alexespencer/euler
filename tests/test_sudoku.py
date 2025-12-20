@@ -1,4 +1,4 @@
-from sudoku import Sudoku
+from euler.sudoku import Sudoku
 
 
 class TestSudoku:

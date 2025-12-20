@@ -1,6 +1,6 @@
 import pytest
 
-from problems.cards import canonical
+from euler.cards import canonical
 
 
 class TestCards:
