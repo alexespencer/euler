@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 import time
 
 # Not the most elegant of solutions, could do with some tidying and we could also consider looking for alternative

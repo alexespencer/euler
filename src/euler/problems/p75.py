@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 from euler import generate_pythag_triples
 
 # For a right angled triangle with integer sides there are a number of properties we might be able to use:

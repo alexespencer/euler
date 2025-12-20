@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 import math
 
 from euler import find_factors

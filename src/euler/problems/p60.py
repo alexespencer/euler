@@ -2,10 +2,6 @@
 
 import os
 import pickle
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 from functools import reduce
 from itertools import combinations
 

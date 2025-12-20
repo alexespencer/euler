@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 from euler import is_square
 
 # https://en.wikipedia.org/wiki/Periodic_continued_fraction

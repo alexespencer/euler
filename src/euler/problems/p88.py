@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 from tqdm import tqdm
 
 from euler import is_product_sum, unique_product_from_factors

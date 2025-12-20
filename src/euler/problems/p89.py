@@ -1,10 +1,4 @@
-# Roman numerals
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
-from roman import number_to_minimal_roman, roman_to_int
+from euler.roman import number_to_minimal_roman, roman_to_int
 
 # Open the file and read in all lines
 with open("data/p89.txt", "r") as f:

@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 from euler import HCF
 
 # Test speed of our HCF function

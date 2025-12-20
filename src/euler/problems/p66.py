@@ -1,39 +1,12 @@
 # Diophantine equations
 
 # Generate the D possibilities from 2 to 1000 if it is NOT square
-import os
-import sys
 
-sys.path.insert(0, os.getcwd())
 
 from euler import continued_expansion, is_square
 
 D_max = 1000
 D_poss = [n for n in range(2, D_max + 1) if not is_square(n)]
-# print(D_poss)
-
-# THis solution is too slow and doesn't find high limits, leaving in for prosperity
-# def find_minimal_solution(D, x_limit=10000000):
-
-#     for x in range(int(D ** 0.5), x_limit):
-#         # Find a perfect square for y
-#         part_solution = x * x - 1
-#         if part_solution % D == 0 and is_square(part_solution / D):
-#             return x
-#     print(f"No solution found for D={D} with x_limit {x_limit}")
-#     return None
-#     raise ValueError(f"No solution found for D={D} with x_limit {x_limit}")
-
-# # Pre-generated squares
-
-# all_x = {}
-# for D in D_poss:
-#     print(D)
-#     x = find_minimal_solution(D)
-#     all_x[D] = x
-
-# # Which D has the largest X
-# print(max(all_x, key=all_x.get))
 
 # The equation in question is a special form of Diophantine equation, called a Pell equation.
 # The equation is of the form:

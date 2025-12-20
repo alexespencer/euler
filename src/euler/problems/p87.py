@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
 from euler import is_prime
 
 # Max prime for 1st element would be root(50,000,000 - 24): <= 7071

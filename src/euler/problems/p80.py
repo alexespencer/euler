@@ -1,10 +1,6 @@
 # In python this is made easier by the decimal library where you can set the precision of a float to 100 places
 # If that didn't exist, we could probably do some clever recursion in combination with our infinite fraction code from earlier problems combined with long division
 
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
 
 from decimal import Decimal, getcontext
 
