@@ -23,22 +23,29 @@ def check_permutations(number_list):
     return False
 
 
-assert check_permutations([1487, 4817, 8147])
-assert check_permutations([123, 321])
-assert not check_permutations([123, 31])
-assert not check_permutations([123, 31, 321])
+def solution() -> int:
+    assert check_permutations([1487, 4817, 8147])
+    assert check_permutations([123, 321])
+    assert not check_permutations([123, 31])
+    assert not check_permutations([123, 31, 321])
 
-for n1 in range(1000, 9974):
-    if not is_prime(n1):
-        continue
+    for n1 in range(1000, 9974):
+        if not is_prime(n1):
+            continue
 
-    # Determine our max x
-    max_x = int((9973 - n1) / 2) + 1
+        # Determine our max x
+        max_x = int((9973 - n1) / 2) + 1
 
-    for x in range(1, max_x):
-        n2, n3 = n1 + x, n1 + x + x
-        if is_prime(n2) and is_prime(n3):
-            # Check the permutations
-            if check_permutations([n1, n2, n3]):
-                print(n1, n2, n3)
-                break
+        for x in range(1, max_x):
+            n2, n3 = n1 + x, n1 + x + x
+            if is_prime(n2) and is_prime(n3):
+                # Check the permutations
+                if check_permutations([n1, n2, n3]):
+                    if n1 != 1487:
+                        return int(str(n1) + str(n2) + str(n3))
+
+    raise Exception("No solution found")
+
+
+if __name__ == "__main__":
+    print(solution())
