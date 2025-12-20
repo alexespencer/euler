@@ -1,7 +1,10 @@
+# TODO: this is a mess, tidy it up. Was it re-used for another question? If so, split it out and
+# add common functions to a module. We don't seem to use any things from Fraction really, other than
+# Equality checking, just use a tuple or recreate a lighter weight one?
+
 import math
 from datetime import datetime
 from fractions import Fraction
-from posixpath import curdir
 
 start_time = datetime.now()
 
