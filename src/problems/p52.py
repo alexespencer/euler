@@ -12,13 +12,14 @@ def p52(number, multiplies=[2, 3, 4, 5, 6]):
     return True
 
 
-assert p52(125874, [2])
+def solution() -> int:
+    i = 0
+    while True:
+        i += 1
 
-found = False
-i = 0
-while not found:
-    i += 1
+        if p52(i):
+            return i
 
-    if p52(i):
-        print(i)
-        found = True
+
+if __name__ == "__main__":
+    print(solution())
