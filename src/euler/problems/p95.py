@@ -1,10 +1,6 @@
-import os
-import sys
 import time
 
 import networkx as nx
-
-sys.path.insert(0, os.getcwd())
 
 from euler import find_factors
 

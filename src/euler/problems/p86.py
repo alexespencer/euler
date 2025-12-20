@@ -5,11 +5,7 @@
 
 # We check each one for an integer solution
 
-import os
-import sys
 import time
-
-sys.path.insert(0, os.getcwd())
 
 from euler import is_square
 

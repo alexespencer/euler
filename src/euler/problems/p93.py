@@ -1,9 +1,4 @@
-import os
-import sys
 import time
-
-sys.path.insert(0, os.getcwd())
-
 from itertools import permutations, product
 
 # Previous WIP would have taken 4 hours, not good enogh

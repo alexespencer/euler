@@ -2,11 +2,7 @@
 # For 1 billion, it takes 74 seconds, without any computation - this would take too long
 # What about using pythagorian triples? Something we have done before in problem 75
 # Our p75 solution, using Euclid's formula, is still not optimal, try again...
-import os
-import sys
 from time import time
-
-sys.path.insert(0, os.getcwd())
 
 from euler import HCF
 

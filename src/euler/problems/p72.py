@@ -1,8 +1,4 @@
-import os
-import sys
 import time
-
-sys.path.insert(0, os.getcwd())
 
 from euler import HCF, find_factors
 

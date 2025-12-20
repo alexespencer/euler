@@ -1,10 +1,5 @@
-import os
-import sys
-import time
-
-sys.path.insert(0, os.getcwd())
-
 import math
+import time
 
 from euler import prime_factors
 
