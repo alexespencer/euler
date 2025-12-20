@@ -3,7 +3,7 @@ from euler.cards import canonical
 
 def solution() -> int:
     # Read the poker.txt file into a list of strings
-    with open("data/poker.txt") as f:
+    with open("data/p54_poker.txt") as f:
         lines = f.readlines()
     # Split the lines up by taking the first 5 elements and the last 5 elements
     hands = [
