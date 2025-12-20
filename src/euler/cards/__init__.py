@@ -36,6 +36,7 @@ def canonical(hand):
     (<Quality.flush: 6>, [12, 10, 8, 5, 4])
 
     """
+    print(hand)
     flush = len(set(suit for _, suit in hand)) == 1
     ranks = sorted("--23456789TJQKA".find(rank) for rank, _ in hand)
     if ranks == [2, 3, 4, 5, 14]:  # ace-low straight
