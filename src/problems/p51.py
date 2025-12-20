@@ -1,5 +1,4 @@
 import itertools
-import time
 
 from euler import is_prime
 
@@ -31,9 +30,6 @@ def apply_mask(number, mask, digit):
     return int("".join(str_num))
 
 
-assert apply_mask("56123", (2, 3), 6) == 56663
-
-
 def p51(number, mask, family_count):
     """Short circuiting function to test if a number and mask has the required number of primes with the logic applied"""
     primes = []
@@ -58,11 +54,6 @@ def p51(number, mask, family_count):
     return True, primes
 
 
-print(p51(56003, (2, 3), 7))
-print(p51(13, (0,), 6))
-print(p51(13, (0,), 7))
-
-
 # We can generate masks in advance
 def generate_masks(num_digits):
     """Generates a mask array, of digits that will be replaced (0 bound). At least 2 masked but does not include the last digit as unlikely to get > 5 primes
@@ -77,28 +68,24 @@ def generate_masks(num_digits):
     return masks
 
 
-start_time = time.time()
+def solution() -> int:
+    masks = {n: generate_masks(n) for n in range(5, 10)}
 
-masks = {n: generate_masks(n) for n in range(5, 10)}
-for num_digits, mask_list in masks.items():
-    print(f"For {num_digits} digit numbers there are {len(mask_list)} masks to try")
+    # Now find the first one with 8
+    i = 56003
+    while True:
+        i += 2
 
-# Now find the first one with 8
-i = 56003
-keep_going = True
-while keep_going:
-    i += 2
+        if not is_prime(i):
+            continue
 
-    if not is_prime(i):
-        continue
+        for mask in masks[len(str(i))]:
+            p51_found, primes = p51(i, mask, 8)
+            if p51_found:
+                return min(primes)
 
-    for mask in masks[len(str(i))]:
-        p50_found, primes = p51(i, mask, 8)
-        if p50_found:
-            print(mask, primes, min(primes))
-            keep_going = False
 
-            break
-
-end_time = time.time()
-print(f"Total time taken: {end_time - start_time:.2f} seconds")
+if __name__ == "__main__":
+    # TODO: move asserts into tests
+    assert apply_mask("56123", (2, 3), 6) == 56663
+    print(solution())
