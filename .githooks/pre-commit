@@ -1,0 +1,47 @@
+#!/bin/sh
+# pre-commit hook (to be placed in .githooks or .git/hooks)
+# - Runs `just lint-stage` (format then check)
+# - Aborts the commit if `just` fails
+# - Aborts the commit if formatting or other tools modified files (so developer can review & stage)
+#
+# Usage:
+#   - Make sure this file is executable: chmod +x .githooks/pre-commit
+#   - If you use a custom hooks path, set git config core.hooksPath .githooks
+#   - To bypass in special cases: export SKIP_PRE_COMMIT=1
+
+set -eu
+
+# Move to repository root to make behavior consistent
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo .)"
+cd "$REPO_ROOT" || exit 1
+
+# Allow skipping the hook via env var
+if [ "${SKIP_PRE_COMMIT:-}" = "1" ]; then
+  printf "pre-commit: SKIP_PRE_COMMIT=1, skipping hook\n"
+  exit 0
+fi
+
+# Ensure `just` is available
+if ! command -v just >/dev/null 2>&1; then
+  printf "pre-commit: 'just' not found in PATH. Install 'just' or set SKIP_PRE_COMMIT=1 to bypass.\n" >&2
+  exit 1
+fi
+
+printf "pre-commit: running 'just lint-stage'...\n"
+# Be explicit about the target to avoid surprises if default changes
+if ! just lint-stage; then
+  printf "pre-commit: 'just' failed. Commit aborted.\n" >&2
+  exit 1
+fi
+
+# If formatting or other tools modified files in the working tree, abort so user can review and stage them.
+# `git diff --quiet` is true when there are no unstaged changes.
+if ! git diff --quiet --; then
+  printf "\npre-commit: Files were modified by formatting or other tools.\n"
+  printf "Please review the changes and stage them before committing.\n\n"
+  git --no-pager status --porcelain
+  exit 1
+fi
+
+printf "pre-commit: all checks passed.\n"
+exit 0
