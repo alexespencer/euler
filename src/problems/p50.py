@@ -1,4 +1,3 @@
-from datetime import datetime
 from itertools import islice
 
 from euler import is_prime
@@ -11,10 +10,6 @@ from euler import is_prime
 # The longest sum of consecutive primes below one-thousand that adds to a prime, contains 21 terms, and is equal to 953.
 
 # Which prime, below one-million, can be written as the sum of the most consecutive primes?
-
-print("Finding primes under 1,000,000...", end="")
-primes_1m = [2] + [x for x in range(3, 1000001, 2) if is_prime(x)]
-print("done")
 
 
 # Function to give a sliding window
@@ -30,36 +25,31 @@ def window(seq, n=2):
         yield result
 
 
-def method1(window_size):
+def method1(window_size, primes_1m: list[int]) -> int | None:
     for w in window(primes_1m, window_size):
         if w[-1] >= 500000:
-            print(
-                f"Aborting checking window size {window_size} as largest prime is now >= 500,000"
-            )
             return None
 
         sum_window = sum(w)
 
         if sum_window >= 1000000:
-            print(
-                f"Aborting checking window size {window_size} as sum of the window is now >= 1,000,000"
-            )
             return None
 
         if sum_window in primes_1m:
-            print(window_size, sum_window, w)
-            return True
+            return sum_window
 
 
-overall_start = datetime.now()
-# Take a sliding window of 6 and see if it adds to a prime
-for window_size in range(1000, 21, -1):
-    start_time = datetime.now()
-    found = method1(window_size)
+def solution() -> int:
+    primes_1m = [2] + [x for x in range(3, 1000001, 2) if is_prime(x)]
 
-    end_time = datetime.now()
-    print("Time taken:", end_time - start_time)
-    if found:
-        break
-overall_end = datetime.now()
-print("Total taken:", overall_end - overall_start)
+    # Take a sliding window of 6 and see if it adds to a prime
+    for window_size in range(1000, 21, -1):
+        value = method1(window_size, primes_1m)
+        if value is not None:
+            return value
+
+    raise ValueError("No solution found")
+
+
+if __name__ == "__main__":
+    print(solution())
