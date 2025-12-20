@@ -15,15 +15,20 @@ def is_lychrel(n, iter_max=50):
     return True
 
 
-assert not is_lychrel(349, 3)
-assert is_lychrel(10677, 52)
-assert not is_lychrel(10677, 53)
-assert is_lychrel(196)
+def solution() -> int:
+    assert not is_lychrel(349, 3)
+    assert is_lychrel(10677, 52)
+    assert not is_lychrel(10677, 53)
+    assert is_lychrel(196)
 
-# # How many Lychrel numbers are there below ten-thousand? (Using 50 as a cutoff)
-count = 0
-for i in range(0, 10000):
-    if is_lychrel(i):
-        count += 1
+    # # How many Lychrel numbers are there below ten-thousand? (Using 50 as a cutoff)
+    count = 0
+    for i in range(0, 10000):
+        if is_lychrel(i):
+            count += 1
 
-print(count)
+    return count
+
+
+if __name__ == "__main__":
+    print(solution())
