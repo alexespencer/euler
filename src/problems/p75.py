@@ -15,7 +15,7 @@ max_length = 1500000
 triangles = generate_pythag_triples(max_length)
 
 # How many with only one triangle up to the max_length
-answer = len([1 for l, t in triangles.items() if len(t) == 1 and l <= max_length])
+answer = len([1 for L, t in triangles.items() if len(t) == 1 and L <= max_length])
 assert answer == 161667
 print(f"Number of Lengths with 1 unique solution (L <= {max_length:,}): {answer}")
 

@@ -1,9 +1,3 @@
-import os
-import sys
-
-print(f"Adding to path: {os.getcwd()}")
-sys.path.insert(0, os.getcwd())
-
 from euler import is_prime
 
 # The arithmetic sequence, 1487, 4817, 8147, in which each of the terms increases by 3330, is unusual in two ways:

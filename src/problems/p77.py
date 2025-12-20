@@ -18,10 +18,10 @@ def accel_asc(n):
             a[k] = x
             y -= x
             k += 1
-        l = k + 1
+        L = k + 1
         while x <= y:
             a[k] = x
-            a[l] = y
+            a[L] = y
             yield a[: k + 2]
             x += 1
             y -= 1

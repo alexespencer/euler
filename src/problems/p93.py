@@ -29,15 +29,12 @@ def possible_calculations(digits):
             ]
 
             for f in fs:
-                # if f.startswith("4 * 2"):
-                #     print(f"{f} = {r}")
                 try:
                     r = eval(f)
 
                     if int(r) == r and r > 0 and r not in all_numbers:
                         all_numbers.append(r)
-                except:
-                    # print(f"Failed to evaluate {f}")
+                except Exception:
                     pass
 
     return all_numbers
@@ -49,9 +46,9 @@ longest_run_digits = None
 for perm in permutations(digit_set, 4):
     a, b, c, d = perm
     if a < b < c < d:
-        # print("Trying", perm)
         all_numbers = possible_calculations(list(perm))
         all_numbers.sort()
+
         # Find the first number that is not in the list
         for i in range(1, len(all_numbers)):
             if all_numbers[i] != i + 1:
@@ -61,7 +58,5 @@ for perm in permutations(digit_set, 4):
                     longest_run_digits = perm
 
                 break
-        # print(all_numbers)
-        # break
 
 print(longest_run, longest_run_digits)

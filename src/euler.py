@@ -73,7 +73,7 @@ def is_pentagon_number(number):
             return True
         else:
             return False
-    except:
+    except Exception:
         return False
 
 
@@ -246,9 +246,9 @@ def LCM(a, b):
     return a * b // HCF(a, b)
 
 
-def LCM_list(l):
+def LCM_list(L):
     """Finds the LCM of a list of numbers"""
-    return reduce(LCM, l)
+    return reduce(LCM, L)
 
 
 def phi_1_to_n(n):
@@ -303,8 +303,8 @@ def unique_product_from_factors(
 
     if depth == 0:
         # Sort each of the lists in master_list
-        for i, l in enumerate(master_list):
-            master_list[i] = sorted(l)
+        for i, L in enumerate(master_list):
+            master_list[i] = sorted(L)
 
         master_list.sort()
         master_list = list(k for k, _ in itertools.groupby(master_list))

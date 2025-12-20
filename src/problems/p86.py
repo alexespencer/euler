@@ -21,11 +21,11 @@ start_time = time.time()
 for h in range(1, max_M + 1):
     for w in range(h, max_M + 1):
         wh_square = (w + h) ** 2
-        for l in range(w, max_M + 1):
-            shortest_distance_sq = (l**2) + wh_square
+        for length in range(w, max_M + 1):
+            shortest_distance_sq = (length**2) + wh_square
             if is_square(shortest_distance_sq):
                 count += 1
-                cuboids.append((h, w, l))
+                cuboids.append((h, w, length))
 
 end_time = time.time()
 

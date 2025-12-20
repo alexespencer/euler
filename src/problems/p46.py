@@ -1,9 +1,3 @@
-import os
-import sys
-
-print(f"Adding to path: {os.getcwd()}")
-sys.path.insert(0, os.getcwd())
-
 from euler import is_composite_number, is_prime
 
 # It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.

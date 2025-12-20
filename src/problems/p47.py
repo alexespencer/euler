@@ -1,9 +1,3 @@
-import os
-import sys
-
-print(f"Adding to path: {os.getcwd()}")
-sys.path.insert(0, os.getcwd())
-
 from euler import prime_factors
 
 # The first two consecutive numbers to have two distinct prime factors are:

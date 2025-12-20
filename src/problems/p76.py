@@ -14,10 +14,10 @@ def accel_asc_count(n):
             a[k] = x
             y -= x
             k += 1
-        l = k + 1
+        L = k + 1
         while x <= y:
             a[k] = x
-            a[l] = y
+            a[L] = y
             yield 1
             x += 1
             y -= 1

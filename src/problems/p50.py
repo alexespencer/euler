@@ -1,9 +1,3 @@
-import os
-import sys
-
-print(f"Adding to path: {os.getcwd()}")
-sys.path.insert(0, os.getcwd())
-
 from datetime import datetime
 from itertools import islice
 

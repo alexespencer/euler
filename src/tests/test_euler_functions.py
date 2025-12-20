@@ -315,7 +315,7 @@ class TestEuler:
             (4213, 7337),
         ],
     )
-    def test_palindrome(self, n, expected_result):
+    def test_reverse_and_add(self, n, expected_result):
         assert reverse_and_add(n) == expected_result
 
     @pytest.mark.parametrize(

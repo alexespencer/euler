@@ -1,9 +1,3 @@
-import os
-import sys
-
-print(f"Adding to path: {os.getcwd()}")
-sys.path.insert(0, os.getcwd())
-
 from euler import is_palindrome, reverse_and_add
 
 
@@ -21,9 +15,6 @@ def is_lychrel(n, iter_max=50):
     return True
 
 
-# assert is_lychrel(47, 10) == True
-# assert is_lychrel(349, 1) == False
-# assert is_lychrel(349, 2) == False
 assert not is_lychrel(349, 3)
 assert is_lychrel(10677, 52)
 assert not is_lychrel(10677, 53)
