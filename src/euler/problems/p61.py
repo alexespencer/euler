@@ -55,7 +55,6 @@ def solution() -> int:
 
     # Repeat, and look for cyclic numbers
     # Go through each node type
-    printed_debug = 0
     for node_type1 in numbers.keys():
         for node_type2 in numbers.keys():
             if node_type1 == node_type2:
