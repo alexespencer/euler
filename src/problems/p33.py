@@ -1,9 +1,11 @@
+import math
 from datetime import datetime
 from fractions import Fraction
+from posixpath import curdir
 
 start_time = datetime.now()
 
-N = 4
+N = 2
 K = 1
 
 
@@ -16,16 +18,17 @@ def count_cancellable_digits(number1, number2):
     )
 
 
-set_n = [
-    (str(n), set(str(n)), {str(d): str(n).count(str(d)) for d in range(10)})
-    for n in range(10**N)
-]
-
-
 def generate_cancellable_fractions(N, K):
+    set_n = [
+        (str(n), set(str(n)), {str(d): str(n).count(str(d)) for d in range(10)})
+        for n in range(10**N)
+    ]
+
     cancellable_fractions = []
     for n in range(10 ** (N - 1), 10**N):
+        print(f"{n=}")
         for d in range(n + 1, 10**N):
+            print(f"{d=}")
             digits_in_common = set_n[n][1].intersection(set_n[d][1])
             if (
                 sum(
@@ -47,51 +50,22 @@ assert count_cancellable_digits(1234, 1234) == 4
 assert count_cancellable_digits(1234, 4321) == 4
 assert count_cancellable_digits(1234, 4322) == 3
 
-start_time = datetime.now()
-a = generate_cancellable_fractions(4, 1)
-print(
-    f"Time taken to generate {len(a)} fractions to consider: {datetime.now() - start_time}"
-)
-exit()
+
 # Generate numbers without trailing zeros
+def fractions():
+    numbers = {
+        x: "".join(sorted(set(str(x))))
+        for x in range(10 ** (N - 1), 10**N)
+        if x % 10 != 0
+    }
 
-numbers = {
-    x: "".join(sorted(set(str(x)))) for x in range(10 ** (N - 1), 10**N) if x % 10 != 0
-}
-# digit_set_to_numbers = defaultdict(list)
-# for n, digit_set in numbers.items():
-#     digit_set_to_numbers[digit_set].append(n)
-
-# Digit set intersection
-# digit_set_intersection_lookup = set([digits for digits in numbers.values()])
-# digit_set_intersection_lookup = {(digit_set1, digit_set2): len((set(digit_set1)).intersection(set(digit_set2))) for digit_set1 in digit_set_intersection_lookup for digit_set2 in digit_set_intersection_lookup}
-
-# print(f"Time taken to generate intersection lookup: {datetime.now() - start_time}")
-
-# Generate fractions, n < d and at least 1 common digit
-# fractions = []
-# for (digit_set1, digit_set2), intersection_count in digit_set_intersection_lookup.items():
-#     if intersection_count == 0:
-#         continue
-
-#     # For the digit sets, get the numbers
-#     nums1 = digit_set_to_numbers[digit_set1]
-#     nums2 = digit_set_to_numbers[digit_set2]
-
-#     fractions.extend([(n, d) for n in nums1 for d in nums2 if n < d])
-fractions = [
-    (n, d)
-    for n in numbers
-    for d in numbers
-    if n < d and count_cancellable_digits(n, d) >= K
-]
-
-print(
-    f"Time taken to generate {len(fractions)} fractions to consider: {datetime.now() - start_time}"
-)
-
-
-cache = {}
+    fractions = [
+        (n, d)
+        for n in numbers
+        for d in numbers
+        if n < d and count_cancellable_digits(n, d) >= K
+    ]
+    return fractions
 
 
 def curious_fraction(n, d, k, orig_fraction=None):
@@ -107,9 +81,8 @@ def curious_fraction(n, d, k, orig_fraction=None):
         # Get indexes of this digit
         n_digit_indexes = [i for i, x in enumerate(str(n)) if x == digit]
         d_digit_indexes = [i for i, x in enumerate(str(d)) if x == digit]
-        # print(k, "Trying digit", digit, n_digit_indexes, d_digit_indexes)
-        # Cartesian test
 
+        # Cartesian test
         for index1 in n_digit_indexes:
             n_new = int(str(n)[:index1] + str(n)[index1 + 1 :])
             for index2 in d_digit_indexes:
@@ -131,32 +104,26 @@ def curious_fraction(n, d, k, orig_fraction=None):
     return False
 
 
-assert curious_fraction(49, 98, 1)
-assert not curious_fraction(449, 494, 2)
-
-assert curious_fraction(3016, 6032, 3)
-
-total_n, total_d = 0, 0
-for i, (n, d) in enumerate(fractions):
-    if i % 10000 == 0:
-        print(f"Processing {i}th fraction")
-    if curious_fraction(n, d, K):
-        print(f"Found curious fraction: {n}/{d}. {n / d}")
-        total_n += n
-        total_d += d
-
-end_time = datetime.now()
-print(f"TOTAL Duration: {end_time - start_time}.")
-
-print(len(numbers))
-print(len(fractions))
-print(fractions[0:10])
-print(total_n, total_d)
+def simplify_fraction(n: int, d: int) -> tuple[int, int]:
+    gcd = math.gcd(n, d)
+    return (n // gcd, d // gcd)
 
 
-# 2,1 - 110 322
-# 3,1 - 77262 163829
-# 3,2 - 7429 17305
-# 4,1 - 12999936 28131911
-# 4,2 - 3571225 7153900
-# 4,3 - 255983 467405
+def solution() -> int:
+    # TODO: move these asserts into tests
+    assert curious_fraction(49, 98, 1)
+    assert not curious_fraction(449, 494, 2)
+    assert curious_fraction(3016, 6032, 3)
+
+    prod_n, prod_d = 1, 1
+    curious_fractions = []
+    for n, d in fractions():
+        if curious_fraction(n, d, K):
+            curious_fractions.append((n, d))
+            prod_n *= n
+            prod_d *= d
+    return simplify_fraction(prod_n, prod_d)[1]  # Return denominator
+
+
+if __name__ == "__main__":
+    print(solution())

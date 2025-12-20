@@ -33,9 +33,6 @@ class Solution:
     def pandigital_product(self, a, b, prod):
         combined = str(a) + str(b) + str(prod)
         if len(combined) == len(set(combined)) and set(combined) == self.pandigits:
-            # print(prod)
-            # print(combined)
-            # print(len(combined), len(set(combined)), set(combined))
             return True
 
         return False
