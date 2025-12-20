@@ -1,4 +1,4 @@
-from problems import p11, p12, p14, p31, p32, p33, p44
+from problems import p11, p12, p14, p31, p32, p33, p44, p46
 
 
 def test_p11_solution():
@@ -27,3 +27,7 @@ def test_p33_solution():
 
 def test_p44_solution():
     assert p44.solution() == 5482660
+
+
+def test_p46_solution():
+    assert p46.solution() == 5777

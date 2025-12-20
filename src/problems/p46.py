@@ -33,9 +33,17 @@ def goldbach(n):
     return False
 
 
-for gold in range(33, 10000, 2):
-    if is_composite_number(gold) and not goldbach(gold):
-        print(gold)
-        if gold >= prime_limit:
-            print("WARNING - below prime limit - raise the prime limit to be sure")
-        break
+def solution() -> int:
+    for gold in range(33, 10000, 2):
+        if is_composite_number(gold) and not goldbach(gold):
+            if gold >= prime_limit:
+                raise ValueError(
+                    "WARNING - below prime limit - raise the prime limit to be sure"
+                )
+            return gold
+
+    raise ValueError("No solution found")
+
+
+if __name__ == "__main__":
+    print(solution())
