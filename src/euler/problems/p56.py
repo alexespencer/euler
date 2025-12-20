@@ -2,14 +2,20 @@
 
 # Considering natural numbers of the form, ab, where a, b < 100, what is the maximum digital sum?
 
-results = []
-for a in range(2, 100):
-    for b in range(2, 100):
-        num = a**b
-        # Sum digits in num
-        sum_digits = sum([int(char) for char in str(num)])
-        results.append((sum_digits, a, b))
 
-# Sort results by descending first element
-results.sort(key=lambda x: x[0], reverse=True)
-print(results[0:10])
+def solution() -> int:
+    results = []
+    for a in range(2, 100):
+        for b in range(2, 100):
+            num = a**b
+            # Sum digits in num
+            sum_digits = sum([int(char) for char in str(num)])
+            results.append((sum_digits, a, b))
+
+    # Sort results by descending first element
+    results.sort(key=lambda x: x[0], reverse=True)
+    return results[0][0]
+
+
+if __name__ == "__main__":
+    print(solution())
