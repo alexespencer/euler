@@ -1,12 +1,7 @@
 # Diophantine equations
-
 # Generate the D possibilities from 2 to 1000 if it is NOT square
 
-
 from euler import continued_expansion, is_square
-
-D_max = 1000
-D_poss = [n for n in range(2, D_max + 1) if not is_square(n)]
 
 # The equation in question is a special form of Diophantine equation, called a Pell equation.
 # The equation is of the form:
@@ -42,13 +37,19 @@ def solve_pell_equation(D):
     return x, y
 
 
-for i in [2, 3, 5, 6, 7]:
-    print(i, solve_pell_equation(i))
+def solution() -> int:
+    D_max = 1000
+    D_poss = [n for n in range(2, D_max + 1) if not is_square(n)]
 
-# Find the D with the largest X
-all_x = {}
-for D in D_poss:
-    x, _ = solve_pell_equation(D)
-    all_x[D] = x
+    # Find the D with the largest X
+    all_x = {}
+    for D in D_poss:
+        x, _ = solve_pell_equation(D)
+        all_x[D] = x
+    print(all_x)
 
-print("D where x is maximised: ", max(all_x, key=all_x.get))
+    return max(all_x, key=lambda k: all_x[k])
+
+
+if __name__ == "__main__":
+    print(solution())

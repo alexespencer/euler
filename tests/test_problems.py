@@ -23,6 +23,8 @@ from euler.problems import (
     p62,
     p63,
     p64,
+    p65,
+    p66,
 )
 
 
@@ -120,3 +122,11 @@ def test_p63_solution():
 
 def test_p64_solution():
     assert p64.solution() == 1322
+
+
+def test_p65_solution():
+    assert p65.solution() == 272
+
+
+def test_p66_solution():
+    assert p66.solution() == 661
