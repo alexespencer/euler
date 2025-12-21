@@ -31,6 +31,7 @@ from euler import (
     prime_factors,
     quadratic_equation,
     reverse_and_add,
+    simplify_fraction,
     square_n,
     triangle_n,
     unique_product_from_factors,
@@ -497,3 +498,10 @@ def test_pythag_triples():
 
     for triple in pt_100:
         assert triple in triangles[sum(triple)]
+
+
+def test_simplify_fraction():
+    assert simplify_fraction(10, 20) == (1, 2)
+    assert simplify_fraction(4, 8) == (1, 2)
+    assert simplify_fraction(3, 7) == (3, 7)
+    assert simplify_fraction(3 * 15 * 10 * 3 * 19, 7 * 15 * 10 * 3 * 19) == (3, 7)

@@ -1,4 +1,5 @@
 import itertools
+import math
 from functools import reduce
 from math import prod, sqrt
 
@@ -455,3 +456,8 @@ def is_prime_miller_rabin(n, _precision_for_huge_n=16):
 
 _known_primes = [2, 3]
 _known_primes += [x for x in range(5, 1000, 2) if is_prime(x)]
+
+
+def simplify_fraction(n: int, d: int) -> tuple[int, int]:
+    gcd = math.gcd(n, d)
+    return (n // gcd, d // gcd)

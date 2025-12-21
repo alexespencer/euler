@@ -2,9 +2,10 @@
 # add common functions to a module. We don't seem to use any things from Fraction really, other than
 # Equality checking, just use a tuple or recreate a lighter weight one?
 
-import math
 from datetime import datetime
 from fractions import Fraction
+
+from euler import simplify_fraction
 
 start_time = datetime.now()
 
@@ -105,11 +106,6 @@ def curious_fraction(n, d, k, orig_fraction=None):
 
     # Tried all digits, no match
     return False
-
-
-def simplify_fraction(n: int, d: int) -> tuple[int, int]:
-    gcd = math.gcd(n, d)
-    return (n // gcd, d // gcd)
 
 
 def solution() -> int:
