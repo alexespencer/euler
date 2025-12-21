@@ -2,15 +2,9 @@
 # add common functions to a module. We don't seem to use any things from Fraction really, other than
 # Equality checking, just use a tuple or recreate a lighter weight one?
 
-from datetime import datetime
 from fractions import Fraction
 
 from euler import simplify_fraction
-
-start_time = datetime.now()
-
-N = 2
-K = 1
 
 
 def count_cancellable_digits(number1, number2):
@@ -56,7 +50,7 @@ assert count_cancellable_digits(1234, 4322) == 3
 
 
 # Generate numbers without trailing zeros
-def fractions():
+def fractions(N, K):
     numbers = {
         x: "".join(sorted(set(str(x))))
         for x in range(10 ** (N - 1), 10**N)
@@ -109,6 +103,9 @@ def curious_fraction(n, d, k, orig_fraction=None):
 
 
 def solution() -> int:
+    N = 2
+    K = 1
+
     # TODO: move these asserts into tests
     assert curious_fraction(49, 98, 1)
     assert not curious_fraction(449, 494, 2)
@@ -116,7 +113,7 @@ def solution() -> int:
 
     prod_n, prod_d = 1, 1
     curious_fractions = []
-    for n, d in fractions():
+    for n, d in fractions(N, K):
         if curious_fraction(n, d, K):
             curious_fractions.append((n, d))
             prod_n *= n
