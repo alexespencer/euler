@@ -6,14 +6,15 @@ from euler import generate_pythag_triples
 # Or...we can use Euclid's formula, but with the k parameter modification so that ALL triples are generated
 # ...where m, n, k are positive integers, and m > n and m,n are coprime (HCF(m,n) == 1) and both not odd
 
-max_length = 1500000
-triangles = generate_pythag_triples(max_length)
 
-# How many with only one triangle up to the max_length
-answer = len([1 for L, t in triangles.items() if len(t) == 1 and L <= max_length])
-assert answer == 161667
-print(f"Number of Lengths with 1 unique solution (L <= {max_length:,}): {answer}")
+def solution() -> int:
+    max_length = 1500000
+    triangles = generate_pythag_triples(max_length)
 
-# Print the longest PT
-longest = max(triangles.keys())
-print(f"Longest length {longest}. EG: {list(triangles[longest])[0]}")
+    # How many with only one triangle up to the max_length
+    answer = len([1 for L, t in triangles.items() if len(t) == 1 and L <= max_length])
+    return answer
+
+
+if __name__ == "__main__":
+    print(solution())
