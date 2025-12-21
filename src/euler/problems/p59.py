@@ -210,7 +210,7 @@ def solution() -> int:
     assert raw_text == decrypted_string
 
     # Import the cipher.txt file into a list
-    with open("data/p59_cipher.txt") as f:
+    with open("data/p59.txt") as f:
         line = f.readline()
 
         # Split the line up by comma and convert to integers
