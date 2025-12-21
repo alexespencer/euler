@@ -30,6 +30,7 @@ from euler.problems import (
     p69,
     p70,
     p71,
+    p72,
 )
 
 
@@ -155,3 +156,7 @@ def test_p70_solution():
 
 def test_p71_solution():
     assert p71.solution() == 428570
+
+
+def test_p72_solution():
+    assert p72.solution() == 303963552391
