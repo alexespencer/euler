@@ -6,7 +6,7 @@ from itertools import combinations
 import networkx as nx
 from networkx.algorithms.clique import enumerate_all_cliques
 
-from euler import is_prime
+from euler.primes import is_prime
 
 
 def ncr(n, r):

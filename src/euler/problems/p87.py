@@ -1,4 +1,4 @@
-from euler import is_prime
+from euler.primes import is_prime
 
 # Max prime for 1st element would be root(50,000,000 - 24): <= 7071
 # Max prime for 2nd element would be cuberoot(50,000,000 - 20): <= 368

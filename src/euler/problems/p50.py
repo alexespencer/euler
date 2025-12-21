@@ -1,6 +1,6 @@
 from itertools import islice
 
-from euler import is_prime
+from euler.primes import is_prime
 
 # The prime 41, can be written as the sum of six consecutive primes:
 

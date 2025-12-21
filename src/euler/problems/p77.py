@@ -1,6 +1,6 @@
 import time
 
-from euler import is_prime
+from euler.primes import is_prime
 
 
 def accel_asc(n):

@@ -1,4 +1,4 @@
-from euler.primes import phi
+from euler.primes import phi, prime_sieve
 
 
 def test_phi():
@@ -11,3 +11,8 @@ def test_phi():
     assert phi(8) == 4
     assert phi(9) == 6
     assert phi(10) == 4
+
+
+def test_prime_sieve():
+    primes = prime_sieve(11)
+    assert primes == [2, 3, 5, 7, 11]

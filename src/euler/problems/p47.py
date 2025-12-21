@@ -1,4 +1,4 @@
-from euler import prime_factors
+from euler.primes import prime_factors
 
 # The first two consecutive numbers to have two distinct prime factors are:
 
