@@ -30,10 +30,12 @@ def number_ways(n):
     return len(list(accel_asc_count(n))) - 1
 
 
-assert number_ways(5) == 6
-assert number_ways(7) == 14
+def solution() -> int:
+    assert number_ways(5) == 6
+    assert number_ways(7) == 14
 
-starttime = time.time()
-print(number_ways(100))
-endtime = time.time()
-print(f"Time taken: {endtime - starttime}")
+    return number_ways(100)
+
+
+if __name__ == "__main__":
+    print(solution())
