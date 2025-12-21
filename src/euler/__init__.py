@@ -116,17 +116,13 @@ def count_factors(n):
 
 def is_composite_number(n):
     """Returns if a number is a composite number. A composite number is a whole number with 2 factors (other than 1 and itself) and is not prime"""
-    if is_prime(n):
-        return False
-
     if n in [1, 2]:
         return False
 
-    for i in range(2, n):
-        if n % i == 0:
-            return True
+    if is_prime(n):
+        return False
 
-    return False
+    return True
 
 
 def list_count_distinct_prime_factor_sieve(N):
