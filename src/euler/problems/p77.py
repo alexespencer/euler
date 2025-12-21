@@ -1,8 +1,10 @@
-import time
-
 from euler.primes import is_prime
 
 
+# NOTE: this could be re-used in p76 but
+# the extra computation required to yield
+# the number instead of just counting nearly
+# doubles the compute time
 def accel_asc(n):
     a = [0 for i in range(n + 1)]
     k = 1
@@ -38,17 +40,16 @@ def count_primes(n, show_ways=False):
     return count_prime
 
 
-assert count_primes(10) == 5
+def solution() -> int:
+    assert count_primes(10) == 5
 
-starttime = time.time()
-n = 10
-while True:
-    cp = count_primes(n)
-    if cp > 5000:
-        print(f"The number {n} can be written as the sum of {cp} primes")
-        break
-    n += 1
-endtime = time.time()
-print(f"Time taken: {endtime - starttime}")
+    n = 10
+    while True:
+        cp = count_primes(n)
+        if cp > 5000:
+            return n
+        n += 1
 
-# count_primes(n, show_ways=True)
+
+if __name__ == "__main__":
+    print(solution())
