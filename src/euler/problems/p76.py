@@ -1,6 +1,5 @@
 # Doing it by hand for the first 7 numbers, we get (from 0) 0, 1, 2, 4, 6, 10, 14 which looks like the OEIS sequence A000123,
 # however it could also be +1, which is 2, 3, 5, 7, 11, 15 which is the OEIS sequence A000041 - this looks like the correct solution as the p(8) for A000123 does not equal 20, but p(8) for A000041 does equal 21
-import time
 
 
 def accel_asc_count(n):
