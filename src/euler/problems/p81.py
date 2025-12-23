@@ -34,20 +34,25 @@ def minimal_path(matrix):
     return min_sum
 
 
-matrix = [
-    [131, 673, 234, 103, 18],
-    [201, 96, 342, 965, 150],
-    [630, 803, 746, 422, 111],
-    [537, 699, 497, 121, 956],
-    [805, 732, 524, 37, 331],
-]
+def solution() -> int:
+    matrix = [
+        [131, 673, 234, 103, 18],
+        [201, 96, 342, 965, 150],
+        [630, 803, 746, 422, 111],
+        [537, 699, 497, 121, 956],
+        [805, 732, 524, 37, 331],
+    ]
 
-assert minimal_path(matrix) == 2427
+    assert minimal_path(matrix) == 2427
 
-# Read in the pyramid
-matrix = []
-with open("data/p81.txt", "r") as f:
-    for line in f:
-        matrix.append(list(map(int, line.split(","))))
+    # Read in the pyramid
+    matrix = []
+    with open("data/p81.txt", "r") as f:
+        for line in f:
+            matrix.append(list(map(int, line.split(","))))
 
-print("Minimum path sum:", minimal_path(matrix))
+    return minimal_path(matrix)
+
+
+if __name__ == "__main__":
+    print(solution())
