@@ -5,38 +5,33 @@
 
 # We check each one for an integer solution
 
-import time
-
 from euler import is_square
 
-max_M = 1900
-find_n_solutions = 1000000
-count = 0
-cuboids = []
-start_time = time.time()
-for h in range(1, max_M + 1):
-    for w in range(h, max_M + 1):
-        wh_square = (w + h) ** 2
-        for length in range(w, max_M + 1):
-            shortest_distance_sq = (length**2) + wh_square
-            if is_square(shortest_distance_sq):
-                count += 1
-                cuboids.append((h, w, length))
 
-end_time = time.time()
+def solution() -> int:
+    max_M = 1900
+    find_n_solutions = 1000000
+    count = 0
+    cuboids = []
+    for h in range(1, max_M + 1):
+        for w in range(h, max_M + 1):
+            wh_square = (w + h) ** 2
+            for length in range(w, max_M + 1):
+                shortest_distance_sq = (length**2) + wh_square
+                if is_square(shortest_distance_sq):
+                    count += 1
+                    cuboids.append((h, w, length))
 
-print(f"M: {max_M}. count: {count}")
-print(f"Time taken: {end_time - start_time:.2f} seconds")
+    if count >= find_n_solutions:
+        # Find max M for which we have found n solutions
+        for m in range(0, max_M + 1):
+            count_found = sum([1 for cuboid in cuboids if max(cuboid) <= m])
 
-if count >= find_n_solutions:
-    # Find max M for which we have found n solutions
-    for m in range(0, max_M + 1):
-        count_found = sum([1 for cuboid in cuboids if max(cuboid) <= m])
+            if count_found >= find_n_solutions:
+                return m
 
-        if count_found >= find_n_solutions:
-            print(
-                f"Lowest M such that the number of solutions first exceed {find_n_solutions} is {m}"
-            )
-            break
-else:
-    print("Increase max_M limit")
+    raise ValueError("Increase max_M limit")
+
+
+if __name__ == "__main__":
+    print(solution())
