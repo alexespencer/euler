@@ -1,4 +1,4 @@
-from euler.problems.p64 import continued_fraction
+from euler.solutions.p64 import continued_fraction
 
 
 def test_continued_fraction():
