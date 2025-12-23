@@ -1,4 +1,5 @@
-# Couting rectangles
+# Counting rectangles
+
 
 # f(a, b) == f(b, a) = so can limit our search space
 
@@ -14,19 +15,25 @@ def count_rectanges(x, y):
     return count
 
 
-assert count_rectanges(3, 2) == 18
+def solution() -> int:
+    assert count_rectanges(3, 2) == 18
 
-closest = math.inf
-closest_area = None
-for x in range(1, 100):
-    for y in range(1, 100):
-        if x < y:
-            continue
+    closest = math.inf
+    closest_area = None
+    for x in range(1, 100):
+        for y in range(1, 100):
+            if x < y:
+                continue
 
-        r = count_rectanges(x, y)
-        if abs(r - 2000000) < closest:
-            closest = abs(r - 2000000)
-            closest_area = x * y
-            print(closest)
+            r = count_rectanges(x, y)
+            if abs(r - 2000000) < closest:
+                closest = abs(r - 2000000)
+                closest_area = x * y
+    if closest_area is None:
+        raise ValueError("No area found")
 
-print(closest_area)
+    return closest_area
+
+
+if __name__ == "__main__":
+    print(solution())
