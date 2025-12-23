@@ -74,11 +74,6 @@ class Board:
         random.shuffle(self.CC_choices)
         random.shuffle(self.CH_choices)
 
-        print("CC choices:", self.CC_choices)
-        print("CH choices:", self.CH_choices)
-        print("Dice sides:", self.dice_sides)
-        # print("Square counts:", self.square_counts)
-
         # For speed, calculate the indexes of R[x] and U[x]
         self.R_indexes = [
             i for i, square in enumerate(Board.squares) if square.startswith("R")
@@ -91,7 +86,7 @@ class Board:
         return [
             (x, self.square_counts[x] / self.dice_rolls, Board.squares.index(x))
             for x in sorted(
-                self.square_counts, key=self.square_counts.get, reverse=True
+                self.square_counts, key=lambda x: self.square_counts[x], reverse=True
             )[:3]
         ]
 
@@ -134,17 +129,14 @@ class Board:
         return None
 
     def roll_dice(self):
-        # print("------")
         # Rolls the dice and take the action(s) and keeps count of where we land
         self.dice_rolls += 1
 
         # Roll the dice
         dice_score, at_least_1_double = self.dice_score()
-        # print(f"Dice score: {dice_score}. Doubles: {at_least_1_double}. Current double rolls: {self.double_rolls}")
         if at_least_1_double:
             self.double_rolls += 1
             if self.double_rolls >= 3:
-                # print("Rolled 3 doubles - advancing to JAIL")
                 self.double_rolls = 0
                 return self.advance_to_square(Board.squares.index("JAIL"))
         else:
@@ -152,10 +144,8 @@ class Board:
 
         # Get next square (might not be the final destination)
         next_square = (self.current_square + dice_score) % len(Board.squares)
-        # print(f"Next (potentially intermediate) square is {next_square} = {Board.squares[next_square]}")
 
         if Board.squares[next_square] == "G2J":
-            # print("Got to G2J - going to JAIL")
             return self.advance_to_square(Board.squares.index("JAIL"))
 
         card_action = None
@@ -177,25 +167,12 @@ class Board:
         return self.advance_to_square(destination_index)
 
 
-print("Starting tests")
-b = Board([6, 6])
-assert b.get_destination_index("Rx") == 5
-b.current_square = 5
-assert b.get_destination_index("Rx") == 15
-print("Tests passed")
+def solution() -> int:
+    b = Board([4, 4])
+    for _ in range(1000000):
+        b.roll_dice()
+    return int("".join(str(x) for _, _, x in b.top_3_squares()))
 
-print("---------")
-print("Simulating 1,000,000 rolls (with 6 sided dice)")
-b = Board([6, 6])
-for i in range(1000000):
-    b.roll_dice()
-# print("Square counts:", b.square_counts)
-print(b.top_3_squares())
 
-print("---------")
-print("Simulating 1,000,000 rolls (with 4 sided dice)")
-b = Board([4, 4])
-for i in range(1000000):
-    b.roll_dice()
-# print("Square counts:", b.square_counts)
-print(b.top_3_squares())
+if __name__ == "__main__":
+    print(solution())
