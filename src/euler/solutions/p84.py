@@ -1,8 +1,6 @@
 # Problem 84 - monopoly square odds
 import random
 
-random.seed(42)
-
 
 class Board:
     squares = [
