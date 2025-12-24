@@ -1,45 +1,44 @@
-from euler import is_product_sum, unique_product_from_factors
+from math import inf
 
 
 def solution() -> int:
-    # A few things we can work out from this
-    # Given factors like {2, 5, 8} 2x5x8 = 80 we can always "pad" by n 'x1's where n = (80 - (2+5+8)) to get the number 1x1x....1x2x5x8 = 1+1+1+...+2+5+8
-
-    # The minimum product-sum for any k is larger or equal to k as for k of 6, 1+1+1+1+1+1 >= 6
-    # The maximum product-sum for any k is 2k, because we could always use 2xk then make up the rest with x1's as needed
-
-    factor_dict = {}
-
     max_k = 12000
+    limit = 2 * max_k  # any minimal product-sum n for k will satisfy n <= 2k
 
-    # Get a dict of n: all product combinations of n
-    product_perm_lookup = {}
-    for n in range(2, (max_k + 1) * 2):
-        product_perm_lookup[n] = unique_product_from_factors(factor_dict, n)
+    # minimal[n] will hold minimal product-sum for k == index
+    minimal = [inf] * (max_k + 1)
 
-    minimal_product_sum = {}
-    for k in range(2, max_k + 1):
-        # Finding minimal product-sum for k
-        for current_prod, all_product_factors in product_perm_lookup.items():
-            if k > current_prod > 2 * k:
-                # Can't be a product-sum for this k
-                continue
+    # recursive generator of factor combinations (non-decreasing factors)
+    # prod: current product; factor_sum: current sum of factors; count: number of factors used;
+    # start: smallest factor allowed next (enforces non-decreasing order)
+    def search(start: int, prod: int, factor_sum: int, count: int) -> None:
+        # try next factor f >= start
+        for f in range(start, (limit // prod) + 1):
+            new_prod = prod * f
+            if new_prod > limit:
+                break
+            new_sum = factor_sum + f
+            new_count = count + 1
 
-            if k in minimal_product_sum and current_prod > minimal_product_sum[k]:
-                continue
+            # compute k = product - sum + count (number of terms including 1s)
+            k = new_prod - new_sum + new_count
+            if k <= max_k:
+                # if we've found a smaller n for this k, record it
+                if new_prod < minimal[k]:
+                    minimal[k] = new_prod
 
-            for product_factors in all_product_factors:
-                # Check and if less than the current minimal, update
-                if is_product_sum(current_prod, product_factors, k):
-                    if (
-                        k not in minimal_product_sum
-                        or current_prod < minimal_product_sum[k]
-                    ):
-                        minimal_product_sum[k] = current_prod
+            # prune: if new_prod is already >= minimal[k] (for this k) then deeper factors
+            # will only increase product further, so skip deeper recursion for this path.
+            # Also if new_prod > limit we break above already.
+            if new_prod < limit:
+                search(f, new_prod, new_sum, new_count)
 
-    sum_of_minimal_product_sum = sum(set(minimal_product_sum.values()))
+    # start recursion with product=1, sum=0, count=0, allowing factors >= 2
+    search(2, 1, 0, 0)
 
-    return sum_of_minimal_product_sum
+    # sum unique minimal product-sum numbers for k=2..max_k
+    result = sum(set(minimal[2:]))
+    return int(result)
 
 
 if __name__ == "__main__":
