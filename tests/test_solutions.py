@@ -45,6 +45,7 @@ from euler.solutions import (
     p84,
     p85,
     p86,
+    p87,
 )
 
 
@@ -230,3 +231,7 @@ def test_p85_solution():
 
 def test_p86_solution():
     assert p86.solution() == 1818
+
+
+def test_p87_solution():
+    assert p87.solution() == 1097343
