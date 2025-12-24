@@ -1,11 +1,4 @@
-import time
 from itertools import permutations, product
-
-# Previous WIP would have taken 4 hours, not good enogh
-
-start_time = time.time()
-
-digit_set = {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
 
 def possible_calculations(digits):
@@ -35,23 +28,30 @@ def possible_calculations(digits):
     return all_numbers
 
 
-# Generate all the permutations of the digits
-longest_run = 0
-longest_run_digits = None
-for perm in permutations(digit_set, 4):
-    a, b, c, d = perm
-    if a < b < c < d:
-        all_numbers = possible_calculations(list(perm))
-        all_numbers.sort()
+def solution() -> int:
+    # Generate all the permutations of the digits
+    longest_run = 0
+    longest_run_digits = None
+    for perm in permutations({1, 2, 3, 4, 5, 6, 7, 8, 9}, 4):
+        a, b, c, d = perm
+        if a < b < c < d:
+            all_numbers = possible_calculations(list(perm))
+            all_numbers.sort()
 
-        # Find the first number that is not in the list
-        for i in range(1, len(all_numbers)):
-            if all_numbers[i] != i + 1:
-                # print(i)
-                if i > longest_run:
-                    longest_run = i
-                    longest_run_digits = perm
+            # Find the first number that is not in the list
+            for i in range(1, len(all_numbers)):
+                if all_numbers[i] != i + 1:
+                    # print(i)
+                    if i > longest_run:
+                        longest_run = i
+                        longest_run_digits = perm
 
-                break
+                    break
 
-print(longest_run, longest_run_digits)
+    if longest_run_digits is None:
+        raise ValueError("No longest run found")
+    return int("".join(map(str, list(longest_run_digits))))
+
+
+if __name__ == "__main__":
+    print(solution())
