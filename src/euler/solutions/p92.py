@@ -1,9 +1,4 @@
 # Seems to be based on p74
-import time
-
-start_time = time.time()
-
-
 def digit_square_sum(n):
     sum = 0
 
@@ -13,44 +8,38 @@ def digit_square_sum(n):
     return sum
 
 
-assert digit_square_sum(44) == 32
-assert digit_square_sum(32) == 13
-
-# Chain lookup
-chain_lookup = {}
-
-
-def add_to_chain_lookup(n):
-    if n not in chain_lookup:
+def add_to_chain_lookup(n, chain_cache):
+    if n not in chain_cache:
         dssum = digit_square_sum(n)
-        chain_lookup[n] = dssum
-        if dssum not in chain_lookup:
-            add_to_chain_lookup(dssum)
+        chain_cache[n] = dssum
+        if dssum not in chain_cache:
+            add_to_chain_lookup(dssum, chain_cache)
         return dssum
     else:
-        return chain_lookup[n]
-
-
-# for i in range(1, 10**7):
-#     add_to_chain_lookup(i)
+        return chain_cache[n]
 
 
 # Function for length of chain
-def chain_length(n):
-    numbers_seen = []
+def chain_length(n, chain_cache):
+    numbers_seen = set()
     while n not in numbers_seen:
-        numbers_seen.append(n)
-        n = add_to_chain_lookup(n)
+        numbers_seen.add(n)
+        n = add_to_chain_lookup(n, chain_cache)
     return len(numbers_seen), 89 in numbers_seen
 
 
-count_89 = 0
-for i in range(1, 10**7):
-    if chain_length(i)[1]:
-        count_89 += 1
-print(count_89)
+def solution() -> int:
+    assert digit_square_sum(44) == 32
+    assert digit_square_sum(32) == 13
 
-assert count_89 == 8581146
+    chain_cache = {}
 
-end_time = time.time()
-print(f"Time taken: {end_time - start_time}")
+    count_89 = 0
+    for i in range(1, 10**7):
+        if chain_length(i, chain_cache)[1]:
+            count_89 += 1
+    return count_89
+
+
+if __name__ == "__main__":
+    print(solution())
