@@ -166,6 +166,7 @@ class Board:
 
 
 def solution() -> int:
+    random.seed(42)
     b = Board([4, 4])
     for _ in range(1000000):
         b.roll_dice()
