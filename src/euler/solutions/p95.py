@@ -1,5 +1,3 @@
-import time
-
 import networkx as nx
 
 from euler import find_factors
@@ -11,16 +9,7 @@ def sum_proper_divisors(n):
     return sum(factors) - n
 
 
-assert sum_proper_divisors(220) == 284
-assert sum_proper_divisors(284) == 220
-assert sum_proper_divisors(1) == 0
-assert sum_proper_divisors(2) == 1
-assert sum_proper_divisors(3) == 1
-assert sum_proper_divisors(4) == 3
-
 # Se can make use of subgraphs/cycles - if we start at a number and get all connected nodes, we are guaranteed to find a repeating cycle
-
-
 def setup_graph(limit):
     # Setup networkx graph
     G = nx.Graph()
@@ -38,14 +27,6 @@ def setup_graph(limit):
     return G
 
 
-start_time = time.time()
-
-limit = 10**6
-print(f"Setup graph for limit {limit}...")
-G = setup_graph(limit)
-print(G)
-
-
 def find_longest_cycle(G):
     cycles = nx.cycle_basis(G)
 
@@ -55,11 +36,20 @@ def find_longest_cycle(G):
     return cycles[0]
 
 
-print("Find longest cycle...")
-longest_cycle = find_longest_cycle(G)
-end_time = time.time()
-print(f"Longest cycle length {len(longest_cycle)}: {longest_cycle}")
-print(f"Min of longest cycle: {min(longest_cycle)}")
-print(f"Time taken: {(end_time - start_time):.2f} seconds")
+def solution() -> int:
+    assert sum_proper_divisors(220) == 284
+    assert sum_proper_divisors(284) == 220
+    assert sum_proper_divisors(1) == 0
+    assert sum_proper_divisors(2) == 1
+    assert sum_proper_divisors(3) == 1
+    assert sum_proper_divisors(4) == 3
 
-# Time taken: 118.46926236152649 seconds
+    limit = 10**6
+    G = setup_graph(limit)
+
+    longest_cycle = find_longest_cycle(G)
+    return min(longest_cycle)
+
+
+if __name__ == "__main__":
+    print(solution())
