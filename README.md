@@ -9,12 +9,10 @@ All problems sourced from https://projecteuler.net
 
 # Data
 
-Download the problem data and save accordingly:
-- `data/p54_poker.txt`
-- `data/p59_cipher.txt`
+Download the problem data and save to `data` folder as `pXX.txt`. For the first 100, this is:
+- p54, p59, p67, p81, p89, p96, p98, p99
 
 # TODO
 
 - [ ] Add mypy (maybe try the new rust based one), resolve problems and add to just
-- [ ] Add tests for all problems
 - [ ] Close gaps in first 100
