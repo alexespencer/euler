@@ -14,5 +14,4 @@ Download the problem data and save to `data` folder as `pXX.txt`. For the first 
 
 # TODO
 
-- [ ] Add mypy (maybe try the new rust based one), resolve problems and add to just
 - [ ] Close gaps in first 100
