@@ -433,6 +433,7 @@ def test_unique_product_from_factors(n, expected_set):
     unique_factors = unique_product_from_factors(factors_lookup, n)
 
     assert unique_factors == expected_set
+    assert unique_factors is not None
     # For each set, check that the product is n
     for s in unique_factors:
         assert prod(s) == n
