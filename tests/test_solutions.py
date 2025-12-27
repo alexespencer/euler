@@ -1,6 +1,7 @@
 from euler.solutions import (
     p01,
     p02,
+    p03,
     p11,
     p12,
     p14,
@@ -70,6 +71,10 @@ def test_p01_solution():
 
 def test_p02_solution():
     assert p02.solution() == 4613732
+
+
+def test_p03_solution():
+    assert p03.solution() == 6857
 
 
 def test_p11_solution():
