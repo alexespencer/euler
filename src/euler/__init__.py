@@ -64,7 +64,7 @@ def is_cube(n):
     return round(n ** (1 / 3)) ** 3 == n
 
 
-def is_square(n):
+def is_square(n: int):
     """Returns if a number is a cube"""
     return round(n ** (1 / 2)) ** 2 == n
 
