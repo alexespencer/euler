@@ -14,6 +14,7 @@ from euler.solutions import (
     p13,
     p14,
     p15,
+    p16,
     p31,
     p32,
     p33,
@@ -132,6 +133,10 @@ def test_p14_solution():
 
 def test_p15_solution():
     assert p15.solution() == 137846528820
+
+
+def test_p16_solution():
+    assert p16.solution() == 1366
 
 
 def test_p31_solution():
