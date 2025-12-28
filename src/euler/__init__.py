@@ -89,7 +89,7 @@ def quadratic_equation(a, b, c):
 
 
 def fibonacci_seq(max_n=None):
-    """Returns a list of fibonacci numbers up to max_n"""
+    """Returns a list of fibonacci numbers up to max_n (if provided, else iterates forever)"""
     a, b = 1, 1
     while True:
         yield a
