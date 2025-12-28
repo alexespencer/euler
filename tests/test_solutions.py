@@ -17,6 +17,7 @@ from euler.solutions import (
     p16,
     p17,
     p18,
+    p19,
     p31,
     p32,
     p33,
@@ -147,6 +148,10 @@ def test_p17_solution():
 
 def test_p18_solution():
     assert p18.solution() == 1074
+
+
+def test_p19_solution():
+    assert p19.solution() == 171
 
 
 def test_p31_solution():
