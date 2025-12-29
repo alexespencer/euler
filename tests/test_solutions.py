@@ -26,6 +26,7 @@ from euler.solutions import (
     p25,
     p26,
     p27,
+    p28,
     p31,
     p32,
     p33,
@@ -192,6 +193,10 @@ def test_p26_solution():
 
 def test_p27_solution():
     assert p27.solution() == -59231
+
+
+def test_p28_solution():
+    assert p28.solution() == 669171001
 
 
 def test_p31_solution():
