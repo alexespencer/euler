@@ -8,6 +8,8 @@ from euler import (
     Calculation,
     continued_expansion,
     count_factors,
+    decimal_digits,
+    decimal_repeat_cycle_length,
     fibonacci_seq,
     find_factors,
     generate_pythag_triples,
@@ -506,3 +508,34 @@ def test_simplify_fraction():
     assert simplify_fraction(4, 8) == (1, 2)
     assert simplify_fraction(3, 7) == (3, 7)
     assert simplify_fraction(3 * 15 * 10 * 3 * 19, 7 * 15 * 10 * 3 * 19) == (3, 7)
+
+
+def test_decimal_digits():
+    digits = decimal_digits(1, 2)
+    assert next(digits) == (5, 0)
+    assert next(digits) == (0, 0)
+
+    digits = decimal_digits(1, 4)
+    assert next(digits) == (2, 2)
+    assert next(digits) == (5, 0)
+
+    digits = decimal_digits(1, 3)
+    assert next(digits) == (3, 1)
+    assert next(digits) == (3, 1)
+
+    digits = decimal_digits(1, 7)
+    assert next(digits) == (1, 3)
+    assert next(digits) == (4, 2)
+    assert next(digits) == (2, 6)
+    assert next(digits) == (8, 4)
+    assert next(digits) == (5, 5)
+    assert next(digits) == (7, 1)
+    assert next(digits) == (1, 3)  # Repeats now
+
+
+def test_cycle_length():
+    assert decimal_repeat_cycle_length(1, 2) == 0
+    assert decimal_repeat_cycle_length(1, 4) == 0
+    assert decimal_repeat_cycle_length(1, 6) == 1
+    assert decimal_repeat_cycle_length(1, 7) == 6
+    assert decimal_repeat_cycle_length(1, 9) == 1

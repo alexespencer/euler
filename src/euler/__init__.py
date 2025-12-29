@@ -2,6 +2,7 @@ import itertools
 import math
 from functools import reduce
 from math import prod, sqrt
+from typing import Iterator
 
 from euler.primes import is_prime, prime_factors
 
@@ -461,3 +462,35 @@ _known_primes += [x for x in range(5, 1000, 2) if is_prime(x)]
 def simplify_fraction(n: int, d: int) -> tuple[int, int]:
     gcd = math.gcd(n, d)
     return (n // gcd, d // gcd)
+
+
+def decimal_digits(n: int, d: int) -> Iterator[tuple[int, int]]:
+    """Iterator for the decimal digits of a fraction where d < n (so representing a number 0 to 1),
+    also returns the remainder so cycles can de detected"""
+    while True:
+        n *= 10
+        digit = n // d
+        n = n % d
+        yield (digit, n)
+
+
+def decimal_repeat_cycle_length(n: int, d: int) -> int:
+    """Finds the cycle length of decimal digits in a fraction.
+
+    Uses the remainder sequence to detect repeats. If a remainder becomes 0
+    the decimal expansion terminates (cycle length 0). If a remainder
+    repeats, the cycle length is the difference between the current index
+    and the index where that remainder was first seen.
+    """
+    digits = decimal_digits(n, d)
+    # Map remainder -> index when it was first seen
+    seen: dict[int, int] = {}
+    index = 0
+    while True:
+        _, remainder = next(digits)
+        if remainder == 0:
+            return 0
+        if remainder in seen:
+            return index - seen[remainder]
+        seen[remainder] = index
+        index += 1
