@@ -147,9 +147,13 @@ def list_distinct_prime_factor_sieve(N):
     return A
 
 
-def is_palindrome(n):
-    """Returns if a number is a palindrome"""
-    return str(n) == str(n)[::-1]
+def is_palindrome(n, base=10):
+    """Returns if a number is a palindrome in the given base"""
+    str_n_base = ""
+    while n > 0:
+        str_n_base += str(n % base)
+        n //= base
+    return str_n_base == str_n_base[::-1]
 
 
 def reverse_and_add(n):
