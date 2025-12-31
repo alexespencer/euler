@@ -13,8 +13,8 @@ from euler import (
     fibonacci_seq,
     find_factors,
     generate_pythag_triples,
-    heptagonal_n,
-    hexagonal_n,
+    heptagon_n,
+    hexagon_n,
     is_composite_number,
     is_cube,
     is_palindrome,
@@ -27,7 +27,7 @@ from euler import (
     is_triangular,
     list_count_distinct_prime_factor_sieve,
     list_distinct_prime_factor_sieve,
-    octagonal_n,
+    octagon_n,
     pentagon_n,
     phi_1_to_n,
     prime_factors,
@@ -348,21 +348,21 @@ def test_square(n, expected_result):
     "n, expected_result", [(1, 1), (2, 6), (3, 15), (4, 28), (5, 45)]
 )
 def test_hex(n, expected_result):
-    assert hexagonal_n(n) == expected_result
+    assert hexagon_n(n) == expected_result
 
 
 @pytest.mark.parametrize(
     "n, expected_result", [(1, 1), (2, 7), (3, 18), (4, 34), (5, 55)]
 )
 def test_hep(n, expected_result):
-    assert heptagonal_n(n) == expected_result
+    assert heptagon_n(n) == expected_result
 
 
 @pytest.mark.parametrize(
     "n, expected_result", [(1, 1), (2, 8), (3, 21), (4, 40), (5, 65)]
 )
 def test_oct(n, expected_result):
-    assert octagonal_n(n) == expected_result
+    assert octagon_n(n) == expected_result
 
 
 def test_cube():

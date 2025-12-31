@@ -45,18 +45,18 @@ def square_n(n):
     return n * n
 
 
-def hexagonal_n(n):
-    """Returns the nth hexagonal number"""
+def hexagon_n(n):
+    """Returns the nth hexagon number"""
     return n * (2 * n - 1)
 
 
-def heptagonal_n(n):
-    """Returns the nth heptagonal number"""
+def heptagon_n(n):
+    """Returns the nth heptagon number"""
     return n * (5 * n - 3) // 2
 
 
-def octagonal_n(n):
-    """Returns the nth octagonal number"""
+def octagon_n(n):
+    """Returns the nth octagon number"""
     return n * (3 * n - 2)
 
 

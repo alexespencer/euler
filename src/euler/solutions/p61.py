@@ -1,9 +1,9 @@
 import networkx as nx
 
 from euler import (
-    heptagonal_n,
-    hexagonal_n,
-    octagonal_n,
+    heptagon_n,
+    hexagon_n,
+    octagon_n,
     pentagon_n,
     square_n,
     triangle_n,
@@ -25,7 +25,7 @@ def solution() -> int:
     numbers = {}
 
     for function_i, f in enumerate(
-        [triangle_n, square_n, pentagon_n, hexagonal_n, heptagonal_n, octagonal_n]
+        [triangle_n, square_n, pentagon_n, hexagon_n, heptagon_n, octagon_n]
     ):
         # Find all 4 digit numbers
         i = 1
