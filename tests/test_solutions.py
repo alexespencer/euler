@@ -56,6 +56,7 @@ from euler.solutions import (
     p55,
     p56,
     p57,
+    p58,
     p59,
     p60,
     p61,
@@ -327,6 +328,10 @@ def test_p56_solution():
 
 def test_p57_solution():
     assert p57.solution() == 153
+
+
+def test_p58_solution():
+    assert p58.solution() == 26241
 
 
 def test_p59_solution():
