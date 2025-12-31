@@ -283,7 +283,7 @@ def _pythag_triples(m, n, max_length):
     return triples
 
 
-def generate_pythag_triples(max_length):
+def generate_pythag_triples(max_length: int) -> dict[int, set[tuple[int, int, int]]]:
     """Generates all pythaga triples up to max_length"""
     # What is the max value of m we need to use?
     m = 2
