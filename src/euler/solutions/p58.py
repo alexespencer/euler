@@ -2,9 +2,6 @@ from euler.primes import is_prime
 
 
 class NumberSpiral:
-    values: dict[tuple[int, int], int]
-    x: int
-    y: int
     value: int
     step: int
 
@@ -12,9 +9,6 @@ class NumberSpiral:
     diagonal_count: int
 
     def __init__(self) -> None:
-        self.values = {}
-        self.x = 0
-        self.y = 0
         self.value = 1
         self.step = 1
 
@@ -26,37 +20,27 @@ class NumberSpiral:
 
         # Take a step to the right
         self.value += 1
-        self.x += 1
 
         # Walk up (1 less than step)
-        self.y -= self.step - 2
         self.value += self.step - 2
-        self.values[(self.x, self.y)] = self.value
+        if is_prime(self.value):
+            self.diagonal_prime_count += 1
 
         # Walk left
-        self.x -= self.step - 1
         self.value += self.step - 1
-        self.values[(self.x, self.y)] = self.value
+        if is_prime(self.value):
+            self.diagonal_prime_count += 1
 
         # Walk down
-        self.y += self.step - 1
         self.value += self.step - 1
-        self.values[(self.x, self.y)] = self.value
+        if is_prime(self.value):
+            self.diagonal_prime_count += 1
 
         # Walk right
-        self.x += self.step - 1
         self.value += self.step - 1
-        self.values[(self.x, self.y)] = self.value
+        if is_prime(self.value):
+            self.diagonal_prime_count += 1
 
-        coord_step = self.step // 2
-        for x, y in [
-            (coord_step, coord_step),
-            (-1 * coord_step, coord_step),
-            (coord_step, -1 * coord_step),
-            (-1 * coord_step, -1 * coord_step),
-        ]:
-            if is_prime(self.values[(x, y)]):
-                self.diagonal_prime_count += 1
         self.diagonal_count += 4
 
     def diagonal_prime_percentage(self) -> float:
