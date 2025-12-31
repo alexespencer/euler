@@ -35,6 +35,7 @@ from euler.solutions import (
     p34,
     p35,
     p36,
+    p37,
     p44,
     p46,
     p47,
@@ -234,6 +235,10 @@ def test_p35_solution():
 
 def test_p36_solution():
     assert p36.solution() == 872187
+
+
+def test_p37_solution():
+    assert p37.solution() == 748317
 
 
 def test_p44_solution():
