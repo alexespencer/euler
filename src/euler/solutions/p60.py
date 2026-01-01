@@ -1,19 +1,11 @@
 # I am quite proud of this solution (using cliques within a graph)
 
-from functools import reduce
 from itertools import combinations
 
 import networkx as nx
 from networkx.algorithms.clique import enumerate_all_cliques
 
 from euler.primes import is_prime
-
-
-def ncr(n, r):
-    r = min(r, n - r)
-    numer = reduce(lambda a, b: a * b, range(n, n - r, -1), 1)
-    denom = reduce(lambda a, b: a * b, range(1, r + 1), 1)
-    return numer // denom
 
 
 def solution() -> int:
