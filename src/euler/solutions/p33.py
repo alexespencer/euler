@@ -1,7 +1,3 @@
-# TODO: this is a mess, tidy it up. Was it re-used for another question? If so, split it out and
-# add common functions to a module. We don't seem to use any things from Fraction really, other than
-# Equality checking, just use a tuple or recreate a lighter weight one?
-
 from fractions import Fraction
 
 from euler import simplify_fraction
@@ -24,9 +20,7 @@ def generate_cancellable_fractions(N, K):
 
     cancellable_fractions = []
     for n in range(10 ** (N - 1), 10**N):
-        print(f"{n=}")
         for d in range(n + 1, 10**N):
-            print(f"{d=}")
             digits_in_common = set_n[n][1].intersection(set_n[d][1])
             if (
                 sum(
@@ -40,13 +34,6 @@ def generate_cancellable_fractions(N, K):
                 cancellable_fractions.append((n, d))
 
     return cancellable_fractions
-
-
-assert count_cancellable_digits(1234, 123) == 3
-assert count_cancellable_digits(1234, 567) == 0
-assert count_cancellable_digits(1234, 1234) == 4
-assert count_cancellable_digits(1234, 4321) == 4
-assert count_cancellable_digits(1234, 4322) == 3
 
 
 # Generate numbers without trailing zeros
@@ -106,10 +93,15 @@ def solution() -> int:
     N = 2
     K = 1
 
-    # TODO: move these asserts into tests
     assert curious_fraction(49, 98, 1)
     assert not curious_fraction(449, 494, 2)
     assert curious_fraction(3016, 6032, 3)
+
+    assert count_cancellable_digits(1234, 123) == 3
+    assert count_cancellable_digits(1234, 567) == 0
+    assert count_cancellable_digits(1234, 1234) == 4
+    assert count_cancellable_digits(1234, 4321) == 4
+    assert count_cancellable_digits(1234, 4322) == 3
 
     prod_n, prod_d = 1, 1
     curious_fractions = []
