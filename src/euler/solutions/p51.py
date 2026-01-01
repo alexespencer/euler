@@ -86,6 +86,5 @@ def solution() -> int:
 
 
 if __name__ == "__main__":
-    # TODO: move asserts into tests
     assert apply_mask("56123", (2, 3), 6) == 56663
     print(solution())

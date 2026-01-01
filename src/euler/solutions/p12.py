@@ -1,43 +1,7 @@
-from functools import reduce
-from math import prod, sqrt
+from math import prod
 
-
-# TODO: move to a factors module
-def find_factors(n):
-    """Returns the factors of n (must be an int)"""
-    step = 2 if n % 2 else 1
-    return set(
-        reduce(
-            list.__add__,
-            ([i, n // i] for i in range(1, int(sqrt(n)) + 1, step) if n % i == 0),
-        )
-    )
-
-
-# TODO: move to a factors module
-def prime_factors(n):
-    """Returns a dictionary of prime: order. For example 100 (prime factors 2x2x5x5) would return {2: 2, 5:2}"""
-    if n == 1:
-        return {}
-
-    p = 2
-    factors = {}
-    while n >= p * p:
-        if n % p == 0:
-            factors.setdefault(p, 0)
-            factors[p] += 1
-            n = n / p
-        else:
-            if p <= 2:
-                p += 1
-            else:
-                p += 2
-
-    n = int(n)
-    factors.setdefault(n, 0)
-    factors[n] += 1
-
-    return factors
+from euler import find_factors
+from euler.primes import prime_factors
 
 
 def number_factors(n):
@@ -94,7 +58,6 @@ def solution() -> int:
 
     assert first_triangle_number_with_over_n_factors(5, factor_count_lookup) == 28
     value = first_triangle_number_with_over_n_factors(500, factor_count_lookup)
-    assert value == 76576500
     return value
 
 
